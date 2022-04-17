@@ -17,6 +17,8 @@ SRCS = srcs/main.c \
 		srcs/env.c \
 		srcs/signal.c \
 		srcs/utils/minishell_util1.c \
+		srcs/utils/error.c \
+		srcs/parse/ft_split_command.c \
 
 
 LIBFT = libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 01:09:31 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 02:03:36 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char *argv[], char **envp)
 			continue ;
 		}
 		add_history(input);
-		//command = ft_split_command(input);
+		command = ft_split_command(input);
 		free(input);
 		//실행 넘겨주기
 		//free command;

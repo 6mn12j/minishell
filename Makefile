@@ -13,8 +13,11 @@ CC = gcc
 READLINE_LIB	= -lreadline -L/opt/homebrew/opt/readline/lib
 READLINE_INC	= -I/opt/homebrew/opt/readline/include
 
-SRCS = src/main.c \
-		src/utils/minishell_util1.c \
+SRCS = srcs/main.c \
+		srcs/env.c \
+		srcs/signal.c \
+		srcs/utils/minishell_util1.c \
+
 
 LIBFT = libft/libft.a
 

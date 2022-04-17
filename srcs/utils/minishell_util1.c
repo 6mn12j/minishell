@@ -1,40 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_util1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 01:12:56 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 01:12:49 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <termios.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-# include "../libft/libft.h"
-
-typedef struct s_state
+int	ft_twoptr_len(char **envp)
 {
-	char	**envp;
-	int		exit_status;
-}	t_state;
+	int	i;
 
-/*global*/
-t_state	g_state;
-
-void	copy_env(char **envp);
-char	*get_env(char *key);
-void	init_signal(void);
-int	ft_twoptr_len(char **envp);
-
-#endif
+	i = 0;
+	while (envp[i])
+		i++;
+	return (i);
+}

@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 01:12:56 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/17 16:28:46 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <termios.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-# include "../libft/libft.h"
-
-typedef struct s_state
+void	copy_env(char **envp)
 {
-	char	**envp;
-	int		exit_status;
-}	t_state;
+	int	i;
 
-/*global*/
-t_state	g_state;
+	i = -1;
+	ft_twoptr_len(envp);
+	g_state.envp = (char **)malloc(sizeof(char *) * ft_twoptr_len(envp) + 1);
+	while (envp[++i])
+		g_state.envp[i] = ft_strdup(envp[i]);
+	return ;
+}
 
-void	copy_env(char **envp);
-char	*get_env(char *key);
-void	init_signal(void);
-int	ft_twoptr_len(char **envp);
+char	*get_env(char *key)
+{
+	int		i;
 
-#endif
+	i = -1;
+	while (g_state.envp[++i])
+	{
+		if (!ft_strncmp(g_state.envp[i], key, ft_strlen(key)))
+			return (ft_substr(g_state.envp[i], ft_strlen(key) + 1, \
+				ft_strlen(g_state.envp[i]) - ft_strlen(key) + 1));
+	}
+	return (ft_strdup(""));
+}

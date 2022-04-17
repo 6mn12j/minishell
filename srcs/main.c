@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 02:03:36 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 04:41:30 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,15 @@ char	*read_input(char **input)
 	temp = get_env("PWD");
 	*input = readline(ft_strjoin(temp, "/bash$:"));
 	free(temp);
+	temp = 0;
 	return (*input);
 }
 
-int	main(int argc, char *argv[], char **envp)
+void	handle_prompt(void)
 {
 	char	*input;
 	char	**command;
 
-	(void)argc;
-	(void)argv;
-	(void)command;
-	copy_env(envp);
-	init_signal();
 	while (read_input(&input))
 	{
 		if (!check_input(input))
@@ -83,9 +79,20 @@ int	main(int argc, char *argv[], char **envp)
 		add_history(input);
 		command = ft_split_command(input);
 		free(input);
+		input = 0;
 		//실행 넘겨주기
 		//free command;
 	}
 	//free env
-	return(1);
+}
+
+int	main(int argc, char *argv[], char **envp)
+{
+	(void)argc;
+	(void)argv;
+	copy_env(envp);
+	init_signal();
+	handle_prompt();
+	g_state.exit_status = 130;
+	return (g_state.exit_status);
 }

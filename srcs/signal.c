@@ -6,19 +6,34 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 04:33:05 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 04:56:54 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_term(void)
+static void	echoctl_off(void)
 {
 	struct termios	term;
 
-	tcgetattr(STDIN_FILENO, &term);
-	term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	if (isatty(STDIN_FILENO))
+	{
+		tcgetattr(STDIN_FILENO, &term);
+		term.c_lflag &= ~(ECHOCTL);
+		tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	}
+	else if (isatty(STDOUT_FILENO))
+	{
+		tcgetattr(STDOUT_FILENO, &term);
+		term.c_lflag &= ~(ECHOCTL);
+		tcsetattr(STDOUT_FILENO, TCSANOW, &term);
+	}
+	else if (isatty(STDERR_FILENO))
+	{
+		tcgetattr(STDERR_FILENO, &term);
+		term.c_lflag &= ~(ECHOCTL);
+		tcsetattr(STDERR_FILENO, TCSANOW, &term);
+	}
 	return ;
 }
 
@@ -38,7 +53,7 @@ static void	handle_signal(int sig)
 
 void	init_signal(void)
 {
-	init_term();
+	echoctl_off();
 	signal(SIGINT, handle_signal);
 	signal(SIGQUIT, SIG_IGN);
 }

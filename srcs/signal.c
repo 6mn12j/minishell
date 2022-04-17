@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 00:36:37 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 04:33:05 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,11 @@ static void	handle_signal(int sig)
 		rl_redisplay();
 		g_state.exit_status = 1;
 	}
-	else if (sig == SIGTERM)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		printf("  \b\b\a");
-		exit(1);
-	}
 }
 
 void	init_signal(void)
 {
 	init_term();
 	signal(SIGINT, handle_signal);
-	signal(SIGQUIT, handle_signal);
+	signal(SIGQUIT, SIG_IGN);
 }

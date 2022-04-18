@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 15:10:35 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/09 17:35:52 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:39:37 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list *t1;
+	t_list	*t1;
 
-	if (!(t1 = malloc(sizeof(t_list))))
+	t1 = malloc(sizeof(t_list));
+	if (!t1)
 		return (0);
 	t1->content = content;
 	t1->next = 0;

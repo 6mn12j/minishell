@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 22:36:14 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/10 14:10:48 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:38:19 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t	get_len(int n)
 	return (len);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	long long	num;
 	char		*temp;
@@ -40,7 +40,8 @@ char			*ft_itoa(int n)
 	}
 	else
 		len = get_len(num);
-	if (!(temp = malloc(sizeof(char) * len + 1)))
+	temp = malloc(sizeof(char) * len + 1);
+	if (!temp)
 		return (0);
 	temp[len] = '\0';
 	while (len > 0)

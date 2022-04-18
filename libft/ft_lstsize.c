@@ -6,13 +6,13 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:19:49 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/09 22:29:46 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:39:46 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int		i;
 

@@ -6,11 +6,11 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:29:10 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/06 21:59:09 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:44:01 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
 		return (c + 32);

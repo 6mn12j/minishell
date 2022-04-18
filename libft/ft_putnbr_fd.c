@@ -6,15 +6,15 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 16:54:46 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/11 00:12:16 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:40:56 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		int_to_char(int num, int fd)
+static void	int_to_char(int num, int fd)
 {
-	int fin;
+	int	fin;
 
 	fin = num % 10;
 	if (num == 0)
@@ -24,10 +24,10 @@ static void		int_to_char(int num, int fd)
 	ft_putchar_fd(fin + '0', fd);
 }
 
-void			ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	long long num;
-	long long fin;
+	long long	num;
+	long long	fin;
 
 	if (fd < 0)
 		return ;

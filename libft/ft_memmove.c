@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:02:57 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/05 20:50:59 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:40:34 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!dest && !src)
@@ -23,7 +23,7 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 	{
 		while (i < len)
 		{
-			((unsigned char*)dest)[i] = ((unsigned char*)src)[i];
+			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 			i++;
 		}
 	}

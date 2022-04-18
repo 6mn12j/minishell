@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:02:07 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/11 00:10:48 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:39:54 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t len)
 		return (0);
 	while (len--)
 	{
-		((unsigned char*)dest)[i] = ((unsigned char*)src)[i];
-		if (((unsigned char*)src)[i] == target)
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		if (((unsigned char *)src)[i] == target)
 			return (&dest[++i]);
 		i++;
 	}

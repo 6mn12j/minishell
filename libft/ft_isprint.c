@@ -6,11 +6,11 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:11:31 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/04 15:22:01 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:37:53 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
 		return (1);

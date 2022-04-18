@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:30:56 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/14 14:38:57 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:37:07 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,31 @@ static int	is_digit(int num)
 
 static int	is_space(char *c)
 {
-	if (*c == '\t'
-			|| *c == '\n'
-			|| *c == '\v'
-			|| *c == '\f'
-			|| *c == '\r'
-			|| *c == ' ')
+	if (*c == '\t' || *c == '\n' || *c == '\v' \
+		|| *c == '\f' || *c == '\r' || *c == ' ')
 		return (1);
 	return (0);
 }
 
-int			ft_atoi(const char *str)
+int	t_atoi(const char *str)
 {
 	int			i;
 	int			sign;
 	long long	result;
 	char		*temp;
 
-	temp = (char*)str;
+	temp = (char *)str;
 	sign = 1;
 	result = 0;
 	i = 0;
 	while (is_space(&temp[i]))
 		i++;
 	if (temp[i] == '-' || temp[i] == '+')
-		sign = temp[i++] == '-' ? -1 : 1;
+	{
+		if (temp[i] == '-')
+			sign = sign * -1;
+		i++;
+	}
 	while (is_digit(temp[i]))
 	{
 		result = (result * 10) + (temp[i] - '0');

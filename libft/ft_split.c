@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 00:25:16 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/11 21:22:08 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:42:07 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static char	**split_malloc(char **temp, char const *src, char c, size_t wc)
 			start = i;
 			while (src[i] && src[i] != c)
 				i++;
-			if (!(temp[count++] = ft_substr(src, start, i - start)))
+			temp[count++] = ft_substr(src, start, i - start);
+			if (!temp[count])
 				return (split_free(temp, count));
 		}
 		else
@@ -50,7 +51,7 @@ static char	**split_malloc(char **temp, char const *src, char c, size_t wc)
 	return (temp);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	size_t	i;
 	size_t	wc;
@@ -71,7 +72,8 @@ char		**ft_split(char const *s, char c)
 		else
 			i++;
 	}
-	if (!(temp = (char**)malloc(sizeof(char*) * (wc + 1))))
+	temp = (char **)malloc(sizeof(char *) * (wc + 1));
+	if (!temp)
 		return (NULL);
 	return (split_malloc(temp, s, c, wc));
 }

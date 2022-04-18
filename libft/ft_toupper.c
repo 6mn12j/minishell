@@ -6,11 +6,11 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:22:46 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/11 00:28:30 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:44:05 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_toupper(int c)
+int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
 		return (c - 32);

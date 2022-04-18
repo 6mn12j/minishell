@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 23:05:09 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/11 00:22:19 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:43:52 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (!s1 || !set)
 		return (NULL);
 	if (!*s1)
-		return (ft_strdup((char*)s1));
+		return (ft_strdup((char *)s1));
 	j = ft_strlen(s1);
 	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;

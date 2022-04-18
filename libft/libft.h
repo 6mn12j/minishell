@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:41:36 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/11 00:29:32 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:46:03 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -64,6 +64,5 @@ size_t			ft_strlcat(char *dest, const char *src, size_t size);
 size_t			ft_strlen(const char *str);
 t_list			*ft_lstnew(void *content);
 t_list			*ft_lstlast(t_list *lst);
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
-void (*del)(void *));
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
 #endif

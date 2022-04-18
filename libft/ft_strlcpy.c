@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:57:59 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/11 00:19:18 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:43:15 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlcpy(char *dest, char const *src, size_t size)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!dest || !src)

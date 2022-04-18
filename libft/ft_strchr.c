@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 23:25:56 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/11 00:29:59 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:42:14 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == target)
-			return ((char*)(s + i));
+			return ((char *)(s + i));
 		i++;
 	}
 	if (s[i] == target)
-		return ((char*)(s + i));
+		return ((char *)(s + i));
 	return (NULL);
 }

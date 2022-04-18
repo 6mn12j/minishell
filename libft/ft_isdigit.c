@@ -6,11 +6,11 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 14:28:04 by minjupar          #+#    #+#             */
-/*   Updated: 2021/05/04 15:09:48 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:37:49 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int num)
+int	ft_isdigit(int num)
 {
 	if (num >= '0' && num <= '9')
 		return (1);

@@ -19,7 +19,8 @@ SRCS = srcs/main.c \
 		srcs/utils/minishell_util1.c \
 		srcs/utils/error.c \
 		srcs/parse/ft_split_command.c \
-		srcs/pipe/pipe.c
+		srcs/pipe/pipe.c \
+		srcs/redirection/redirection.c
 
 
 LIBFT = libft/libft.a

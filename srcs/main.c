@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 04:41:30 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/18 22:30:00 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,19 @@ int	check_quote(char *input)
 int	check_input(char *input)
 {
 	int	i;
+	int	space_cnt;
 
 	i = -1;
+	space_cnt = 0;
 	if (!input)
+		return (0);
+	while (input[++i])
+	{
+		if (input[i] == ' ')
+			space_cnt++;
+	}
+	if (!ft_strncmp(input, "\n", ft_strlen(input)) || \
+		space_cnt == (int)ft_strlen(input))
 		return (0);
 	if (!check_quote(input))
 	{
@@ -55,12 +65,14 @@ int	check_input(char *input)
 
 char	*read_input(char **input)
 {
-	char	*temp;
+	//char	*temp;
 
-	temp = get_env("PWD");
-	*input = readline(ft_strjoin(temp, "/bash$:"));
-	free(temp);
-	temp = 0;
+	//temp = get_env("PWD");
+	//*input = readline(ft_strjoin(temp, "/bash$:"));
+	*input = readline("soobash$:");
+
+	//free(temp);
+	//temp = 0;
 	return (*input);
 }
 
@@ -78,6 +90,7 @@ void	handle_prompt(void)
 		}
 		add_history(input);
 		command = ft_split_command(input);
+		//parse_command(command);
 		free(input);
 		input = 0;
 		//실행 넘겨주기

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 04:38:19 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:00:52 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ char	**ft_split_command(char *str)
 		start = get_start(start + word_len, str);
 	}
 	command_array[i] = (char *) '\0';
-	for(int i = 0; i < word_cnt;i++)
-		printf("%s\n",command_array[i]);
+	// for(int index = 0; index < word_cnt; index++)
+	// 	printf("%s\n",command_array[index]);
 	return (command_array);
 }

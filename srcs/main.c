@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 22:30:00 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/22 21:25:52 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ int	check_input(char *input)
 
 char	*read_input(char **input)
 {
-	//char	*temp;
+	char	*temp;
 
-	//temp = get_env("PWD");
+	temp = get_env("PWD");
+	// temp = get_env("PATH");
 	//*input = readline(ft_strjoin(temp, "/bash$:"));
 	*input = readline("soobash$:");
 

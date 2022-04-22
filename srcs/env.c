@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 20:18:13 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 01:41:56 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*get_env(char *key)
 	i = -1;
 	while (g_state.envp[++i])
 	{
-		if (!ft_strncmp(g_state.envp[i], key, ft_strlen(key)))
+		if (!ft_strncmp(g_state.envp[i], key, ft_strlen(key) + 1))
 			return (ft_substr(g_state.envp[i], ft_strlen(key) + 1, \
 				ft_strlen(g_state.envp[i]) - ft_strlen(key) + 1));
 	}

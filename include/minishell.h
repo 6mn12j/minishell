@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 22:07:04 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 02:03:36 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,19 @@ typedef struct s_state
 	int		exit_status;
 }	t_state;
 
+
+/*
+type (output에서만 사용)
+">" : 0
+">>" : 1
+*/
+
+# define	REDIR_SINGLE_IN		0
+# define	REDIR_SINGLE_OUT	1
+# define	REDIR_DOUBLE_OUT	2
+
 typedef struct s_redir {
-	int				cnt; //갯수
+	int				type;
 	char			*file_name;
 	struct s_redir	*next;
 	struct s_redir	*prev;
@@ -42,12 +53,13 @@ typedef struct s_redir {
 typedef struct s_cmd {
 	int				pipe_type;
 	char			*cmd;
-	char			**argv;   //
+	char			**argv; // cmd는 argv[0]를 참조하고 있어서 free를 해주지 않아도 됨.
+	int				argc;
+	struct s_redir	*input;
+	struct s_redir	*output;
+	char			*heredoc; //종료문자
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
-	struct t_redir	*input;
-	struct t_redir	*output;
-	char			*heredoc; //종료문자
 }	t_cmd;
 
 /*global*/
@@ -58,8 +70,16 @@ void	copy_env(char **envp);
 char	*get_env_key(char *command, int start);
 void	init_signal(void);
 int		ft_twoptr_len(char **envp);
+int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);
 void	ft_error(void);
+
+t_cmd	*create_cmd_node(t_cmd *prev);
+void	malloc_cmd_list(char **commands, t_cmd **head);
+
+t_redir	*create_redir_node(int type, char *file_name);
+void	add_redir_node(t_redir *new_node, t_redir *head);
+void	handle_redir(t_cmd *node, int type, char *file_name);
 
 void	parser(char **input, t_cmd **head);
 char	**parse_commands(char **commands);

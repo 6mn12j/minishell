@@ -22,6 +22,8 @@ SRCS = srcs/main.c \
 		srcs/parse/parser.c \
 		srcs/parse/ft_split_commands.c \
 		srcs/parse/parse_commands.c \
+		srcs/list/cmd_list.c \
+		srcs/list/redir_list.c \
 
 
 

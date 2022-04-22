@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 20:49:34 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 01:42:04 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_input(char *input)
 		if (input[i] == ' ')
 			space_cnt++;
 	}
-	if (!ft_strncmp(input, "\n", ft_strlen(input)) || \
+	if (!ft_strncmp(input, "\n", ft_strlen(input) + 1) || \
 		space_cnt == (int)ft_strlen(input))
 		return (0);
 	if (!check_quote(input))
@@ -88,6 +88,7 @@ void	handle_prompt(void)
 			free(input);
 			continue ;
 		}
+		head = NULL;
 		parser(&input, &head);
 		//실행에 head넘겨주기;
 		//free head

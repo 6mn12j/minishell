@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 17:20:42 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/22 21:21:44 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ typedef struct s_redir {
 }	t_redir;
 
 /*
-	pipe_type: 0 : 시작, 1: 중간, 2: 끝, 3: 혼자있을 때
+	pipe_type: 0 : 혼자있을 때, 1 : 시작, 2: 중간, 3: 끝
+
+	if (pipe_type)
 */
 typedef struct s_cmd {
 	int				pipe_type;
 	char			*cmd;
-	char			option;   //n
+	char			**argv;   //
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 	struct t_redir	*input;

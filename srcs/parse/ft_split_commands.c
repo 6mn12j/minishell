@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_command.c                                 :+:      :+:    :+:   */
+/*   ft_split_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/20 14:00:52 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:27:43 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ int	get_word_count(char *str)
 	int		flag;
 	int		word_count;
 
-
 	flag = 0;
 	i = -1;
 	word_count = 0;
 	while (str[++i])
 	{
-
 		if (change_quote(str[i]))
 			flag = !flag;
 		if (flag == 0 && str[i + 1] == '\0')
@@ -94,7 +92,7 @@ int	get_start(int start, char *str)
 	return (start);
 }
 
-char	**ft_split_command(char *str)
+char	**ft_split_commands(char *str)
 {
 	//1. 단어 갯수를 센다
 	//2. 단어 갯수만큼 말록 한다.
@@ -120,7 +118,5 @@ char	**ft_split_command(char *str)
 		start = get_start(start + word_len, str);
 	}
 	command_array[i] = (char *) '\0';
-	// for(int index = 0; index < word_cnt; index++)
-	// 	printf("%s\n",command_array[index]);
 	return (command_array);
 }

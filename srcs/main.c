@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 22:30:00 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/22 20:49:34 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*read_input(char **input)
 void	handle_prompt(void)
 {
 	char	*input;
-	char	**command;
+	t_cmd	*head;
 
 	while (read_input(&input))
 	{
@@ -88,13 +88,12 @@ void	handle_prompt(void)
 			free(input);
 			continue ;
 		}
+		parser(&input, &head);
+		//실행에 head넘겨주기;
+		//free head
 		add_history(input);
-		command = ft_split_command(input);
-		//parse_command(command);
 		free(input);
 		input = 0;
-		//실행 넘겨주기
-		//free command;
 	}
 	//free env
 }
@@ -106,6 +105,7 @@ int	main(int argc, char *argv[], char **envp)
 	copy_env(envp);
 	init_signal();
 	handle_prompt();
+
 	g_state.exit_status = 130;
 	return (g_state.exit_status);
 }

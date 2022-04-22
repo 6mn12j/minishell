@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/17 16:28:46 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/22 20:18:13 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,26 @@ void	copy_env(char **envp)
 	while (envp[++i])
 		g_state.envp[i] = ft_strdup(envp[i]);
 	return ;
+}
+
+char	*get_env_key(char *command, int start)
+{
+	int		i;
+	int		len;
+	char	*key;
+
+	len = 0;
+	i = start;
+	if (command[i] == '\'' || command[i] == '"')
+		i++;
+	while (command[++i])
+	{
+		if (command[i] == '\'' || command[i] == '"' || command[i] == ' ')
+			break ;
+		len++;
+	}
+	key = ft_substr(command, start + 1, len);
+	return (key);
 }
 
 char	*get_env(char *key)

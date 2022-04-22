@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 21:21:44 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/22 22:20:37 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ typedef struct s_redir {
 typedef struct s_cmd {
 	int				pipe_type;
 	char			*cmd;
-	char			**argv;   //
+	char			**argv;
+	int				pipe[2];
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 	struct t_redir	*input;

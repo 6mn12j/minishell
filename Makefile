@@ -18,6 +18,7 @@ SRCS = srcs/main.c \
 		srcs/signal.c \
 		srcs/utils/minishell_util1.c \
 		srcs/utils/error.c \
+		srcs/utils/ft_free.c \
 		srcs/parse/parser.c \
 		srcs/parse/ft_split_commands.c \
 		srcs/parse/parse_commands.c \

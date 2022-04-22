@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 20:48:16 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/22 22:07:04 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	ft_strjoin_char(char **dst, char ch);
 void	ft_error(void);
 
 void	parser(char **input, t_cmd **head);
-void	parse_commands(char **commands);
+char	**parse_commands(char **commands);
 char	**ft_split_commands(char *str);
+void	ft_free_two_ptr(char **ptr);
 
 #endif

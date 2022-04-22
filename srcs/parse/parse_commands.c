@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 20:33:57 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/22 22:18:30 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	parse_command(char **temp, char*command)
 	int		i;
 	char	quote;
 
-	(void )temp;
 	i = -1;
 	quote = 0;
 	while (command[++i])
@@ -81,16 +80,18 @@ void	parse_command(char **temp, char*command)
 	ft_strjoin_char(temp, 1);
 }
 
-void	parse_commands(char **commands)
+char	**parse_commands(char **commands)
 {
 	int		i;
 	char	*temp;
+	char	**result;
 
-	temp = ft_strdup("");
 	i = -1;
+	temp = ft_strdup("");
 	while (commands[++i])
 		parse_command(&temp, commands[i]);
-
-	printf("temp:%s\n",temp);
-	return ;
+	ft_free_two_ptr(commands);
+	result = ft_split(temp, 1);
+	free(temp);
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 02:11:43 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 07:56:56 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	malloc_argv(char **commands, t_cmd **head)
 
 	i = -1;
 	cur = *head;
-	while (commands[++i] != NULL && cur != NULL)
+	while (commands[++i] && cur)
 	{
 		if (ft_strncmp(commands[i], "|", 2) == 0)
 			cur = cur->next;
@@ -27,7 +27,7 @@ void	malloc_argv(char **commands, t_cmd **head)
 			cur->argc++;
 	}
 	cur = *head;
-	while (cur != NULL)
+	while (cur)
 	{
 		cur->argv = (char **)malloc(sizeof(char *) * (cur->argc + 1));
 		i = -1;
@@ -39,26 +39,41 @@ void	malloc_argv(char **commands, t_cmd **head)
 
 void	set_pipe_type(t_cmd	*cur)
 {
-	if (cur->prev == NULL && cur->next == NULL)
+	if (!cur->prev && !cur->next)
 		cur->pipe_type = 0;
 	else
 	{
 		cur->pipe_type = 1;
 		cur = cur->next;
-		while (cur != NULL)
+		while (cur)
 		{
-			if (cur->next != NULL)
+			if (cur->next)
 				cur->pipe_type = 2;
-			else if (cur->next == NULL)
+			else if (!cur->next)
 				cur->pipe_type = 3;
 			cur = cur->next;
 		}
 	}
 }
 
+void	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
+{
+	// TODO : heredoc 여러개일떄 처리할 것인지?
+	if (!heredoc)
+		return ;
+	else
+		(*i)++;
+	if (cur->heredoc)
+	{
+		free(cur->heredoc);
+		cur->heredoc = NULL;
+	}
+	cur->heredoc = heredoc;
+}
+
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 {
-	while (commands[++i] != NULL && cur != NULL)
+	while (commands[++i] && cur)
 	{
 		if (ft_strncmp(commands[i], "|", 2) == 0)
 		{
@@ -68,14 +83,13 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 		else
 		{
 			if (ft_strncmp(commands[i], "<<", 3) == 0)
-			 	// TODO : heredoc 여러개일떄 처리할 것인지?
-				cur->heredoc = ft_strdup(commands[++i]);
+				handle_heredoc(cur, ft_strdup(commands[i + 1]), &i);
 			else if (ft_strncmp(commands[i], "<", 2) == 0)
-				handle_redir(cur, REDIR_SINGLE_IN, ft_strdup(commands[++i]));
+				handle_redir(cur, REDIR_S_IN, ft_strdup(commands[i + 1]), &i);
 			else if (ft_strncmp(commands[i], ">>", 3) == 0)
-				handle_redir(cur, REDIR_DOUBLE_OUT, ft_strdup(commands[++i]));
+				handle_redir(cur, REDIR_D_OUT, ft_strdup(commands[i + 1]), &i);
 			else if (ft_strncmp(commands[i], ">", 2) == 0)
-				handle_redir(cur, REDIR_SINGLE_OUT, ft_strdup(commands[++i]));
+				handle_redir(cur, REDIR_S_OUT, ft_strdup(commands[i + 1]), &i);
 			else
 			{
 				cur->argv[i_argv++] = ft_strdup(commands[i]);
@@ -98,22 +112,7 @@ void	parser(char **input, t_cmd **head)
 	char	**commands;
 
 	commands = parse_commands(ft_split_commands(*input));
-	//set cmd //head에 commands담기.
 	set_cmd(commands, head);
-
-	printf("head : %p\n", *head);
-	for (t_cmd *cur = *head; cur != NULL; cur = cur->next)
-	{
-		for (char **cur_arg = cur->argv; *cur_arg != NULL; cur_arg++)
-			printf("argv : %s\n", *cur_arg);
-		printf("input_head : %p\n", cur->input);
-		for (t_redir *cur_in = cur->input; cur_in != NULL; cur_in = cur_in->next)
-			printf("input : %s\n", cur_in->file_name);
-		printf("output_head : %p\n", cur->output);
-		for (t_redir *cur_out = cur->output; cur_out != NULL; cur_out = cur_out->next)
-			printf("output[%d] : %s\n", cur_out->type, cur_out->file_name);
-		printf("heredoc : %s\n", cur->heredoc);
-	}
-	// system("leaks minishell");
+	print_test(head); // TODO : 내기 전에 삭제
 	ft_free_two_ptr(commands);
 }

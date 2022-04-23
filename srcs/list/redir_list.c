@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:28 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 01:19:16 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 02:36:20 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,25 @@ void	add_redir_node(t_redir *new_node, t_redir *head)
 	cur->next = new_node;
 }
 
-void	handle_redir(t_cmd *node, int type, char *file_name)
+void	handle_redir(t_cmd *node, int type, char *file_name, int *i)
 {
-	if (type == REDIR_SINGLE_OUT)
+	if (file_name != NULL)
+		(*i)++;
+	if (type == REDIR_S_OUT)
 	{
 		if (node->output == NULL)
 			node->output = create_redir_node(type, file_name);
 		else
 			add_redir_node(create_redir_node(type, file_name), node->output);
 	}
-	else if (type == REDIR_DOUBLE_OUT)
+	else if (type == REDIR_D_OUT)
 	{
 		if (node->output == NULL)
 			node->output = create_redir_node(type, file_name);
 		else
 			add_redir_node(create_redir_node(type, file_name), node->output);
 	}
-	else if (type == REDIR_SINGLE_IN)
+	else if (type == REDIR_S_IN)
 	{
 		if (node->input == NULL)
 			node->input = create_redir_node(type, file_name);

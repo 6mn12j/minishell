@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:57 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 02:03:36 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 07:52:00 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ t_cmd	*create_cmd_node(t_cmd *prev)
 {
 	t_cmd	*node;
 
-	node = (t_cmd *)malloc(sizeof(t_cmd) * 1);
+	node = (t_cmd *)malloc(sizeof(t_cmd));
+	if (!node)
+		ft_error();
 	node->pipe_type = 0;
 	node->cmd = NULL;
 	node->argv = NULL;
@@ -40,9 +42,9 @@ void	malloc_cmd_list(char **commands, t_cmd **head)
 	while (count >= 0)
 	{
 		node = create_cmd_node(prev);
-		if (*head == NULL)
+		if (!*head)
 			*head = node;
-		if (prev != NULL)
+		if (prev)
 			prev->next = node;
 		prev = node;
 		count--;

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 01:42:18 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 07:49:29 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_strjoin_char(char **dst, char ch)
 	str[1] = '\0';
 	*dst = ft_strjoin(*dst, str);
 	free(temp);
+	temp = NULL;
 }
 
 int	count_pipe(char **commands)
@@ -41,7 +42,7 @@ int	count_pipe(char **commands)
 
 	i = 0;
 	count = 0;
-	while (commands[i] != NULL)
+	while (commands[i])
 	{
 		if (ft_strncmp(commands[i], "|", 2) == 0)
 			count++;

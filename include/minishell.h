@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 02:03:36 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 23:03:23 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,15 @@ typedef struct s_state
 	int		exit_status;
 }	t_state;
 
-
 /*
 type (output에서만 사용)
 ">" : 0
 ">>" : 1
 */
 
-# define	REDIR_SINGLE_IN		0
-# define	REDIR_SINGLE_OUT	1
-# define	REDIR_DOUBLE_OUT	2
+# define REDIR_S_IN 0
+# define REDIR_S_OUT 1
+# define REDIR_D_OUT 2
 
 typedef struct s_redir {
 	int				type;
@@ -53,37 +52,46 @@ typedef struct s_redir {
 typedef struct s_cmd {
 	int				pipe_type;
 	char			*cmd;
-	char			**argv; // cmd는 argv[0]를 참조하고 있어서 free를 해주지 않아도 됨.
+	char			**argv;
 	int				argc;
 	struct s_redir	*input;
 	struct s_redir	*output;
-	char			*heredoc; //종료문자
+	char			*heredoc;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
 
 /*global*/
-t_state g_state;
+t_state	g_state;
 
-char	*get_env(char *key);
+/*env*/
 void	copy_env(char **envp);
+void	join_env(char **temp, char *key);
+char	*get_env(char *key);
 char	*get_env_key(char *command, int start);
+int		parse_env(char **temp, char *command, int start);
+
 void	init_signal(void);
 int		ft_twoptr_len(char **envp);
 int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);
 void	ft_error(void);
 
+/*cmd list*/
 t_cmd	*create_cmd_node(t_cmd *prev);
 void	malloc_cmd_list(char **commands, t_cmd **head);
 
+/*redir list*/
 t_redir	*create_redir_node(int type, char *file_name);
 void	add_redir_node(t_redir *new_node, t_redir *head);
-void	handle_redir(t_cmd *node, int type, char *file_name);
+void	handle_redir(t_cmd *node, int type, char *file_name, int *i);
 
+/*utils*/
 void	parser(char **input, t_cmd **head);
 char	**parse_commands(char **commands);
 char	**ft_split_commands(char *str);
 void	ft_free_two_ptr(char **ptr);
+
+void	print_test(t_cmd **head);// TODO: 내기 전에 삭제!
 
 #endif

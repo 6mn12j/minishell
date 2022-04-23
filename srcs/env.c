@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 22:55:59 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 23:07:12 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,21 @@ char	*get_env(char *key)
 				ft_strlen(g_state.envp[i]) - ft_strlen(key) + 1));
 	}
 	return (ft_strdup(""));
+}
+
+void	join_env(char **temp, char *key)
+{
+	char	*value;
+	char	*parse_temp;
+
+	value = get_env(key);
+	parse_temp = *temp;
+	*temp = ft_strjoin(*temp, value);
+	free(value);
+	free(parse_temp);
+	key = NULL;
+	parse_temp = NULL;
+	return ;
 }
 
 int	parse_env(char **temp, char *command, int start)

@@ -6,17 +6,11 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 22:18:30 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/23 23:05:09 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-	'$HOME' -> $HOME
-	"$HOME" -> /Users/dellimanjyu
-	"   $HOME" ->    /Users/dellimanjyu
-*/
 
 static int	change_quote(char c)
 {
@@ -43,22 +37,6 @@ static int	change_quote(char c)
 	return (c == flag);
 }
 
-int	parse_env(char **temp, char *command, int start)
-{
-	char	*key;
-	char	*value;
-	char	*parse_temp;
-
-	key = get_env_key(command, start);
-	value = get_env(key);
-	parse_temp = *temp;
-	*temp = ft_strjoin(*temp, value);
-	start += ft_strlen(key);
-	free(key);
-	free(parse_temp);
-	return (start);
-}
-
 void	parse_command(char **temp, char*command)
 {
 	int		i;
@@ -70,6 +48,11 @@ void	parse_command(char **temp, char*command)
 	{
 		if (quote != '\'' && command[i] == '$')
 			i = parse_env(temp, command, i);
+		else if (command[i] == '~')
+		{
+			join_env(temp, "HOME");
+			continue ;
+		}
 		else if (!quote && change_quote(command[i]))
 			quote = command[i];
 		else if (quote && change_quote(command[i]))
@@ -90,8 +73,10 @@ char	**parse_commands(char **commands)
 	temp = ft_strdup("");
 	while (commands[++i])
 		parse_command(&temp, commands[i]);
+	printf("temp: %s\n",temp);
 	ft_free_two_ptr(commands);
 	result = ft_split(temp, 1);
 	free(temp);
+	temp = NULL;
 	return (result);
 }

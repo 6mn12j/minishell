@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 22:20:37 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/24 21:46:16 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/stat.h>
 
 # include "../libft/libft.h"
+# include "../get_next_line/include/get_next_line.h"
 
 # define READ 0
 # define WRITE 1
@@ -43,7 +44,7 @@ typedef struct s_redir {
 }	t_redir;
 
 /*
-	pipe_type: 0 : 혼자있을 때, 1 : 시작, 2: 중간, 3: 끝
+	pipe_type : 0 -> 아무것도 없을 때 
 
 	if (pipe_type)
 */

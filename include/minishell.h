@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 23:08:27 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 01:01:31 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,20 @@ typedef struct s_cmd {
 /*global*/
 t_state	g_state;
 
+/*parser*/
+char	**ft_split_cmds(char *str);
+char	**parse_cmds(char **commands);
+void	set_is_path(t_cmd *cmd);
+void	set_pipe_type(t_cmd	*cur);
+int		handle_heredoc(t_cmd *cur, char *heredoc, int *i);
+int		check_redir(t_cmd *cur, char **commands, int *i);
+void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv);
+void	make_file(char *filename);
+void	ft_free_two_ptr(char **ptr);
+void	parser(char **input, t_cmd **head);
+
+void	print_test(t_cmd **head);// TODO: 내기 전에 삭제!
+
 /*env*/
 void	copy_env(char **envp);
 void	join_env(char **temp, char *key);
@@ -87,14 +101,5 @@ void	malloc_cmd_list(char **commands, t_cmd **head);
 t_redir	*create_redir_node(int type, char *file_name);
 void	add_redir_node(t_redir *new_node, t_redir *head);
 int		handle_redir(t_cmd *node, int type, char *file_name, int *i);
-
-/*utils*/
-void	parser(char **input, t_cmd **head);
-char	**parse_commands(char **commands);
-char	**ft_split_commands(char *str);
-void	ft_free_two_ptr(char **ptr);
-void	make_file(char *filename);
-
-void	print_test(t_cmd **head);// TODO: 내기 전에 삭제!
 
 #endif

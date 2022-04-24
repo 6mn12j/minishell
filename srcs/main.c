@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 23:13:25 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 00:41:21 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,18 @@ char	*read_input(char **input)
 	return (*input);
 }
 
+void	excute_cmd(t_cmd *head)
+{
+	if (!head->next && head->cmd)
+	{
+		//빌트인 실행
+	}
+	else
+	{
+		//파이프 여러개 일때
+	}
+}
+
 void	handle_prompt(void)
 {
 	char	*input;
@@ -87,6 +99,7 @@ void	handle_prompt(void)
 		}
 		head = NULL;
 		parser(&input, &head);
+		excute_cmd(head);
 		//실행에 head넘겨주기;
 		//free head
 		add_history(input);

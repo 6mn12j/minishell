@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_commands.c                                   :+:      :+:    :+:   */
+/*   parse_cmds.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -63,7 +63,7 @@ void	parse_command(char **temp, char*command)
 	ft_strjoin_char(temp, 1);
 }
 
-char	**parse_commands(char **commands)
+char	**parse_cmds(char **commands)
 {
 	int		i;
 	char	*temp;
@@ -73,7 +73,6 @@ char	**parse_commands(char **commands)
 	temp = ft_strdup("");
 	while (commands[++i])
 		parse_command(&temp, commands[i]);
-	printf("temp: %s\n",temp);
 	ft_free_two_ptr(commands);
 	result = ft_split(temp, 1);
 	free(temp);

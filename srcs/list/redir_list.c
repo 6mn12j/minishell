@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:28 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 22:51:29 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 01:39:39 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	handle_redir(t_cmd *node, int type, char *file_name, int *i)
 			node->input = create_redir_node(type, file_name);
 		else
 			add_redir_node(create_redir_node(type, file_name), node->input);
-
 	}
 	return (1);
 }

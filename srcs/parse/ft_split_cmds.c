@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_commands.c                                 :+:      :+:    :+:   */
+/*   ft_split_cmds.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -92,7 +92,7 @@ int	get_start(int start, char *str)
 	return (start);
 }
 
-char	**ft_split_commands(char *str)
+char	**ft_split_cmds(char *str)
 {
 	//1. 단어 갯수를 센다
 	//2. 단어 갯수만큼 말록 한다.

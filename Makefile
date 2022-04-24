@@ -21,8 +21,10 @@ SRCS = srcs/main.c \
 		srcs/utils/ft_free.c \
 		srcs/utils/test.c \
 		srcs/parse/parser.c \
-		srcs/parse/ft_split_commands.c \
-		srcs/parse/parse_commands.c \
+		srcs/parse/ft_split_cmds.c \
+		srcs/parse/set_is_path.c \
+		srcs/parse/parse_cmds.c \
+		srcs/parse/set_cmd_list.c \
 		srcs/list/cmd_list.c \
 		srcs/list/redir_list.c \
 

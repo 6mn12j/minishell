@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 21:57:21 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 02:04:40 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	parse_env(char **temp, char *command, int start)
 	*temp = ft_strjoin(*temp, value);
 	start += ft_strlen(key);
 	free(key);
+	free(value);
 	free(parse_temp);
 	key = NULL;
 	parse_temp = NULL;

@@ -24,5 +24,5 @@ void	print_test(t_cmd **head)
 		printf("heredoc : %s\n", cur->heredoc);
 		printf("--------------------\n");
 	}
-	// system("leaks minishell");
+	//system("leaks minishell");
 }

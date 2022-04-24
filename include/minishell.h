@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 01:01:31 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 01:59:05 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # include <fcntl.h>
 # include <sys/stat.h>
-
 
 # include "../libft/libft.h"
 
@@ -95,11 +94,12 @@ void	ft_error(void);
 
 /*cmd list*/
 t_cmd	*create_cmd_node(t_cmd *prev);
+void	delete_cmd_list(t_cmd **cmd);
 void	malloc_cmd_list(char **commands, t_cmd **head);
 
 /*redir list*/
 t_redir	*create_redir_node(int type, char *file_name);
+void	delete_redir_list(t_redir *redir);
 void	add_redir_node(t_redir *new_node, t_redir *head);
 int		handle_redir(t_cmd *node, int type, char *file_name, int *i);
-
 #endif

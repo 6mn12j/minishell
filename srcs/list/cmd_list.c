@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:57 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 01:42:05 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 02:02:34 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,25 @@ void	malloc_cmd_list(char **commands, t_cmd **head)
 		prev = node;
 		count--;
 	}
+}
+
+void	delete_cmd_list(t_cmd **cmd)
+{
+	t_cmd	*temp;
+	t_cmd	*del_node;
+
+	temp = *cmd;
+	while (temp)
+	{
+		del_node = temp;
+		temp = temp->next;
+		ft_free_two_ptr(del_node->argv);
+		if (del_node->input)
+			delete_redir_list(del_node->input);
+		if (del_node->output)
+			delete_redir_list(del_node->output);
+		free(del_node);
+		del_node = NULL;
+	}
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:28 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 01:39:39 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 01:56:31 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,24 @@ void	add_redir_node(t_redir *new_node, t_redir *head)
 		cur = cur->next;
 	new_node->prev = cur;
 	cur->next = new_node;
+	return ;
+}
+
+void	delete_redir_list(t_redir *redir)
+{
+	t_redir	*temp;
+	t_redir	*del_node;
+
+	temp = redir;
+	while (temp)
+	{
+		del_node = temp;
+		temp = temp->next;
+		free(del_node->file_name);
+		del_node->file_name = NULL;
+		free(del_node);
+		del_node = NULL;
+	}
 	return ;
 }
 

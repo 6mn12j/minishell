@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:28 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 02:36:20 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/24 22:51:29 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ void	add_redir_node(t_redir *new_node, t_redir *head)
 	t_redir	*cur;
 
 	cur = head;
-	while (cur->next != NULL)
+	while (cur->next)
 		cur = cur->next;
 	new_node->prev = cur;
 	cur->next = new_node;
+	return ;
 }
 
-void	handle_redir(t_cmd *node, int type, char *file_name, int *i)
+int	handle_redir(t_cmd *node, int type, char *file_name, int *i)
 {
 	if (file_name != NULL)
 		(*i)++;
@@ -59,5 +60,7 @@ void	handle_redir(t_cmd *node, int type, char *file_name, int *i)
 			node->input = create_redir_node(type, file_name);
 		else
 			add_redir_node(create_redir_node(type, file_name), node->input);
+
 	}
+	return (1);
 }

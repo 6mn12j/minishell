@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 04:26:41 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/24 23:13:25 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	handle_prompt(void)
 		free(input);
 		input = NULL;
 	}
-	//free env
+	ft_free_two_ptr(g_state.envp);
 }
 
 int	main(int argc, char *argv[], char **envp)

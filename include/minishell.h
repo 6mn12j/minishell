@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 23:03:23 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/24 23:08:27 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# include <fcntl.h>
+# include <sys/stat.h>
+
 
 # include "../libft/libft.h"
 
@@ -46,11 +50,9 @@ typedef struct s_redir {
 	struct s_redir	*prev;
 }	t_redir;
 
-/*
-	pipe_type: 0 : 혼자있을 때, 1 : 시작, 2: 중간, 3: 끝
-*/
 typedef struct s_cmd {
 	int				pipe_type;
+	int				is_path;
 	char			*cmd;
 	char			**argv;
 	int				argc;
@@ -84,13 +86,14 @@ void	malloc_cmd_list(char **commands, t_cmd **head);
 /*redir list*/
 t_redir	*create_redir_node(int type, char *file_name);
 void	add_redir_node(t_redir *new_node, t_redir *head);
-void	handle_redir(t_cmd *node, int type, char *file_name, int *i);
+int		handle_redir(t_cmd *node, int type, char *file_name, int *i);
 
 /*utils*/
 void	parser(char **input, t_cmd **head);
 char	**parse_commands(char **commands);
 char	**ft_split_commands(char *str);
 void	ft_free_two_ptr(char **ptr);
+void	make_file(char *filename);
 
 void	print_test(t_cmd **head);// TODO: 내기 전에 삭제!
 

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 07:49:29 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/24 23:03:08 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,12 @@ int	count_pipe(char **commands)
 		i++;
 	}
 	return (count);
+}
+
+void	make_file(char *filename)
+{
+	int	fd;
+
+	fd = open(filename, O_CREAT, S_IRWXO);
+	close(fd);
 }

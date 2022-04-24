@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 07:56:56 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/24 23:02:06 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	set_pipe_type(t_cmd	*cur)
 	}
 }
 
-void	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
+int	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
 {
 	// TODO : heredoc 여러개일떄 처리할 것인지?
 	if (!heredoc)
-		return ;
+		return 1;
 	else
 		(*i)++;
 	if (cur->heredoc)
@@ -69,6 +69,26 @@ void	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
 		cur->heredoc = NULL;
 	}
 	cur->heredoc = heredoc;
+	return (1);
+}
+
+int	check_redir(t_cmd *cur, char **commands, int *i)
+{
+	if (ft_strncmp(commands[*i], "<<", 3) == 0)
+		return (handle_heredoc(cur, ft_strdup(commands[*i + 1]), i));
+	else if (ft_strncmp(commands[*i], "<", 2) == 0)
+		return (handle_redir(cur, REDIR_S_IN, ft_strdup(commands[*i + 1]), i));
+	else if (ft_strncmp(commands[*i], ">>", 3) == 0)
+	{
+		make_file(commands[*i + 1]);
+		return (handle_redir(cur, REDIR_D_OUT, ft_strdup(commands[*i + 1]), i));
+	}
+	else if (ft_strncmp(commands[*i], ">", 2) == 0)
+	{
+		make_file(commands[*i + 1]);
+		return (handle_redir(cur, REDIR_S_OUT, ft_strdup(commands[*i + 1]), i));
+	}
+	return (0);
 }
 
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
@@ -77,19 +97,14 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 	{
 		if (ft_strncmp(commands[i], "|", 2) == 0)
 		{
+			cur->pipe_type = 1;
 			cur = cur->next;
 			i_argv = 0;
 		}
 		else
 		{
-			if (ft_strncmp(commands[i], "<<", 3) == 0)
-				handle_heredoc(cur, ft_strdup(commands[i + 1]), &i);
-			else if (ft_strncmp(commands[i], "<", 2) == 0)
-				handle_redir(cur, REDIR_S_IN, ft_strdup(commands[i + 1]), &i);
-			else if (ft_strncmp(commands[i], ">>", 3) == 0)
-				handle_redir(cur, REDIR_D_OUT, ft_strdup(commands[i + 1]), &i);
-			else if (ft_strncmp(commands[i], ">", 2) == 0)
-				handle_redir(cur, REDIR_S_OUT, ft_strdup(commands[i + 1]), &i);
+			if (check_redir(cur, commands, &i))
+				;
 			else
 			{
 				cur->argv[i_argv++] = ft_strdup(commands[i]);
@@ -104,7 +119,7 @@ void	set_cmd(char **commands, t_cmd **head)
 	malloc_cmd_list(commands, head);
 	malloc_argv(commands, head);
 	set_cmd_list(commands, *head, -1, 0);
-	set_pipe_type(*head);
+	//set_pipe_type(*head);
 }
 
 void	parser(char **input, t_cmd **head)

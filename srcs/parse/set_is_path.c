@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   set_is_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 18:08:43 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 21:50:51 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/25 03:19:21 by minjupar          #+#    #+#             */
+/*   Updated: 2022/04/25 15:23:21 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	set_is_path(t_cmd *cmd)
 {
-	size_t	i;
+	//TODO: 상대경로는 ...? ~ -> /Users/username 으로 파싱됨
 
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (i < n && (s1[i] && s2[i]))
+	int		i;
+	t_cmd	*cur;
+
+	i = -1;
+	cur = cmd;
+	while (cur)
 	{
-		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
-			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
-		i++;
+		if (cur->cmd[0] == '/')
+			cur->is_path = 1;
+		if (!ft_strncmp(cur->cmd, "..", 2))
+			cur->is_path = 1;
+		cur = cur->next;
 	}
-	if (i == n && n != 0)
-		i--;
-	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 }

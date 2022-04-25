@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 18:08:43 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 21:50:51 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/22 22:05:23 by minjupar          #+#    #+#             */
+/*   Updated: 2022/04/23 07:47:26 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	ft_free_two_ptr(char **ptr)
 {
-	size_t	i;
+	int		i;
 
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (i < n && (s1[i] && s2[i]))
+	i = -1;
+	while (ptr[++i])
 	{
-		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
-			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
-		i++;
+		free(ptr[i]);
+		ptr[i] = NULL;
 	}
-	if (i == n && n != 0)
-		i--;
-	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+	free(ptr);
+	ptr = NULL;
+	return ;
 }

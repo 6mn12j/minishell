@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 01:59:54 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:07:53 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,6 @@ char	*read_input(char **input)
 {
 	*input = readline("soobash$:");
 	return (*input);
-}
-
-void	excute_cmd(t_cmd *head)
-{
-	if (!head->next && head->cmd)
-	{
-		//빌트인 실행
-	}
-	else
-	{
-		//파이프 여러개 일때
-	}
 }
 
 void	handle_prompt(void)

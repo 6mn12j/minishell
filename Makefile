@@ -15,7 +15,7 @@ READLINE_INC	= -I /Users/$(USER)/.brew/opt/readline/include
 
 SRCS = srcs/main.c \
 		srcs/env.c \
-		srcs/excute.c \
+		srcs/execute.c \
 		srcs/signal.c \
 		srcs/utils/minishell_util1.c \
 		srcs/utils/error.c \

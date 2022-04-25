@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 21:25:52 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/25 17:22:30 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ int	check_input(char *input)
 		if (input[i] == ' ')
 			space_cnt++;
 	}
-	if (!ft_strncmp(input, "\n", ft_strlen(input)) || \
+	if (!ft_strncmp(input, "\n", ft_strlen(input) + 1) || \
 		space_cnt == (int)ft_strlen(input))
+	{
+		add_history(input);
 		return (0);
+	}
 	if (!check_quote(input))
 	{
 		printf("Invalid quote\n");
@@ -65,39 +68,33 @@ int	check_input(char *input)
 
 char	*read_input(char **input)
 {
-	char	*temp;
-
-	temp = get_env("PWD");
-	// temp = get_env("PATH");
-	//*input = readline(ft_strjoin(temp, "/bash$:"));
 	*input = readline("soobash$:");
-
-	//free(temp);
-	//temp = 0;
 	return (*input);
 }
 
 void	handle_prompt(void)
 {
 	char	*input;
-	char	**command;
+	t_cmd	*head;
 
 	while (read_input(&input))
 	{
 		if (!check_input(input))
 		{
 			free(input);
+			input = NULL;
 			continue ;
 		}
+		head = NULL;
+		parser(&input, &head);
+		excute_cmd(head);
+		//실행에 head넘겨주기;
+		delete_cmd_list(&head);
 		add_history(input);
-		command = ft_split_command(input);
-		//parse_command(command);
 		free(input);
-		input = 0;
-		//실행 넘겨주기
-		//free command;
+		input = NULL;
 	}
-	//free env
+	ft_free_two_ptr(g_state.envp);
 }
 
 int	main(int argc, char *argv[], char **envp)

@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/06 18:08:43 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 21:50:51 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/25 17:07:58 by minjupar          #+#    #+#             */
+/*   Updated: 2022/04/25 17:09:51 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	excute_cmd(t_cmd *head)
 {
-	size_t	i;
-
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (i < n && (s1[i] && s2[i]))
+	if (!head->next && head->cmd)
 	{
-		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
-			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
-		i++;
+		//빌트인 실행
 	}
-	if (i == n && n != 0)
-		i--;
-	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+	else
+	{
+		//파이프 여러개 일때
+	}
 }

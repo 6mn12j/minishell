@@ -15,6 +15,7 @@ READLINE_INC	= -I /Users/$(USER)/.brew/opt/readline/include
 
 SRCS = srcs/main.c \
 		srcs/env.c \
+		srcs/excute.c \
 		srcs/signal.c \
 		srcs/utils/minishell_util1.c \
 		srcs/utils/error.c \
@@ -22,6 +23,17 @@ SRCS = srcs/main.c \
 		srcs/pipe/pipe.c \
 		srcs/cmd/execute.c \
 		srcs/redirection/redirection.c
+		srcs/utils/ft_free.c \
+		srcs/utils/test.c \
+		srcs/parse/parser.c \
+		srcs/parse/ft_split_cmds.c \
+		srcs/parse/set_is_path.c \
+		srcs/parse/parse_cmds.c \
+		srcs/parse/set_cmd_list.c \
+		srcs/list/cmd_list.c \
+		srcs/list/redir_list.c \
+
+
 
 LIBFT = libft/libft.a
 

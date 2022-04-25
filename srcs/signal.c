@@ -6,12 +6,12 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 04:56:54 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:11:22 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+//echo 쉘 터미널 환경 설정값 받아서 임의로 수정가능.
 static void	echoctl_off(void)
 {
 	struct termios	term;

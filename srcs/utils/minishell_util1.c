@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/24 23:03:08 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:11:50 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void	make_file(char *filename)
 {
 	int	fd;
 
-	fd = open(filename, O_CREAT, S_IRWXO);
+	fd = open(filename, O_CREAT, 0644);
 	close(fd);
 }

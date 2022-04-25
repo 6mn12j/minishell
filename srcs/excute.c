@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_is_path.c                                      :+:      :+:    :+:   */
+/*   excute.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 03:19:21 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:05:56 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/25 17:07:58 by minjupar          #+#    #+#             */
+/*   Updated: 2022/04/25 17:09:51 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_is_path(t_cmd *cmd)
+void	excute_cmd(t_cmd *head)
 {
-	//TODO: 상대경로는 ...? ~ -> /Users/username 으로 파싱됨
-
-	int		i;
-	t_cmd	*cur;
-
-	i = -1;
-	cur = cmd;
-	if(!cur->cmd)
-		return ;
-	while (cur)
+	if (!head->next && head->cmd)
 	{
-		if (cur->cmd[0] == '/')
-			cur->is_path = 1;
-		if (!ft_strncmp(cur->cmd, "..", 2))
-			cur->is_path = 1;
-		cur = cur->next;
+		//빌트인 실행
+	}
+	else
+	{
+		//파이프 여러개 일때
 	}
 }

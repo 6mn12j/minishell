@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:22:30 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/25 21:34:37 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	handle_prompt(void)
 		}
 		head = NULL;
 		parser(&input, &head);
-		excute_cmd(head);
+		execute_cmd(head);
 		//실행에 head넘겨주기;
 		delete_cmd_list(&head);
 		add_history(input);

@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/25 19:09:48 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/25 22:40:10 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ int	rdr_ll(char *heredoc)
 	int		fd;
 	char	*line;
 	int		r_fd;
+	int		idx;
+	int		filename;
 
 	r_fd = dup(READ);
-	fd = open("tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	filename = "tmp" + "idx";
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (ft_strncmp(line, heredoc, ft_strlen(heredoc)) == 0)

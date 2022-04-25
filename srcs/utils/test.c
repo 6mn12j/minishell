@@ -20,7 +20,7 @@ void	print_test(t_cmd **head)
 			printf("input : %s\n", cur_in->file_name);
 		printf("output_head : %p\n", cur->output);
 		for (t_redir *cur_out = cur->output; cur_out != NULL; cur_out = cur_out->next)
-			printf("output[%d] : %s\n", cur_out->type, cur_out->file_name);
+			printf("output type:%d : %s\n", cur_out->type, cur_out->file_name);
 		printf("heredoc : %s\n", cur->heredoc);
 		printf("--------------------\n");
 	}

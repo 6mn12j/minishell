@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:08:30 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 17:34:38 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,20 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <termios.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
 
 # include <fcntl.h>
 # include <sys/stat.h>
 
 # include "../libft/libft.h"
+# include "../get_next_line/include/get_next_line.h"
+
+# define READ 0
+# define WRITE 1
 
 typedef struct s_state
 {
@@ -34,8 +41,8 @@ typedef struct s_state
 
 /*
 type (output에서만 사용)
-">" : 0
-">>" : 1
+">" : 1
+">>" : 2
 */
 
 # define REDIR_S_IN 0
@@ -52,6 +59,7 @@ typedef struct s_redir {
 typedef struct s_cmd {
 	int				pipe_type;
 	int				is_path;
+	int				pipe[2];
 	char			*cmd;
 	char			**argv;
 	int				argc;
@@ -93,6 +101,14 @@ int		ft_twoptr_len(char **envp);
 int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);
 void	ft_error(void);
+
+// pipe
+void	use_pipe(int pipe_fd[2], int usage);
+
+// redirection
+int		rdr_l(char *in);
+int		rdr_r(char *out, int flag);
+int		rdr_rr(char *out, int flag);
 
 /*cmd list*/
 t_cmd	*create_cmd_node(t_cmd *prev);

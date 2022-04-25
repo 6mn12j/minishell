@@ -12,31 +12,6 @@
 
 #include "minishell.h"
 
-static int	change_quote(char c)
-{
-	static char	flag = 0;
-
-	if (c == '\'' || c == '"')
-	{
-		if (flag == 0)
-		{
-			flag = c;
-			return (1);
-		}
-		if (c == '\'' && flag == '\'')
-		{
-			flag = 0;
-			return (1);
-		}
-		else if (c == '"' && flag == '"')
-		{
-			flag = 0 ;
-			return (1);
-		}
-	}
-	return (c == flag);
-}
-
 void	parse_command(char **temp, char*command)
 {
 	int		i;
@@ -53,10 +28,10 @@ void	parse_command(char **temp, char*command)
 			join_env(temp, "HOME");
 			continue ;
 		}
-		else if (!quote && change_quote(command[i]))
-			quote = command[i];
-		else if (quote && change_quote(command[i]))
-			quote = 0;
+		else if (!quote && (command[i] == '\'' || command[i] == '"'))
+			change_quote(command[i], &quote);
+		else if (quote && command[i] == quote)
+			change_quote(command[i], & quote);
 		else
 			ft_strjoin_char(temp, command[i]);
 	}

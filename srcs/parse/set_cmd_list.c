@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 01:03:43 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:02:18 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,9 @@ int	check_redir(t_cmd *cur, char **commands, int *i)
 	else if (ft_strncmp(commands[*i], "<", 2) == 0)
 		return (handle_redir(cur, REDIR_S_IN, ft_strdup(commands[*i + 1]), i));
 	else if (ft_strncmp(commands[*i], ">>", 3) == 0)
-	{
-		make_file(commands[*i + 1]);
 		return (handle_redir(cur, REDIR_D_OUT, ft_strdup(commands[*i + 1]), i));
-	}
 	else if (ft_strncmp(commands[*i], ">", 2) == 0)
-	{
-		make_file(commands[*i + 1]);
 		return (handle_redir(cur, REDIR_S_OUT, ft_strdup(commands[*i + 1]), i));
-	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:08:30 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:01:58 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@ typedef struct s_state
 	char	**envp;
 	int		exit_status;
 }	t_state;
-
-/*
-type (output에서만 사용)
-">" : 0
-">>" : 1
-*/
 
 # define REDIR_S_IN 0
 # define REDIR_S_OUT 1

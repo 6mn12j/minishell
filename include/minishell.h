@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:22:11 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/25 17:34:38 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct s_state
 
 /*
 type (output에서만 사용)
-">" : 0
-">>" : 1
+">" : 1
+">>" : 2
 */
 
 # define REDIR_S_IN 0
@@ -110,7 +110,6 @@ int		rdr_l(char *in);
 int		rdr_r(char *out, int flag);
 int		rdr_rr(char *out, int flag);
 
-#endif
 /*cmd list*/
 t_cmd	*create_cmd_node(t_cmd *prev);
 void	delete_cmd_list(t_cmd **cmd);

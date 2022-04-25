@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:03:14 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/25 17:08:51 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ char	**ft_split_command(char *str);
 void	use_pipe(int pipe_fd[2], int usage);
 
 // redirection
-int		rdr_in(char *in);
-int		rdr_out(char *out, int flag);
-int		rdr_double_out(char *out, int flag);
+int		rdr_l(char *in);
+int		rdr_r(char *out, int flag);
+int		rdr_rr(char *out, int flag);
 
 #endif

@@ -14,9 +14,9 @@ READLINE_LIB	= -lreadline -L/opt/homebrew/opt/readline/lib
 READLINE_INC	= -I/opt/homebrew/opt/readline/include
 
 SRCS = srcs/main.c \
-		srcs/env.c \
-		srcs/excute.c \
-		srcs/signal.c \
+		srcs/utils/env.c \
+		srcs/utils/excute.c \
+		srcs/utils/signal.c \
 		srcs/utils/minishell_util1.c \
 		srcs/utils/error.c \
 		srcs/utils/ft_free.c \

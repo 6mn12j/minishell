@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 18:01:58 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/26 07:37:55 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ typedef struct s_cmd {
 	int				argc;
 	struct s_redir	*input;
 	struct s_redir	*output;
-	char			*heredoc;
+	char			*here_filename;
+	//char			*heredoc;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;

@@ -12,27 +12,19 @@
 
 #include "minishell.h"
 
-int	change_quote(char c, char *flag)
+void	change_quote(char c, char *flag)
 {
 	if (c == '\'' || c == '"')
 	{
 		if (*flag == 0)
-		{
 			*flag = c;
-			return (1);
-		}
+
 		if (c == '\'' && *flag == '\'')
-		{
 			*flag = 0;
-			return (1);
-		}
 		else if (c == '"' && *flag == '"')
-		{
 			*flag = 0 ;
-			return (1);
-		}
 	}
-	return (c == *flag);
+	return ;
 }
 
 int	get_word_count(char *str)

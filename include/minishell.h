@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 04:49:13 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/27 06:03:17 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**ft_split_cmds(char *str);
 char	**parse_cmds(char **commands);
 void	set_is_path(t_cmd *cmd);
 void	set_pipe_type(t_cmd	*cur);
-int		change_quote(char c, char *flag);
+void	change_quote(char c, char *flag);
 int		handle_heredoc(t_cmd *cur, char *heredoc, int *i);
 int		check_redir(t_cmd *cur, char **commands, int *i);
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv);

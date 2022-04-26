@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:07:53 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/26 18:11:45 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	handle_prompt(void)
 		}
 		head = NULL;
 		parser(&input, &head);
+		//오류처리!
 		excute_cmd(head);
 		//실행에 head넘겨주기;
 		delete_cmd_list(&head);

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/26 14:33:05 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:54:10 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int	read_heredoc(t_cmd *cur, char *heredoc)
 	line = readline("> ");
 	while (line)
 	{
-		if (ft_strcmp(line, heredoc) == 0)
+		if (ft_strncmp(line, heredoc, ft_strlen(line)) == 0)
 			break ;
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
 		line = readline("> ");
 	}
-	if (ft_strcmp(line, heredoc) == 0)
+	if (ft_strncmp(line, heredoc, ft_strlen(line)) == 0)
 		free(line);
 	return (1);
 }

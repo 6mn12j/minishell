@@ -11,8 +11,30 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+/*
+1. 유효한 리다이렉트나 파이프를 만나면 true값을 반환
+2. index를 어떻게 옮길것인지?
+3. "<<<", ">>>", "||" 이런 친구들은 false 반환
+*/
+int	is_separate(char **temp, char *cmd, int *i)
+{
+	char	symbol;
 
-void	parse_command(char **temp, char*command)
+	if (cmd[*i] == '|' || cmd[*i] == '>' || cmd[*i] == '<')
+		symbol = cmd[*i];
+	else
+		return (0);
+	ft_strjoin_char(temp, 1);
+	while (cmd[*i] == symbol)
+	{
+		ft_strjoin_char(temp, symbol);
+		(*i)++;
+	}
+	(*i)--;
+	return (1);
+}
+
+void	parse_command(char **temp, char *command)
 {
 	int		i;
 	char	quote;
@@ -32,6 +54,8 @@ void	parse_command(char **temp, char*command)
 			change_quote(command[i], &quote);
 		else if (quote && command[i] == quote)
 			change_quote(command[i], & quote);
+		else if (!quote && is_separate(temp, command, &i))
+			ft_strjoin_char(temp, 1);
 		else
 			ft_strjoin_char(temp, command[i]);
 	}

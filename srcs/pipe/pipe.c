@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   excute.c                                           :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 17:07:58 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 03:09:19 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/20 14:50:53 by jinyoo            #+#    #+#             */
+/*   Updated: 2022/04/20 14:51:17 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	excute_cmd(t_cmd *head)
+void	use_pipe(int pipe_fd[2], int usage)
 {
-	if (!head->next && head->cmd)
-	{
-		//빌트인 실행
-	}
-	else
-	{
-		//파이프 여러개 일때
-	}
+	dup2(pipe_fd[usage], usage);
+	close(pipe_fd[READ]);
+	close(pipe_fd[WRITE]);
 }

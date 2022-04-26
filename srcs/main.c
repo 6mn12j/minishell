@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 04:28:56 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/27 04:51:09 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	handle_prompt(void)
 		if (flag)
 			printf("Error\n");
 		else
-			excute_cmd(head);
+			execute_cmds(head);
 		delete_cmd_list(&head);
 		add_history(input);
 		free(input);

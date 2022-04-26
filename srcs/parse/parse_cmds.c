@@ -12,14 +12,19 @@
 
 #include "minishell.h"
 /*
-1. 유효한 리다이렉트나 파이프를 만나면 true값을 반환
-2. index를 어떻게 옮길것인지?
-3. "<<<", ">>>", "||" 이런 친구들은 false 반환
+
+1.카운트세서
+	1. < > 3개 이상일때, | 2개 이상일때 ->
+		 전역변수에 errono
+
 */
+
 int	is_separate(char **temp, char *cmd, int *i)
 {
 	char	symbol;
+	int		cnt;
 
+	cnt = 0;
 	if (cmd[*i] == '|' || cmd[*i] == '>' || cmd[*i] == '<')
 		symbol = cmd[*i];
 	else
@@ -29,8 +34,12 @@ int	is_separate(char **temp, char *cmd, int *i)
 	{
 		ft_strjoin_char(temp, symbol);
 		(*i)++;
+		cnt++;
 	}
 	(*i)--;
+	if ((symbol == '|' && cnt >= 2) || \
+		(symbol != '|' && cnt >= 3))
+		g_state.exit_status = WAIT_TIMEOUT;
 	return (1);
 }
 

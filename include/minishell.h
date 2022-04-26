@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 03:09:04 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/27 04:25:12 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 # define READ 0
 # define WRITE 1
+
+# define WAIT_TIMEOUT 258
 
 typedef struct s_state
 {
@@ -81,6 +83,7 @@ void	make_file(char *filename);
 void	ft_free_two_ptr(char **ptr);
 void	parser(char **input, t_cmd **head);
 void	excute_cmd(t_cmd *head);
+int		error_cmds(t_cmd *node);
 
 void	print_test(t_cmd **head);// TODO: 내기 전에 삭제
 

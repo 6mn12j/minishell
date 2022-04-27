@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 02:56:28 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 03:38:52 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*read_input(char **input)
 
 void	handle_prompt(void)
 {
-	int		flag;
+	int		is_error;
 	char	*input;
 	t_cmd	*head;
 
@@ -87,10 +87,8 @@ void	handle_prompt(void)
 			continue ;
 		}
 		parser(&input, &head);
-		flag = error_cmds(head);
-		if (flag)
-			printf("Error\n");
-		else
+		is_error = error_cmds(head);
+		if (is_error == FALSE)
 			execute_cmds(head);
 		delete_cmd_list(&head);
 		add_history(input);

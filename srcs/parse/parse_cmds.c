@@ -29,13 +29,13 @@ int	is_separate(char **temp, char *cmd, int *i)
 	if (cnt == 1 && symbol == '|')
 		ft_strjoin_char(temp, PIPE_TYPE);
 	else if (cnt == 1 && symbol == '<')
-		ft_strjoin_char(temp, REDIR_S_IN);
+		ft_strjoin_char(temp, REDIR_L);
 	else if (cnt == 1 && symbol == '>')
-		ft_strjoin_char(temp, REDIR_S_OUT);
+		ft_strjoin_char(temp, REDIR_R);
 	else if (cnt == 2 && symbol == '<')
 		ft_strjoin_char(temp, HEREDOC);
 	else if (cnt == 2 && symbol == '>')
-		ft_strjoin_char(temp, REDIR_D_OUT);
+		ft_strjoin_char(temp, REDIR_RR);
 	else
 		ft_strjoin_char(temp, ERROR_TYPE);
 	return (1);

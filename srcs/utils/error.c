@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 00:34:39 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 03:40:37 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 */
 int	error_cmds(t_cmd *node)
 {
+	int	i;
+
 	while (node)
 	{
 		if (node->cmd == NULL)
@@ -31,6 +33,16 @@ int	error_cmds(t_cmd *node)
 		else if ((node->output && node->output->file_name == NULL) \
 		|| (node->input && node->input->file_name == NULL))
 			return (1);
+		i = 0;
+		while (node->argv[i])
+		{
+			if (node->argv[i][0] == 7)
+			{
+				printf("soobash: syntax error near unexpected token `newline'\n");
+				return (1);
+			}
+			i++;
+		}
 		node = node->next;
 	}
 	return (0);

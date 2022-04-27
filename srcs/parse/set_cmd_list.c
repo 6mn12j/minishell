@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 02:34:31 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 03:18:12 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
 	{
 		if (cur->input == NULL)
 		{
-			handle_redir(cur, REDIR_S_IN, ft_strdup(cur->here_filename), i);
+			handle_redir(cur, REDIR_L, ft_strdup(cur->here_filename), i);
 			return (1);
 		}
 		else
@@ -62,20 +62,17 @@ int	check_redir(t_cmd *cur, char **commands, int *i)
 {
 	if (commands[*i][0] == HEREDOC)
 		return (handle_heredoc(cur, ft_strdup(commands[*i + 1]), i));
-	else if (commands[*i][0] == REDIR_S_IN)
-		return (handle_redir(cur, REDIR_S_IN, ft_strdup(commands[*i + 1]), i));
-	else if (commands[*i][0] == REDIR_D_OUT)
-		return (handle_redir(cur, REDIR_D_OUT, ft_strdup(commands[*i + 1]), i));
-	else if (commands[*i][0] == REDIR_S_OUT)
-		return (handle_redir(cur, REDIR_S_OUT, ft_strdup(commands[*i + 1]), i));
+	else if (commands[*i][0] == REDIR_L)
+		return (handle_redir(cur, REDIR_L, ft_strdup(commands[*i + 1]), i));
+	else if (commands[*i][0] == REDIR_RR)
+		return (handle_redir(cur, REDIR_RR, ft_strdup(commands[*i + 1]), i));
+	else if (commands[*i][0] == REDIR_R)
+		return (handle_redir(cur, REDIR_R, ft_strdup(commands[*i + 1]), i));
 	return (0);
 }
 
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 {
-	int	heredoc_file;
-
-	heredoc_file = 0;
 	while (commands[++i] && cur)
 	{
 		if (commands[i][0] == PIPE_TYPE)
@@ -85,18 +82,11 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 			cur->pipe[1] = 0;
 			cur = cur->next;
 			i_argv = 0;
-			heredoc_file = 0;
 		}
 		else
 		{
 			if (check_redir(cur, commands, &i))
-			{
-				if (heredoc_file == 0)
-				{
-					cur->argv[i_argv++] = ft_strdup(cur->here_filename);
-					heredoc_file = 1;
-				}
-			}
+				;
 			else
 			{
 				cur->argv[i_argv++] = ft_strdup(commands[i]);

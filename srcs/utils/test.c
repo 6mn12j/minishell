@@ -8,7 +8,7 @@ void	print_test(t_cmd **head)
 	for (t_cmd *cur = *head; cur != NULL; cur = cur->next)
 	{
 		printf("command : %s\n", cur->cmd);
-		printf("pipe_tyep:%d\n",cur->pipe_type);
+		printf("pipe_tyep:%d\n",cur->is_pipe);
 		printf("path?:%d\n",cur->is_path);
 		printf("prev:%p\n",cur->prev);
 		printf("next:%p\n",cur->next);

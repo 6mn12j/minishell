@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 02:44:37 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 03:42:42 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,21 @@
 # define READ 0
 # define WRITE 1
 
+# define TRUE 1
+# define FALSE 0
+
 # define WAIT_TIMEOUT 258
 
 # define ERROR -1
 # define SUCCESS 1
+
+# define SEPARATOR 1
+# define REDIR_L 2
+# define REDIR_R 3
+# define REDIR_RR 4
+# define HEREDOC 5
+# define PIPE_TYPE 6
+# define ERROR_TYPE 7
 
 typedef struct s_state
 {
@@ -44,13 +55,6 @@ typedef struct s_state
 	int		exit_status;
 }	t_state;
 
-# define SEPARATOR 1
-# define REDIR_S_IN 2
-# define REDIR_S_OUT 3
-# define REDIR_D_OUT 4
-# define HEREDOC 5
-# define PIPE_TYPE 6
-# define ERROR_TYPE 7
 typedef struct s_redir {
 	int				type;
 	char			*file_name;

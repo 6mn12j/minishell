@@ -6,18 +6,18 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:11:50 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/27 06:18:22 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_twoptr_len(char **envp)
+int	ft_twoptr_len(char **twoptr)
 {
 	int	i;
 
 	i = 0;
-	while (envp[i])
+	while (twoptr[i])
 		i++;
 	return (i);
 }

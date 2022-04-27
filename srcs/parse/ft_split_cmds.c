@@ -18,8 +18,7 @@ void	change_quote(char c, char *flag)
 	{
 		if (*flag == 0)
 			*flag = c;
-
-		if (c == '\'' && *flag == '\'')
+		else if (c == '\'' && *flag == '\'')
 			*flag = 0;
 		else if (c == '"' && *flag == '"')
 			*flag = 0 ;

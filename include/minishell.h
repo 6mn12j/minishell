@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 06:03:17 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/27 06:18:35 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*get_env_key(char *command, int start);
 int		parse_env(char **temp, char *command, int start);
 
 void	init_signal(void);
-int		ft_twoptr_len(char **envp);
+int		ft_twoptr_len(char **twoptr);
 int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);
 void	ft_error(void);

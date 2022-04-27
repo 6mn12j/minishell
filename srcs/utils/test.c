@@ -24,5 +24,6 @@ void	print_test(t_cmd **head)
 		printf("heredoc : %s\n", cur->here_filename);
 		printf("--------------------\n");
 	}
+	printf("g_state:exit_status:%d\n",g_state.exit_status);
 	//system("leaks minishell");
 }

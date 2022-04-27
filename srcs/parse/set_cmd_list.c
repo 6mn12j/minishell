@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 03:46:13 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:36:44 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	check_redir(t_cmd *cur, char **commands, int *i)
 		return (handle_redir(cur, REDIR_S_OUT, ft_strdup(commands[*i + 1]), i));
 	return (0);
 }
+
 
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 {

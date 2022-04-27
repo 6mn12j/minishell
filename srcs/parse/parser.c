@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 04:55:17 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:01:03 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parser(char **input, t_cmd **head)
 	*head = NULL;
 	commands = parse_cmds(ft_split_cmds(*input));
 	set_cmd(commands, head);
-	//print_test(head); // TODO : 내기 전에 삭제
+	print_test(head); // TODO : 내기 전에 삭제
 	ft_free_two_ptr(commands);
 	return ;
 }

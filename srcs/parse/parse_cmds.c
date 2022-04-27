@@ -37,6 +37,7 @@ int	is_separate(char **temp, char *cmd, int *i)
 		cnt++;
 	}
 	(*i)--;
+	// << < >> > 일때 뒤에 파일이름이 없으면 또 에러 처리 해줘야함.
 	if ((symbol == '|' && cnt >= 2) || \
 		(symbol != '|' && cnt >= 3))
 		g_state.exit_status = WAIT_TIMEOUT;
@@ -54,7 +55,7 @@ void	parse_command(char **temp, char *command)
 	{
 		if (quote != '\'' && command[i] == '$')
 			i = parse_env(temp, command, i);
-		else if (command[i] == '~')
+		else if (!quote && command[i] == '~')
 		{
 			join_env(temp, "HOME");
 			continue ;

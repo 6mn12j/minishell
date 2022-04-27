@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/26 15:01:44 by jinyoo           ###   ########.fr       */
-=======
-/*   Updated: 2022/04/27 04:49:13 by minjupar         ###   ########.fr       */
->>>>>>> e530f2b9735a905bf89d7ef1c1f4ce35280e1585
+/*   Updated: 2022/04/27 21:56:51 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +35,9 @@
 
 # define WAIT_TIMEOUT 258
 
+# define ERROR -1
+# define SUCCESS 1
+
 typedef struct s_state
 {
 	char	**envp;
@@ -57,7 +56,7 @@ typedef struct s_redir {
 }	t_redir;
 
 typedef struct s_cmd {
-	int				pipe_type;
+	int				is_pipe;
 	int				is_path;
 	int				pipe[2];
 	char			*cmd;
@@ -78,7 +77,6 @@ t_state	g_state;
 char	**ft_split_cmds(char *str);
 char	**parse_cmds(char **commands);
 void	set_is_path(t_cmd *cmd);
-void	set_pipe_type(t_cmd	*cur);
 int		change_quote(char c, char *flag);
 int		handle_heredoc(t_cmd *cur, char *heredoc, int *i);
 int		check_redir(t_cmd *cur, char **commands, int *i);
@@ -103,17 +101,15 @@ int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);
 void	ft_error(void);
 
-// pipe
-void	use_pipe(int pipe_fd[2], int usage);
-
 // redirection
 int		rdr_l(char *in);
 int		rdr_r(t_redir *redir);
 int		rdr_rr(t_redir *redir);
+int		redirection_handler(t_cmd *command);
 
 // execute
-char	*get_valid_cmd(char *cmd, char *path);
-void	execute_cmd(t_cmd *head);
+char	*get_valid_cmd(t_cmd *command, char **env_paths);
+int		execute_cmds(t_cmd *command);
 
 /*cmd list*/
 t_cmd	*create_cmd_node(t_cmd *prev);

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 13:31:42 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 00:34:39 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ int	error_cmds(t_cmd *node)
 	{
 		if (node->cmd == NULL)
 			return (1);
-		else if (g_state.exit_status == WAIT_TIMEOUT)
+		else if (node->here_filename && node->heredoc == NULL)
 			return (1);
-		// else if (node->here_filename && !node->input)
-		// 	return (1);
-		// else if ((node->output && node->output->file_name == NULL) \
-		// || (node->input && node->input->file_name == NULL))
-		// 	return (1);
+		else if ((node->output && node->output->file_name == NULL) \
+		|| (node->input && node->input->file_name == NULL))
+			return (1);
 		node = node->next;
 	}
 	return (0);

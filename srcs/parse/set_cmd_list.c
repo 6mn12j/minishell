@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 00:04:03 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 01:15:34 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	read_heredoc(t_cmd *cur, char *heredoc)
 	char		*filename;
 	static int	index = 0;
 
-	printf("heredoc:%s\n",heredoc);
+	cur->heredoc = heredoc;
 	if (cur->here_filename)
 		filename = ft_strjoin(".temp", ft_itoa(index));
 	else
@@ -47,7 +47,15 @@ int	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
 {
 
 	if (read_heredoc(cur, heredoc))
-		handle_redir(cur, REDIR_S_IN, cur->here_filename, i);
+	{
+		if (cur->input == NULL)
+		{
+			handle_redir(cur, REDIR_S_IN, ft_strdup(cur->here_filename), i);
+			return (1);
+		}
+		else
+			(*i)++;
+	}
 	return (1);
 }
 
@@ -67,8 +75,12 @@ int	check_redir(t_cmd *cur, char **commands, int *i)
 
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 {
+	int	heredoc_file;
+
+	heredoc_file = 0;
 	while (commands[++i] && cur)
 	{
+
 		if (ft_strncmp(commands[i], "|", 2) == 0)
 		{
 			cur->is_pipe = 1;
@@ -76,11 +88,18 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 			cur->pipe[1] = 0;
 			cur = cur->next;
 			i_argv = 0;
+			heredoc_file = 0;
 		}
 		else
 		{
 			if (check_redir(cur, commands, &i))
-				;
+			{
+				if (heredoc_file == 0)
+				{
+					cur->argv[i_argv++] = ft_strdup(cur->here_filename);
+					heredoc_file = 1;
+				}
+			}
 			else
 			{
 				cur->argv[i_argv++] = ft_strdup(commands[i]);

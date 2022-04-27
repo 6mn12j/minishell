@@ -8,7 +8,7 @@ void	print_test(t_cmd **head)
 	for (t_cmd *cur = *head; cur != NULL; cur = cur->next)
 	{
 		printf("command : %s\n", cur->cmd);
-		printf("pipe_tyep:%d\n",cur->is_pipe);
+		printf("ispipe?:%d\n",cur->is_pipe);
 		printf("path?:%d\n",cur->is_path);
 		printf("prev:%p\n",cur->prev);
 		printf("next:%p\n",cur->next);
@@ -21,9 +21,11 @@ void	print_test(t_cmd **head)
 		printf("output_head : %p\n", cur->output);
 		for (t_redir *cur_out = cur->output; cur_out != NULL; cur_out = cur_out->next)
 			printf("output type:%d : %s\n", cur_out->type, cur_out->file_name);
-		printf("heredoc : %s\n", cur->here_filename);
+		printf("heredoc: %s\n",cur->heredoc);
+		printf("here_filename : %s\n", cur->here_filename);
 		printf("--------------------\n");
 	}
-	printf("g_state:exit_status:%d\n",g_state.exit_status);
+	printf("-------parse FIN------\n");
+
 	//system("leaks minishell");
 }

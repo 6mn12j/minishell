@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:57 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 15:37:31 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/28 00:37:24 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	here_filename(t_cmd *head)
+{
+	int	result;
+
+	result = 0;
+	while (head)
+	{
+		head = head->next;
+		result ++;
+	}
+	return (result);
+}
 
 t_cmd	*create_cmd_node(t_cmd *prev)
 {
@@ -26,6 +39,7 @@ t_cmd	*create_cmd_node(t_cmd *prev)
 	node->argc = 0;
 	node->input = NULL;
 	node->output = NULL;
+	node->heredoc = NULL;
 	node->here_filename = NULL;
 	node->next = NULL;
 	node->prev = prev;
@@ -60,7 +74,8 @@ void	delete_cmd_list(t_cmd **cmd)
 	temp = *cmd;
 	while (temp)
 	{
-		unlink(temp->here_filename);
+		if (temp->heredoc)
+			unlink(temp->here_filename);
 		del_node = temp;
 		temp = temp->next;
 		ft_free_two_ptr(del_node->argv);

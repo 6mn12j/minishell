@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 00:03:56 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 01:19:17 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	set_cmd(char **commands, t_cmd **head)
 	malloc_cmd_list(commands, head);
 	malloc_argv(commands, head);
 	set_cmd_list(commands, *head, -1, 0);
-	//set_is_pipe(*head);
-	set_is_path(*head);
 }
 
 void	parser(char **input, t_cmd **head)
@@ -53,7 +51,7 @@ void	parser(char **input, t_cmd **head)
 	*head = NULL;
 	commands = parse_cmds(ft_split_cmds(*input));
 	set_cmd(commands, head);
-	// print_test(head); // TODO : 내기 전에 삭제
+	print_test(head); // TODO : 내기 전에 삭제
 	ft_free_two_ptr(commands);
 	return ;
 }

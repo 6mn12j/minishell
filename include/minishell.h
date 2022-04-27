@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 00:04:42 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 00:37:49 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_cmd {
 	struct s_redir	*input;
 	struct s_redir	*output;
 	char			*here_filename;
-	//char			*heredoc;
+	char			*heredoc;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
@@ -77,7 +77,7 @@ t_state	g_state;
 char	**ft_split_cmds(char *str);
 char	**parse_cmds(char **commands);
 void	set_is_path(t_cmd *cmd);
-int		change_quote(char c, char *flag);
+void	change_quote(char c, char *flag);
 int		handle_heredoc(t_cmd *cur, char *heredoc, int *i);
 int		check_redir(t_cmd *cur, char **commands, int *i);
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv);
@@ -112,6 +112,7 @@ char	*get_valid_cmd(t_cmd *command, char **env_paths);
 int		execute_cmds(t_cmd *command);
 
 /*cmd list*/
+int		here_filename(t_cmd *head);
 t_cmd	*create_cmd_node(t_cmd *prev);
 void	delete_cmd_list(t_cmd **cmd);
 void	malloc_cmd_list(char **commands, t_cmd **head);

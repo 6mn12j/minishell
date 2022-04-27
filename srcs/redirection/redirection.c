@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/26 15:09:24 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/27 21:56:06 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,38 @@
 
 int	rdr_l(char *in)
 {
-	int fd;
-	int	r_fd;
+	int	fd;
 
-	r_fd = dup(READ);
 	fd = open(in, O_RDONLY);
-	dup2(fd, READ);
+	if (fd == ERROR)
+		return (ERROR);
+	if (dup2(fd, READ) == ERROR)
+		return (ERROR);
 	close(fd);
-	return (r_fd);
+	return (SUCCESS);
 }
 
 int	rdr_rr(t_redir *redir)
 {
 	int			fd;
-	int			w_fd;
 	t_redir		*rdr;
 
-	w_fd = dup(WRITE);
 	rdr = redir;
 	while (rdr->next)
 	{
 		fd = open(rdr->file_name, O_WRONLY | O_APPEND | O_CREAT, 0644);
+		if (fd == ERROR)
+			return (ERROR);
 		close(fd);
 		rdr = rdr->next;
 	}
 	fd = open(rdr->file_name, O_WRONLY | O_APPEND | O_CREAT, 0644);
-	dup2(fd, WRITE);
+	if (fd == ERROR)
+		return (ERROR);
+	if (dup2(fd, WRITE) == ERROR)
+		return (ERROR);
 	close(fd);
-	return (w_fd);
+	return (SUCCESS);
 }
 
 int	rdr_ll(char *heredoc)
@@ -51,14 +55,13 @@ int	rdr_ll(char *heredoc)
 	int		r_fd;
 	// int		idx;
 	// int		filename;
-
 	r_fd = dup(READ);
 	// filename = "tmp" + "idx";
 	fd = open("tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	while (get_next_line(0, &line) > 0)
 	{
 		if (ft_strncmp(line, heredoc, ft_strlen(heredoc)) == 0)
-			break;
+			break ;
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
@@ -75,19 +78,45 @@ int	rdr_ll(char *heredoc)
 int	rdr_r(t_redir *redir)
 {
 	int		fd;
-	int		w_fd;
-	t_redir		*rdr;
+	t_redir	*rdr;
 
-	w_fd = dup(WRITE);
 	rdr = redir;
 	while (rdr->next)
 	{
 		fd = open(rdr->file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		if (fd == ERROR)
+			return (ERROR);
 		close(fd);
 		rdr = rdr->next;
 	}
 	fd = open(rdr->file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-	dup2(fd, WRITE);
+	if (fd == ERROR)
+		return (ERROR);
+	if (dup2(fd, WRITE) == ERROR)
+		return (ERROR);
 	close(fd);
-	return (w_fd);
+	return (SUCCESS);
+}
+
+int	redirection_handler(t_cmd *command)
+{
+	if (command->input)
+	{
+		if (rdr_l(command->input->file_name) == ERROR)
+			return (ERROR);
+	}
+	else if (command->output)
+	{
+		if (command->output->type == 1)
+		{
+			if (rdr_r(command->output) == ERROR)
+				return (ERROR);
+		}
+		else if (command->output->type == 2)
+		{
+			if (rdr_rr(command->output) == ERROR)
+				return (ERROR);
+		}
+	}
+	return (SUCCESS);
 }

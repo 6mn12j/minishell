@@ -6,7 +6,11 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/04/26 15:01:44 by jinyoo           ###   ########.fr       */
+=======
 /*   Updated: 2022/04/27 04:49:13 by minjupar         ###   ########.fr       */
+>>>>>>> e530f2b9735a905bf89d7ef1c1f4ce35280e1585
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +86,6 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv);
 void	make_file(char *filename);
 void	ft_free_two_ptr(char **ptr);
 void	parser(char **input, t_cmd **head);
-void	execute_cmds(t_cmd *node);
 int		error_cmds(t_cmd *node);
 
 void	print_test(t_cmd **head);// TODO: 내기 전에 삭제
@@ -105,8 +108,12 @@ void	use_pipe(int pipe_fd[2], int usage);
 
 // redirection
 int		rdr_l(char *in);
-int		rdr_r(char *out, int flag);
-int		rdr_rr(char *out, int flag);
+int		rdr_r(t_redir *redir);
+int		rdr_rr(t_redir *redir);
+
+// execute
+char	*get_valid_cmd(char *cmd, char *path);
+void	execute_cmd(t_cmd *head);
 
 /*cmd list*/
 t_cmd	*create_cmd_node(t_cmd *prev);
@@ -118,4 +125,5 @@ t_redir	*create_redir_node(int type, char *file_name);
 void	delete_redir_list(t_redir *redir);
 void	add_redir_node(t_redir *new_node, t_redir *head);
 int		handle_redir(t_cmd *node, int type, char *file_name, int *i);
+
 #endif

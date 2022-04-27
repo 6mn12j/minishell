@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 01:17:37 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 02:56:28 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	handle_prompt(void)
 
 	while (read_input(&input))
 	{
-		g_state.exit_status = 0;
 		if (!check_input(input))
 		{
 			free(input);

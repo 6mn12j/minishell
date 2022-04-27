@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 00:37:49 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 02:44:37 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,13 @@ typedef struct s_state
 	int		exit_status;
 }	t_state;
 
-# define REDIR_S_IN 0
-# define REDIR_S_OUT 1
-# define REDIR_D_OUT 2
-
+# define SEPARATOR 1
+# define REDIR_S_IN 2
+# define REDIR_S_OUT 3
+# define REDIR_D_OUT 4
+# define HEREDOC 5
+# define PIPE_TYPE 6
+# define ERROR_TYPE 7
 typedef struct s_redir {
 	int				type;
 	char			*file_name;

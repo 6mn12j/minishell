@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 01:15:34 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 02:34:31 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	read_heredoc(t_cmd *cur, char *heredoc)
 
 int	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
 {
-
 	if (read_heredoc(cur, heredoc))
 	{
 		if (cur->input == NULL)
@@ -61,17 +60,16 @@ int	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
 
 int	check_redir(t_cmd *cur, char **commands, int *i)
 {
-	if (ft_strncmp(commands[*i], "<<", 3) == 0)
+	if (commands[*i][0] == HEREDOC)
 		return (handle_heredoc(cur, ft_strdup(commands[*i + 1]), i));
-	else if (ft_strncmp(commands[*i], "<", 2) == 0)
+	else if (commands[*i][0] == REDIR_S_IN)
 		return (handle_redir(cur, REDIR_S_IN, ft_strdup(commands[*i + 1]), i));
-	else if (ft_strncmp(commands[*i], ">>", 3) == 0)
+	else if (commands[*i][0] == REDIR_D_OUT)
 		return (handle_redir(cur, REDIR_D_OUT, ft_strdup(commands[*i + 1]), i));
-	else if (ft_strncmp(commands[*i], ">", 2) == 0)
+	else if (commands[*i][0] == REDIR_S_OUT)
 		return (handle_redir(cur, REDIR_S_OUT, ft_strdup(commands[*i + 1]), i));
 	return (0);
 }
-
 
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 {
@@ -80,8 +78,7 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 	heredoc_file = 0;
 	while (commands[++i] && cur)
 	{
-
-		if (ft_strncmp(commands[i], "|", 2) == 0)
+		if (commands[i][0] == PIPE_TYPE)
 		{
 			cur->is_pipe = 1;
 			cur->pipe[0] = 0;

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 06:18:22 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 02:33:11 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	count_pipe(char **commands)
 	count = 0;
 	while (commands[i])
 	{
-		if (ft_strncmp(commands[i], "|", 2) == 0)
+		if (commands[i][0] == PIPE_TYPE)
 			count++;
 		i++;
 	}

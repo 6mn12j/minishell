@@ -11,13 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-
-1.카운트세서
-	1. < > 3개 이상일때, | 2개 이상일때 ->
-		 전역변수에 errono
-
-*/
 
 int	is_separate(char **temp, char *cmd, int *i)
 {
@@ -29,18 +22,22 @@ int	is_separate(char **temp, char *cmd, int *i)
 		symbol = cmd[*i];
 	else
 		return (0);
-	ft_strjoin_char(temp, 1);
-	while (cmd[*i] == symbol)
-	{
-		ft_strjoin_char(temp, symbol);
-		(*i)++;
+	ft_strjoin_char(temp, SEPARATOR);
+	while (cmd[(*i)++] == symbol)
 		cnt++;
-	}
 	(*i)--;
-	// << < >> > 일때 뒤에 파일이름이 없으면 또 에러 처리 해줘야함.
-	if ((symbol == '|' && cnt >= 2) || \
-		(symbol != '|' && cnt >= 3))
-		g_state.exit_status = WAIT_TIMEOUT;
+	if (cnt == 1 && symbol == '|')
+		ft_strjoin_char(temp, PIPE_TYPE);
+	else if (cnt == 1 && symbol == '<')
+		ft_strjoin_char(temp, REDIR_S_IN);
+	else if (cnt == 1 && symbol == '>')
+		ft_strjoin_char(temp, REDIR_S_OUT);
+	else if (cnt == 2 && symbol == '<')
+		ft_strjoin_char(temp, HEREDOC);
+	else if (cnt == 2 && symbol == '>')
+		ft_strjoin_char(temp, REDIR_D_OUT);
+	else
+		ft_strjoin_char(temp, ERROR_TYPE);
 	return (1);
 }
 
@@ -65,11 +62,11 @@ void	parse_command(char **temp, char *command)
 		else if (quote && command[i] == quote)
 			change_quote(command[i], & quote);
 		else if (!quote && is_separate(temp, command, &i))
-			ft_strjoin_char(temp, 1);
+			ft_strjoin_char(temp, SEPARATOR);
 		else
 			ft_strjoin_char(temp, command[i]);
 	}
-	ft_strjoin_char(temp, 1);
+	ft_strjoin_char(temp, SEPARATOR);
 }
 
 char	**parse_cmds(char **commands)

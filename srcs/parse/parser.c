@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 01:19:17 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 02:48:07 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	malloc_argv(char **commands, t_cmd **head)
 	cur = *head;
 	while (commands[++i] && cur)
 	{
-		if (ft_strncmp(commands[i], "|", 2) == 0)
+		if (commands[i][0] == PIPE_TYPE)
 			cur = cur->next;
 		else
 			cur->argc++;

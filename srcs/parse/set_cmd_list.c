@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_cmd_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:31:53 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/27 03:46:13 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,42 @@ void	set_pipe_type(t_cmd	*cur)
 	}
 }
 
+int	read_heredoc(t_cmd *cur, char *heredoc)
+{
+	int			fd;
+	char		*line;
+	char		*filename;
+	static int	index = 0;
+
+	printf("heredoc:%s\n",heredoc);
+	if (cur->here_filename)
+		filename = ft_strjoin(".temp", ft_itoa(index));
+	else
+		filename = ft_strjoin(".temp", ft_itoa(++index));
+	cur->here_filename = filename;
+	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (heredoc == NULL)
+		return (0);
+	line = readline("> ");
+	while (line)
+	{
+		if (ft_strncmp(line, heredoc, ft_strlen(line)) == 0)
+			break ;
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+		line = readline("> ");
+	}
+	if (ft_strncmp(line, heredoc, ft_strlen(line)) == 0)
+		free(line);
+	return (1);
+}
+
 int	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
 {
-	if (!heredoc)
-		return (1);
-	else
-		(*i)++;
-	if (cur->heredoc)
-	{
-		free(cur->heredoc);
-		cur->heredoc = NULL;
-	}
-	cur->heredoc = heredoc;
+
+	if (read_heredoc(cur, heredoc))
+		handle_redir(cur, REDIR_S_IN, cur->here_filename, i);
 	return (1);
 }
 

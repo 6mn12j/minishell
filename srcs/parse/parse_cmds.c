@@ -11,8 +11,39 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+/*
 
-void	parse_command(char **temp, char*command)
+1.카운트세서
+	1. < > 3개 이상일때, | 2개 이상일때 ->
+		 전역변수에 errono
+
+*/
+
+int	is_separate(char **temp, char *cmd, int *i)
+{
+	char	symbol;
+	int		cnt;
+
+	cnt = 0;
+	if (cmd[*i] == '|' || cmd[*i] == '>' || cmd[*i] == '<')
+		symbol = cmd[*i];
+	else
+		return (0);
+	ft_strjoin_char(temp, 1);
+	while (cmd[*i] == symbol)
+	{
+		ft_strjoin_char(temp, symbol);
+		(*i)++;
+		cnt++;
+	}
+	(*i)--;
+	if ((symbol == '|' && cnt >= 2) || \
+		(symbol != '|' && cnt >= 3))
+		g_state.exit_status = WAIT_TIMEOUT;
+	return (1);
+}
+
+void	parse_command(char **temp, char *command)
 {
 	int		i;
 	char	quote;
@@ -32,6 +63,8 @@ void	parse_command(char **temp, char*command)
 			change_quote(command[i], &quote);
 		else if (quote && command[i] == quote)
 			change_quote(command[i], & quote);
+		else if (!quote && is_separate(temp, command, &i))
+			ft_strjoin_char(temp, 1);
 		else
 			ft_strjoin_char(temp, command[i]);
 	}

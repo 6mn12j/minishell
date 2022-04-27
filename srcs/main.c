@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 21:34:37 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/27 13:49:01 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,25 @@ char	*read_input(char **input)
 
 void	handle_prompt(void)
 {
+	int		flag;
 	char	*input;
 	t_cmd	*head;
 
 	while (read_input(&input))
 	{
+		g_state.exit_status = 0;
 		if (!check_input(input))
 		{
 			free(input);
 			input = NULL;
 			continue ;
 		}
-		head = NULL;
 		parser(&input, &head);
-		execute_cmd(head);
-		//실행에 head넘겨주기;
+		flag = error_cmds(head);
+		if (flag)
+			printf("Error\n");
+		else
+			execute_cmds(head);
 		delete_cmd_list(&head);
 		add_history(input);
 		free(input);

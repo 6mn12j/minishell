@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 03:19:21 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 17:05:56 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/27 02:56:37 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,16 @@
 
 void	set_is_path(t_cmd *cmd)
 {
-	//TODO: 상대경로는 ...? ~ -> /Users/username 으로 파싱됨
-
 	int		i;
 	t_cmd	*cur;
 
 	i = -1;
 	cur = cmd;
-	if(!cur->cmd)
+	if (!cur->cmd)
 		return ;
 	while (cur)
 	{
-		if (cur->cmd[0] == '/')
-			cur->is_path = 1;
-		if (!ft_strncmp(cur->cmd, "..", 2))
+		if (ft_strchr(cur->cmd, '/'))
 			cur->is_path = 1;
 		cur = cur->next;
 	}

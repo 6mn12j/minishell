@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 02:04:40 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:59:41 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ char	*get_env_key(char *command, int start)
 
 	len = 0;
 	i = start;
-	if (command[i] == '\'' || command[i] == '"')
+	if (command[i] == '"')
 		i++;
 	while (command[++i])
 	{
-		if (command[i] == '\'' || command[i] == '"' || command[i] == ' ')
+		if (command[i] == '\'' || command[i] == '"'\
+		|| command[i] == ' ' || command[i] == '$')
 			break ;
 		len++;
 	}
@@ -47,18 +48,24 @@ char	*get_env_key(char *command, int start)
 char	*get_env(char *key)
 {
 	int		i;
+	char	*temp;
 
 	i = -1;
 	if (ft_strlen(key) == 0)
 		return (ft_strdup(""));
 	if (!ft_strncmp(key, "?", ft_strlen(key)))
 		return (ft_itoa(g_state.exit_status));
+	temp = ft_strjoin(key, "=");
 	while (g_state.envp[++i])
 	{
-		if (!ft_strncmp(g_state.envp[i], key, ft_strlen(key)))
+		if (!ft_strncmp(g_state.envp[i], temp, ft_strlen(temp)))
+		{
+			free(temp);
 			return (ft_substr(g_state.envp[i], ft_strlen(key) + 1, \
 				ft_strlen(g_state.envp[i]) - ft_strlen(key) + 1));
+		}
 	}
+	free(temp);
 	return (ft_strdup(""));
 }
 

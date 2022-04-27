@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/26 15:01:44 by jinyoo           ###   ########.fr       */
+=======
+/*   Updated: 2022/04/27 04:49:13 by minjupar         ###   ########.fr       */
+>>>>>>> e530f2b9735a905bf89d7ef1c1f4ce35280e1585
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +37,13 @@
 # define READ 0
 # define WRITE 1
 
+# define WAIT_TIMEOUT 258
+
 typedef struct s_state
 {
 	char	**envp;
 	int		exit_status;
 }	t_state;
-
-/*
-type (output에서만 사용)
-">" : 1
-">>" : 2
-*/
 
 # define REDIR_S_IN 0
 # define REDIR_S_OUT 1
@@ -65,7 +65,8 @@ typedef struct s_cmd {
 	int				argc;
 	struct s_redir	*input;
 	struct s_redir	*output;
-	char			*heredoc;
+	char			*here_filename;
+	//char			*heredoc;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
@@ -85,6 +86,7 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv);
 void	make_file(char *filename);
 void	ft_free_two_ptr(char **ptr);
 void	parser(char **input, t_cmd **head);
+int		error_cmds(t_cmd *node);
 
 void	print_test(t_cmd **head);// TODO: 내기 전에 삭제
 

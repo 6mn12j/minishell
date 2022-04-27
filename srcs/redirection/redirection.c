@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/27 21:56:06 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/28 03:11:46 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ int	redirection_handler(t_cmd *command)
 	}
 	else if (command->output)
 	{
-		if (command->output->type == 1)
+		if (command->output->type == REDIR_R)
 		{
 			if (rdr_r(command->output) == ERROR)
 				return (ERROR);
 		}
-		else if (command->output->type == 2)
+		else if (command->output->type == REDIR_RR)
 		{
 			if (rdr_rr(command->output) == ERROR)
 				return (ERROR);

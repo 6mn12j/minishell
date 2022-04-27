@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:28 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/25 01:56:31 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 03:09:06 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ int	handle_redir(t_cmd *node, int type, char *file_name, int *i)
 {
 	if (file_name != NULL)
 		(*i)++;
-	if (type == REDIR_S_OUT)
+	if (type == REDIR_R)
 	{
 		if (node->output == NULL)
 			node->output = create_redir_node(type, file_name);
 		else
 			add_redir_node(create_redir_node(type, file_name), node->output);
 	}
-	else if (type == REDIR_D_OUT)
+	else if (type == REDIR_RR)
 	{
 		if (node->output == NULL)
 			node->output = create_redir_node(type, file_name);
 		else
 			add_redir_node(create_redir_node(type, file_name), node->output);
 	}
-	else if (type == REDIR_S_IN)
+	else if (type == REDIR_L)
 	{
 		if (node->input == NULL)
 			node->input = create_redir_node(type, file_name);

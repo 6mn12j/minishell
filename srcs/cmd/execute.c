@@ -6,84 +6,119 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/27 13:51:30 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/27 21:55:16 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_valid_cmd(char *cmd, char *path)
+char	*get_valid_cmd(t_cmd *command, char **env_paths)
 {
 	char		*tmp;
 	char		*cmd_path;
-	char		**env_paths;
-	int			i;
 	struct stat	buf;
 
-	i = -1;
-	env_paths = ft_split(path, ':');
-	while (env_paths[++i])
+	if (command->is_path)
 	{
-		tmp = ft_strjoin(env_paths[i], "/");
-		cmd_path = ft_strjoin(tmp, cmd);
-		free(tmp);
-		if (stat(cmd_path, &buf) == 0)
-			return (cmd_path);
+		if (stat(command->cmd, &buf) == 0)
+			return (command->cmd);
+	}
+	else
+	{
+		while (*env_paths)
+		{
+			tmp = ft_strjoin(*env_paths, "/");
+			cmd_path = ft_strjoin(tmp, command->cmd);
+			free(tmp);
+			if (stat(cmd_path, &buf) == 0)
+				return (cmd_path);
+			env_paths++;
+		}
 	}
 	return (NULL);
 }
 
-int	exec_one_cmd(t_cmd *command)
+static int	child_handler(t_cmd *command)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-		return (-1);
-	else if (!pid)
+	if (command->input || command->output)
 	{
-		if (command->input)
-			rdr_l(command->input->file_name);
-		else if (command->output)
-		{
-			if (command->output->type == 1)
-				rdr_r(command->output);
-			else if (command->output->type == 2)
-				rdr_rr(command->output);
-		}
-		execve(command->cmd, command->argv, g_state.envp);
+		if (redirection_handler(command) == ERROR)
+			return (ERROR);
 	}
 	else
-		waitpid(pid, NULL, 0);
-	return (1);
+	{
+		if (command->is_pipe)
+		{
+			if (dup2(command->pipe[WRITE], WRITE) == ERROR)
+				return (ERROR);
+		}
+		if (command->prev && command->prev->is_pipe)
+		{
+			if (dup2(command->prev->pipe[READ], READ) == ERROR)
+				return (ERROR);
+		}
+	}
+	if (execve(command->cmd, command->argv, g_state.envp) == ERROR)
+		return (ERROR);
+	return (SUCCESS);
 }
 
-void	execute_cmd(t_cmd *command)
+static void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
+{
+	waitpid(pid, NULL, 0);
+	if (pipe_open)
+	{
+		close(command->pipe[WRITE]);
+		if (!command->next)
+			close(command->pipe[READ]);
+	}
+	if (command->prev && command->prev->is_pipe)
+		close(command->prev->pipe[READ]);
+}
+
+static int	exec_cmd(t_cmd *command)
+{
+	pid_t	pid;
+	int		pipe_open;
+
+	pipe_open = 0;
+	if (command->is_pipe || (command->prev && command->prev->is_pipe))
+	{
+		pipe_open = 1;
+		pipe(command->pipe);
+	}
+	pid = fork();
+	if (pid == -1)
+		return (ERROR);
+	else if (!pid)
+	{
+		if (child_handler(command) == ERROR)
+			return (ERROR);
+	}
+	else
+		parent_handler(command, pid, pipe_open);
+	return (SUCCESS);
+}
+
+int	execute_cmds(t_cmd *command)
 {
 	char	*path;
 	int		flag;
 
 	path = get_env("PATH");
-	if (!command->next && command->cmd)
+	flag = 0;
+	while (command)
 	{
-		//빌트인 실행
-
-		//  ---------빌트인이 아닌 명령어 실행------------
+		// ---------빌트인이 아닌 명령어 실행------------
+		if (command->cmd)
+			command->cmd = get_valid_cmd(command, ft_split(path, ':'));
+		if (!command->cmd)
+			return (ERROR);
+		exec_cmd(command);
 		if (!command->is_path)
-		{
-			command->cmd = get_valid_cmd(command->cmd, path);
-			flag = 1;
-			// if (!command->cmd)
-			// 	error
-		}
-		exec_one_cmd(command);
+			free(command->cmd);
 		// ----------------------------------------
+		command = command->next;
 	}
-	else
-	{
-		//파이프 여러개 일때
-	}
-	if (flag)
-		free(command->cmd);
+	return (SUCCESS);
 }
-

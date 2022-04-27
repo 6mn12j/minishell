@@ -6,30 +6,11 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/27 13:36:44 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 00:04:03 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	set_pipe_type(t_cmd	*cur)
-{
-	if (!cur->prev && !cur->next)
-		cur->pipe_type = 0;
-	else
-	{
-		cur->pipe_type = 1;
-		cur = cur->next;
-		while (cur)
-		{
-			if (cur->next)
-				cur->pipe_type = 2;
-			else if (!cur->next)
-				cur->pipe_type = 3;
-			cur = cur->next;
-		}
-	}
-}
 
 int	read_heredoc(t_cmd *cur, char *heredoc)
 {
@@ -90,7 +71,9 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 	{
 		if (ft_strncmp(commands[i], "|", 2) == 0)
 		{
-			cur->pipe_type = 1;
+			cur->is_pipe = 1;
+			cur->pipe[0] = 0;
+			cur->pipe[1] = 0;
 			cur = cur->next;
 			i_argv = 0;
 		}

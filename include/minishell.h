@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 03:42:42 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:48:54 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	ft_strjoin_char(char **dst, char ch);
 void	ft_error(void);
 
 // redirection
-int		rdr_l(char *in);
+int		rdr_l(t_redir *redir);
 int		rdr_r(t_redir *redir);
 int		rdr_rr(t_redir *redir);
 int		redirection_handler(t_cmd *command);

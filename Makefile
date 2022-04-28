@@ -22,6 +22,7 @@ SRCS = srcs/main.c \
 		srcs/utils/ft_free.c \
 		srcs/utils/test.c \
 		srcs/parse/parser.c \
+		srcs/parse/heredoc.c \
 		srcs/parse/ft_split_cmds.c \
 		srcs/parse/set_is_path.c \
 		srcs/parse/parse_cmds.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/28 00:03:47 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 17:24:24 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,15 @@ static int	child_handler(t_cmd *command)
 		if (redirection_handler(command) == ERROR)
 			return (ERROR);
 	}
-	else
+	if (command->is_pipe)
 	{
-		if (command->is_pipe)
-		{
-			if (dup2(command->pipe[WRITE], WRITE) == ERROR)
-				return (ERROR);
-		}
-		if (command->prev && command->prev->is_pipe)
-		{
-			if (dup2(command->prev->pipe[READ], READ) == ERROR)
-				return (ERROR);
-		}
+		if (dup2(command->pipe[WRITE], WRITE) == ERROR)
+			return (ERROR);
+	}
+	if (command->prev && command->prev->is_pipe)
+	{
+		if (dup2(command->prev->pipe[READ], READ) == ERROR)
+			return (ERROR);
 	}
 	if (execve(command->cmd, command->argv, g_state.envp) == ERROR)
 		return (ERROR);

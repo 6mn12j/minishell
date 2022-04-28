@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 03:40:37 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/29 02:57:32 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@
 		1. '<', '>' 3개 이상일때
 		2. '|' 2개 이상일때
 */
+
+static int	check_newline_error(t_cmd *node)
+{
+	if ((node->here_filename && node->heredoc == NULL) || \
+			(node->output && node->output->file_name == NULL) || \
+			(node->input && node->input->file_name == NULL))
+	{
+		printf("soobash: syntax error near unexpected token `newline'\n");
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
 int	error_cmds(t_cmd *node)
 {
 	int	i;
@@ -27,29 +40,30 @@ int	error_cmds(t_cmd *node)
 	while (node)
 	{
 		if (node->cmd == NULL)
-			return (1);
-		else if (node->here_filename && node->heredoc == NULL)
-			return (1);
-		else if ((node->output && node->output->file_name == NULL) \
-		|| (node->input && node->input->file_name == NULL))
-			return (1);
+		{
+			printf("No such file or directory\n");
+			return (TRUE);
+		}
+		else if (check_newline_error(node))
+			return (TRUE);
 		i = 0;
 		while (node->argv[i])
 		{
 			if (node->argv[i][0] == 7)
 			{
-				printf("soobash: syntax error near unexpected token `newline'\n");
-				return (1);
+				printf("soobash: ");
+				printf("syntax error near unexpected token `newline'\n");
+				return (TRUE);
 			}
 			i++;
 		}
 		node = node->next;
 	}
-	return (0);
+	return (FALSE);
 }
 
 void	ft_error(void)
 {
 	printf("error\n");
-	exit(1);
+	exit(SUCCESS);
 }

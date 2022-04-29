@@ -6,57 +6,11 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 03:18:12 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/29 02:32:12 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	read_heredoc(t_cmd *cur, char *heredoc)
-{
-	int			fd;
-	char		*line;
-	char		*filename;
-	static int	index = 0;
-
-	cur->heredoc = heredoc;
-	if (cur->here_filename)
-		filename = ft_strjoin(".temp", ft_itoa(index));
-	else
-		filename = ft_strjoin(".temp", ft_itoa(++index));
-	cur->here_filename = filename;
-	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (heredoc == NULL)
-		return (0);
-	line = readline("> ");
-	while (line)
-	{
-		if (ft_strncmp(line, heredoc, ft_strlen(line)) == 0)
-			break ;
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
-		line = readline("> ");
-	}
-	if (ft_strncmp(line, heredoc, ft_strlen(line)) == 0)
-		free(line);
-	return (1);
-}
-
-int	handle_heredoc(t_cmd *cur, char *heredoc, int *i)
-{
-	if (read_heredoc(cur, heredoc))
-	{
-		if (cur->input == NULL)
-		{
-			handle_redir(cur, REDIR_L, ft_strdup(cur->here_filename), i);
-			return (1);
-		}
-		else
-			(*i)++;
-	}
-	return (1);
-}
 
 int	check_redir(t_cmd *cur, char **commands, int *i)
 {

@@ -6,36 +6,36 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/22 16:11:22 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/29 02:46:46 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 //echo 쉘 터미널 환경 설정값 받아서 임의로 수정가능.
-static void	echoctl_off(void)
-{
-	struct termios	term;
+// static void	echoctl_off(void)
+// {
+// 	struct termios	term;
 
-	if (isatty(STDIN_FILENO))
-	{
-		tcgetattr(STDIN_FILENO, &term);
-		term.c_lflag &= ~(ECHOCTL);
-		tcsetattr(STDIN_FILENO, TCSANOW, &term);
-	}
-	else if (isatty(STDOUT_FILENO))
-	{
-		tcgetattr(STDOUT_FILENO, &term);
-		term.c_lflag &= ~(ECHOCTL);
-		tcsetattr(STDOUT_FILENO, TCSANOW, &term);
-	}
-	else if (isatty(STDERR_FILENO))
-	{
-		tcgetattr(STDERR_FILENO, &term);
-		term.c_lflag &= ~(ECHOCTL);
-		tcsetattr(STDERR_FILENO, TCSANOW, &term);
-	}
-	return ;
-}
+// 	if (isatty(STDIN_FILENO))
+// 	{
+// 		tcgetattr(STDIN_FILENO, &term);
+// 		term.c_lflag &= ~(ECHOCTL);
+// 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
+// 	}
+// 	else if (isatty(STDOUT_FILENO))
+// 	{
+// 		tcgetattr(STDOUT_FILENO, &term);
+// 		term.c_lflag &= ~(ECHOCTL);
+// 		tcsetattr(STDOUT_FILENO, TCSANOW, &term);
+// 	}
+// 	else if (isatty(STDERR_FILENO))
+// 	{
+// 		tcgetattr(STDERR_FILENO, &term);
+// 		term.c_lflag &= ~(ECHOCTL);
+// 		tcsetattr(STDERR_FILENO, TCSANOW, &term);
+// 	}
+// 	return ;
+// }
 
 static void	handle_signal(int sig)
 {
@@ -53,7 +53,7 @@ static void	handle_signal(int sig)
 
 void	init_signal(void)
 {
-	echoctl_off();
+	//echoctl_off();
 	signal(SIGINT, handle_signal);
 	signal(SIGQUIT, SIG_IGN);
 }

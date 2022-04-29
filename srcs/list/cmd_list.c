@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:57 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 00:37:24 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/29 03:44:14 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ void	delete_cmd_list(t_cmd **cmd)
 	temp = *cmd;
 	while (temp)
 	{
-		if (temp->heredoc)
+		if (temp->here_filename)
 			unlink(temp->here_filename);
+		free(temp->here_filename);
+		free(temp->heredoc);
 		del_node = temp;
 		temp = temp->next;
 		ft_free_two_ptr(del_node->argv);

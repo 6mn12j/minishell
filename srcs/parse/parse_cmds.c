@@ -80,7 +80,7 @@ char	**parse_cmds(char **commands)
 	while (commands[++i])
 		parse_command(&temp, commands[i]);
 	ft_free_two_ptr(commands);
-	result = ft_split(temp, 1);
+	result = ft_split(temp, SEPARATOR);
 	free(temp);
 	temp = NULL;
 	return (result);

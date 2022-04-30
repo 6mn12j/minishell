@@ -25,6 +25,7 @@ SRCS = srcs/main.c \
 		srcs/builtins/ft_unset.c \
 		srcs/builtins/ft_export.c \
 		srcs/utils/env.c \
+		srcs/utils/env2.c \
 		srcs/utils/signal.c \
 		srcs/utils/minishell_util1.c \
 		srcs/utils/error.c \

@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/28 17:24:24 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/29 15:57:53 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	child_handler(t_cmd *command)
 
 static void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
 {
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, NULL, 0);
 	if (pipe_open)
 	{
@@ -71,6 +72,7 @@ static void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
 	}
 	if (command->prev && command->prev->is_pipe)
 		close(command->prev->pipe[READ]);
+	init_signal();
 }
 
 static int	exec_cmd(t_cmd *command)

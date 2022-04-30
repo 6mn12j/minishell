@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:01:09 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 19:42:47 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/01 02:52:01 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_echo(t_cmd *command)
 
 	j = 0;
 	option = 0;
-
 	while (command->argv[++j])
 	{
 		while (check_n_option(command, j, &option))

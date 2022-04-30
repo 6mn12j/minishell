@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/29 02:57:32 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 20:31:24 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,14 @@ int	error_cmds(t_cmd *node)
 
 	while (node)
 	{
-		if (node->cmd == NULL)
+		if (node->cmd == NULL && node->input)
 		{
 			printf("No such file or directory\n");
+			return (TRUE);
+		}
+		else if (node->cmd == NULL && node->is_pipe && node->input == NULL && node->output == NULL && node->heredoc == NULL)
+		{
+			printf("syntax error near unexpected token `|'\n");
 			return (TRUE);
 		}
 		else if (check_newline_error(node))

@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/29 13:28:50 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/30 15:01:01 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,10 @@ int		rdr_l(t_redir *redir);
 int		rdr_r(t_redir *redir);
 int		rdr_rr(t_redir *redir);
 int		redirection_handler(t_cmd *command);
+
+// built_in
+int		is_built_in(char *cmd);
+int		exec_built_in(t_cmd *command);
 
 // execute
 char	*get_valid_cmd(t_cmd *command, char **env_paths);

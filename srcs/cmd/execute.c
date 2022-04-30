@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/29 15:57:53 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/30 15:02:31 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_valid_cmd(t_cmd *command, char **env_paths)
 	return (NULL);
 }
 
-static int	child_handler(t_cmd *command)
+static int	child_handler(t_cmd *command, int flag)
 {
 	if (command->input || command->output)
 	{
@@ -55,8 +55,13 @@ static int	child_handler(t_cmd *command)
 		if (dup2(command->prev->pipe[READ], READ) == ERROR)
 			return (ERROR);
 	}
-	if (execve(command->cmd, command->argv, g_state.envp) == ERROR)
-		return (ERROR);
+	if (flag)
+		exec_built_in(command);
+	else
+	{
+		if (execve(command->cmd, command->argv, g_state.envp) == ERROR)
+			return (ERROR);
+	}
 	return (SUCCESS);
 }
 
@@ -75,7 +80,7 @@ static void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
 	init_signal();
 }
 
-static int	exec_cmd(t_cmd *command)
+static int	exec_cmd(t_cmd *command, int flag)
 {
 	pid_t	pid;
 	int		pipe_open;
@@ -91,7 +96,7 @@ static int	exec_cmd(t_cmd *command)
 		return (ERROR);
 	else if (!pid)
 	{
-		if (child_handler(command) == ERROR)
+		if (child_handler(command, flag) == ERROR)
 			return (ERROR);
 	}
 	else
@@ -103,20 +108,20 @@ int	execute_cmds(t_cmd *command)
 {
 	char	*path;
 	int		flag;
-
+	
 	path = get_env("PATH");
-	flag = 0;
 	while (command)
 	{
-		// ---------빌트인이 아닌 명령어 실행------------
-		if (command->cmd)
+		flag = 0;
+		if (is_built_in(command->cmd))
+			flag = 1;
+		else if (command->cmd)
 			command->cmd = get_valid_cmd(command, ft_split(path, ':'));
 		if (!command->cmd)
 			return (ERROR);
-		exec_cmd(command);
-		if (!command->is_path)
+		exec_cmd(command, flag);
+		if (!command->is_path && !flag)
 			free(command->cmd);
-		// ----------------------------------------
 		command = command->next;
 	}
 	return (SUCCESS);

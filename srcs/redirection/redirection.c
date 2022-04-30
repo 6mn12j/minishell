@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/28 17:00:20 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/30 15:10:56 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,33 +56,6 @@ int	rdr_rr(t_redir *redir)
 		return (ERROR);
 	close(fd);
 	return (SUCCESS);
-}
-
-int	rdr_ll(char *heredoc)
-{
-	int		fd;
-	char	*line;
-	int		r_fd;
-	// int		idx;
-	// int		filename;
-	r_fd = dup(READ);
-	// filename = "tmp" + "idx";
-	fd = open("tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	while (get_next_line(0, &line) > 0)
-	{
-		if (ft_strncmp(line, heredoc, ft_strlen(heredoc)) == 0)
-			break ;
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
-	}
-	if (ft_strncmp(line, heredoc, ft_strlen(heredoc)) == 0)
-		free(line);
-	// dup2(fd, READ);
-	// close(fd);
-	// unlink("tmp");
-	// ctrl + D 처리되면 안됨
-	return (r_fd);
 }
 
 int	rdr_r(t_redir *redir)

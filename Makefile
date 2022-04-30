@@ -1,17 +1,18 @@
 CFLAGS = -Wall -Wextra -Werror -Iinclude
 CC = gcc
 
+# brew info readline
 # 인텔 맥 ( 클러스터 PC X )
 # READLINE_LIB 	= -lreadline -L/usr/local/opt/readline/lib
 # READLINE_INC	= -I/usr/local/opt/readline/include
 
 # 인텔 맥 ( 클러스터 PC O )
-READLINE_LIB 	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
-READLINE_INC	= -I /Users/$(USER)/.brew/opt/readline/include
+# READLINE_LIB 	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
+# READLINE_INC	= -I /Users/$(USER)/.brew/opt/readline/include
 
 # M1 맥 ( 클러스터 PC X )
-# READLINE_LIB	= -lreadline -L/opt/homebrew/opt/readline/lib
-# READLINE_INC	= -I/opt/homebrew/opt/readline/include
+READLINE_LIB	= -lreadline -L/opt/homebrew/opt/readline/lib
+READLINE_INC	= -I/opt/homebrew/opt/readline/include
 
 SRCS = srcs/main.c \
 		srcs/cmd/execute.c \

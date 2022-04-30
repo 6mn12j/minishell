@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/29 03:37:15 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 03:12:53 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	check_input(char *input)
 
 char	*read_input(char **input)
 {
-	*input = readline("soobash$:");
+	*input = readline("soobash$ ");
 	return (*input);
 }
 

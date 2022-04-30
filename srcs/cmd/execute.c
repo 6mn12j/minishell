@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/30 15:15:37 by jinyoo           ###   ########.fr       */
+=======
+/*   Updated: 2022/04/30 15:57:53 by minjupar         ###   ########.fr       */
+>>>>>>> c3735fd4a3fa70b5ba9496407b6206ec93e958d5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +69,10 @@ static int	child_handler(t_cmd *command, int flag)
 	return (SUCCESS);
 }
 
-static void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
+void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
 {
-	signal(SIGINT, SIG_IGN);
+
+	signal(SIGINT, handle_parent_sigint);
 	waitpid(pid, NULL, 0);
 	if (pipe_open)
 	{
@@ -108,7 +113,7 @@ int	execute_cmds(t_cmd *command)
 {
 	char	*path;
 	int		flag;
-	
+
 	path = get_env("PATH");
 	while (command)
 	{

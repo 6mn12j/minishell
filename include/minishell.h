@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 15:10:40 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/30 15:57:41 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ char	*get_env_key(char *command, int start);
 int		parse_env(char **temp, char *command, int start);
 
 void	init_signal(void);
+void	handle_signal(int signo);
+void	handle_parent_sigint(int signo);
 int		ft_twoptr_len(char **twoptr);
 int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);

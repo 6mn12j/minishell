@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 02:32:04 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/29 03:51:52 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 15:52:34 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	make_heredoc_file(t_cmd *cur, char *heredoc)
 	}
 	return ;
 }
-
 
 int	read_heredoc(t_cmd *cur, char *heredoc)
 {

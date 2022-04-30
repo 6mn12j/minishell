@@ -3,20 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/28 03:11:46 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 15:10:56 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	rdr_l(char *in)
+int	rdr_l(t_redir *redir)
 {
 	int	fd;
+	t_redir *rdr;
 
-	fd = open(in, O_RDONLY);
+	rdr = redir;
+	while (rdr->next)
+	{
+		fd = open(rdr->file_name, O_RDONLY);
+		if (fd == ERROR)
+			return (ERROR);
+		close(fd);
+		rdr = rdr->next;
+	}
+	fd = open(rdr->file_name, O_RDONLY);
 	if (fd == ERROR)
 		return (ERROR);
 	if (dup2(fd, READ) == ERROR)
@@ -48,33 +58,6 @@ int	rdr_rr(t_redir *redir)
 	return (SUCCESS);
 }
 
-int	rdr_ll(char *heredoc)
-{
-	int		fd;
-	char	*line;
-	int		r_fd;
-	// int		idx;
-	// int		filename;
-	r_fd = dup(READ);
-	// filename = "tmp" + "idx";
-	fd = open("tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	while (get_next_line(0, &line) > 0)
-	{
-		if (ft_strncmp(line, heredoc, ft_strlen(heredoc)) == 0)
-			break ;
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
-	}
-	if (ft_strncmp(line, heredoc, ft_strlen(heredoc)) == 0)
-		free(line);
-	// dup2(fd, READ);
-	// close(fd);
-	// unlink("tmp");
-	// ctrl + D 처리되면 안됨
-	return (r_fd);
-}
-
 int	rdr_r(t_redir *redir)
 {
 	int		fd;
@@ -100,12 +83,17 @@ int	rdr_r(t_redir *redir)
 
 int	redirection_handler(t_cmd *command)
 {
+	int	w_fd;
+	int	r_fd;
+
+	w_fd = dup(WRITE);
+	r_fd = dup(READ);
 	if (command->input)
 	{
-		if (rdr_l(command->input->file_name) == ERROR)
+		if (rdr_l(command->input) == ERROR)
 			return (ERROR);
 	}
-	else if (command->output)
+	if (command->output)
 	{
 		if (command->output->type == REDIR_R)
 		{

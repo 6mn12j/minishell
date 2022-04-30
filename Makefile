@@ -34,35 +34,29 @@ SRCS = srcs/main.c \
 
 LIBFT = libft/libft.a
 
-GNL = get_next_line/libgnl.a
-
 NAME = minishell
 
 OBJS = $(SRCS:.c=.o)
 
 all:  $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(GNL)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(GNL) $(READLINE_INC) $(READLINE_LIB)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(READLINE_INC) $(READLINE_LIB)
 
 $(LIBFT):
 	@make -C ./libft
 
-$(GNL):
-	@make -C ./get_next_line
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(READLINE_INC) -c $< -o $@
 
 clean:
 	@make clean -C libft/
-	@make clean -C get_next_line/
 	@rm -rf $(OBJS)
 
 
 fclean: clean
 	@make fclean -C libft/
-	@make fclean -C get_next_line/
 	@rm -rf $(NAME) $(OBJS)
 
 re: fclean all

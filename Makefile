@@ -1,6 +1,7 @@
 CFLAGS = -Wall -Wextra -Werror -Iinclude
 CC = gcc
 
+# brew info readline
 # 인텔 맥 ( 클러스터 PC X )
 # READLINE_LIB 	= -lreadline -L/usr/local/opt/readline/lib
 # READLINE_INC	= -I/usr/local/opt/readline/include

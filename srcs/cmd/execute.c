@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/28 00:03:47 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 15:35:35 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ static int	child_handler(t_cmd *command)
 	return (SUCCESS);
 }
 
-static void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
+void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
 {
+
+	signal(SIGINT, handle_parent_sigint);
 	waitpid(pid, NULL, 0);
 	if (pipe_open)
 	{

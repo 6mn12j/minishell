@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/29 02:32:12 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 18:32:46 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ int	check_redir(t_cmd *cur, char **commands, int *i)
 	return (0);
 }
 
+//ex  > a
+static void	set_not_output_file(int *i_argv, t_cmd *cur)
+{
+	cur->argv[(*i_argv)++] = ft_strdup("touch");
+	cur->argv[(*i_argv)++] = ft_strdup(cur->output->file_name);
+	cur->cmd = cur->argv[0];
+	return ;
+}
+
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 {
 	while (commands[++i] && cur)
@@ -40,7 +49,11 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 		else
 		{
 			if (check_redir(cur, commands, &i))
-				;
+			{
+				if ((commands[i - 1][0] == REDIR_R || commands[i - 1][0] == REDIR_RR ) && \
+				cur->output->file_name && cur->cmd == NULL)
+					set_not_output_file(&i_argv, cur);
+			}
 			else
 			{
 				cur->argv[i_argv++] = ft_strdup(commands[i]);

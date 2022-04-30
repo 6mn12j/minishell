@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 16:04:43 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 21:38:59 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,15 @@ typedef struct s_cmd {
 t_state	g_state;
 
 /*builtins*/
+void	ft_cd(t_cmd *command);
+void	ft_pwd(t_cmd *command);
+void	ft_env(t_cmd *command);
 void	ft_echo(t_cmd *command);
+void	ft_exit(t_cmd *command);
+void	ft_unset(t_cmd *command);
+void	ft_export(t_cmd *command);
+
+
 
 /*parser*/
 char	**ft_split_cmds(char *str);

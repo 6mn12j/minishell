@@ -2,6 +2,13 @@
 
 #include "minishell.h"
 
+void	print_commands(char **commands)
+{
+	for(int i = 0 ; commands[i]; i++)
+		printf("commands[%d]:%s\n", i, commands[i]);
+	return ;
+}
+
 void	print_test(t_cmd **head)
 {
 	printf("head : %p\n", *head);
@@ -13,6 +20,7 @@ void	print_test(t_cmd **head)
 		printf("prev:%p\n",cur->prev);
 		printf("next:%p\n",cur->next);
 		printf("argv : %p\n", cur->argv);
+		printf("ergc:%d\n",cur->argc);
 		for (char **cur_arg = cur->argv; *cur_arg != NULL; cur_arg++)
 			printf("argv : %s\n", *cur_arg);
 		printf("input_head : %p\n", cur->input);

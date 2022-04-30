@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 04:42:13 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 22:32:46 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,21 @@ char	*get_env_key(char *command, int start)
 
 	len = 0;
 	i = start;
-	if (command[i] == '"')
+	while (command[i] == '"' || command[i] == '$')
+	{
 		i++;
+		start++;
+	}
 	while (command[++i])
 	{
 		if (command[i] == '\'' || command[i] == '"'\
 		|| command[i] == ' ' || command[i] == '$' \
-		|| command[i] == '|' || command[i] == '.')
+		|| command[i] == '|' || command[i] == '.' \
+		|| command[i] == '=')
 			break ;
 		len++;
 	}
-	key = ft_substr(command, start + 1, len);
+	key = ft_substr(command, start, len + 1);
 	return (key);
 }
 

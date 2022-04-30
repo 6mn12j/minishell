@@ -17,6 +17,7 @@ READLINE_INC	= -I/opt/homebrew/opt/readline/include
 SRCS = srcs/main.c \
 		srcs/cmd/execute.c \
 		srcs/cmd/built_in.c \
+		srcs/builtins/ft_echo.c \
 		srcs/utils/env.c \
 		srcs/utils/signal.c \
 		srcs/utils/minishell_util1.c \

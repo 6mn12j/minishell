@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 02:48:58 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/01 03:34:18 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	ft_export(t_cmd *command)
 	key = get_env_key(command->argv[1], 0);
 	value = get_env(key);
 	new_value = get_new_value(key, command);
-	if (!check_key(key))
+	if (!check_env_key(key))
 	{
 		printf("bash: export: `%s%s': not a valid identifier\n", key, new_value);
 		return ;

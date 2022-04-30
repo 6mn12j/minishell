@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 03:07:22 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/01 03:34:18 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_unset(t_cmd *command)
 	int		index;
 	char	**temp;
 
-	if (!check_key(command->argv[1]))
+	if (!check_env_key(command->argv[1]))
 	{
 		printf("bash: unset: `%s': not a valid identifier\n",command->argv[1]);
 		return ;

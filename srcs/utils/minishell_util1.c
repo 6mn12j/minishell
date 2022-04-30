@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 03:05:33 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/01 03:34:35 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,4 @@ void	make_file(char *filename)
 
 	fd = open(filename, O_CREAT, 0644);
 	close(fd);
-}
-
-int	check_key(char *key)
-{
-	int	i;
-
-	i = 0;
-	if (!ft_isalpha(key[i]) && key[i] != '_')
-		return (FALSE);
-	else
-		i++;
-	while (key[i])
-	{
-		if (!ft_isalpha(key[i]))
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
 }

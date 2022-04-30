@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 01:50:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 01:50:35 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/01 03:34:18 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,22 @@ int	get_env_index(char *key)
 	free(temp);
 	temp = NULL;
 	return (i);
+}
+
+int	check_env_key(char *key)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_isalpha(key[i]) && key[i] != '_')
+		return (FALSE);
+	else
+		i++;
+	while (key[i])
+	{
+		if (!ft_isalpha(key[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }

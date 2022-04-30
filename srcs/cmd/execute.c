@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/30 15:15:37 by jinyoo           ###   ########.fr       */
-=======
-/*   Updated: 2022/04/30 15:57:53 by minjupar         ###   ########.fr       */
->>>>>>> c3735fd4a3fa70b5ba9496407b6206ec93e958d5
+/*   Updated: 2022/04/30 16:58:39 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +45,12 @@ static int	child_handler(t_cmd *command, int flag)
 		if (redirection_handler(command) == ERROR)
 			return (ERROR);
 	}
-	if (command->is_pipe)
+	if (command->is_pipe && !command->output)
 	{
 		if (dup2(command->pipe[WRITE], WRITE) == ERROR)
 			return (ERROR);
 	}
-	if (command->prev && command->prev->is_pipe)
+	if (command->prev && command->prev->is_pipe && !command->input)
 	{
 		if (dup2(command->prev->pipe[READ], READ) == ERROR)
 			return (ERROR);

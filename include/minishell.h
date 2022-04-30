@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 15:01:01 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/04/30 15:10:40 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # include <sys/stat.h>
 
 # include "../libft/libft.h"
-# include "../get_next_line/include/get_next_line.h"
 
 # define READ 0
 # define WRITE 1

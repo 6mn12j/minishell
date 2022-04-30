@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 21:38:59 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 22:41:02 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	parser(char **input, t_cmd **head);
 int		error_cmds(t_cmd *node);
 
 void	print_test(t_cmd **head);// TODO: 내기 전에 삭제
+void	print_commands(char **commands);// TODO: 내기 전에 삭제
 
 /*env*/
 void	copy_env(char **envp);

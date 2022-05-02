@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:01:09 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/02 18:45:50 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/03 02:00:53 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ void	ft_echo(t_cmd *command)
 {
 	char	option;
 	int		j;
+	int		is_string;
 
 	j = 0;
+	is_string = 0;
 	option = 0;
 	while (command->argv[++j])
 	{
-		while (check_n_option(command, j, &option))
+		while (!is_string && check_n_option(command, j, &option))
 			j++;
 		printf("%s", command->argv[j]);
+		is_string = 1;
 		if (command->argv[j + 1] != NULL)
 			printf(" ");
 	}

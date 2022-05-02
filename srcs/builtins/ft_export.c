@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 03:34:18 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:46:37 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,13 @@ void	ft_export(t_cmd *command)
 	new_value = get_new_value(key, command);
 	if (!check_env_key(key))
 	{
-		printf("bash: export: `%s%s': not a valid identifier\n", key, new_value);
+		printf("bash: export: `%s%s': not a valid identifier\n", key, new_value); //write 2번으로
 		return ;
 	}
 	if (ft_strlen(value) > 0)
 		update_env(key, new_value);
 	else
 		set_new_env(key, new_value);
+	g_state.exit_status = 0;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:01:09 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 02:52:01 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:45:50 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void	ft_echo(t_cmd *command)
 	}
 	if (option != 'n')
 		printf("\n");
+	g_state.exit_status = 0;
 	return ;
 }

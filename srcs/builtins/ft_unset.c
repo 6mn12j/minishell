@@ -6,11 +6,17 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 03:34:18 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:47:18 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_unset_error_printf(char *error_props)
+{
+	printf("bash: unset: `%s': not a valid identifier\n", error_props);
+	return ;
+}
 
 void	ft_unset(t_cmd *command)
 {
@@ -20,10 +26,7 @@ void	ft_unset(t_cmd *command)
 	char	**temp;
 
 	if (!check_env_key(command->argv[1]))
-	{
-		printf("bash: unset: `%s': not a valid identifier\n",command->argv[1]);
-		return ;
-	}
+		return (ft_unset_error_printf(command->argv[1]));
 	index = get_env_index(command->argv[1]);
 	temp = (char **)malloc(sizeof(char *) * ft_twoptr_len(g_state.envp));
 	if (!temp)
@@ -39,4 +42,5 @@ void	ft_unset(t_cmd *command)
 	free(g_state.envp[index]);
 	free(g_state.envp);
 	g_state.envp = temp;
+	g_state.exit_status = 0;
 }

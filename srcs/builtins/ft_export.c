@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/02 18:46:37 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/02 23:14:01 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	set_new_env(char *key, char *new_value)
 	int		len;
 	char	**temp;
 
-	len = ft_twoptr_len(g_state.envp) + 2;
+	len = ft_twoptr_len(g_state.envp) + 1;
 	temp = g_state.envp;
 	temp = (char **)malloc(sizeof(char *) * len);
 	if (!temp)
@@ -102,5 +102,9 @@ void	ft_export(t_cmd *command)
 	else
 		set_new_env(key, new_value);
 	g_state.exit_status = 0;
+	free(key);
+	key = NULL;
+	free(value);
+	value = NULL;
 	return ;
 }

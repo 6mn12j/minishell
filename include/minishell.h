@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 03:34:18 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:34:21 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ void	ft_echo(t_cmd *command);
 void	ft_exit(t_cmd *command);
 void	ft_unset(t_cmd *command);
 void	ft_export(t_cmd *command);
-
+int		is_built_in(char *cmd);
+int		exec_built_in(t_cmd *command);
+void	set_new_env(char *key, char *new_value);
 
 
 /*parser*/
@@ -128,10 +130,6 @@ int		rdr_l(t_redir *redir);
 int		rdr_r(t_redir *redir);
 int		rdr_rr(t_redir *redir);
 int		redirection_handler(t_cmd *command);
-
-// built_in
-int		is_built_in(char *cmd);
-int		exec_built_in(t_cmd *command);
 
 // execute
 char	*get_valid_cmd(t_cmd *command, char **env_paths);

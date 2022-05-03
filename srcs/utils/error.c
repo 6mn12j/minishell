@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 20:31:24 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:43:17 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ int	error_cmds(t_cmd *node)
 
 void	ft_error(void)
 {
-	printf("error\n");
-	exit(SUCCESS);
+	write(STDERR_FILENO, "malloc error\n", 13);
+	exit(-1);
 }

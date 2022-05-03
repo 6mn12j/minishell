@@ -69,9 +69,7 @@ int	get_word_len(int start, char*str)
 int	get_start(int start, char *str)
 {
 	while (str[start] && (str[start] == ' '))
-	{
 		start ++;
-	}
 	return (start);
 }
 
@@ -86,7 +84,7 @@ char	**ft_split_cmds(char *str)
 	word_cnt = get_word_count(str);
 	command_array = (char **)malloc(sizeof(char *) * (word_cnt + 1));
 	if (!command_array)
-		ft_error();
+		return (NULL);
 	i = -1;
 	start = get_start(0, str);
 	while (++i < word_cnt)
@@ -94,10 +92,10 @@ char	**ft_split_cmds(char *str)
 		word_len = get_word_len(start, str);
 		command_array[i] = (char *)malloc(sizeof(char) * (word_len +1));
 		if (!command_array[i])
-			ft_error();
+			return (NULL);
 		ft_strlcpy(command_array[i], str + start, word_len + 1);
 		start = get_start(start + word_len, str);
 	}
-	command_array[i] = (char *) '\0';
+	command_array[i] = NULL;
 	return (command_array);
 }

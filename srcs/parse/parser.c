@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 20:19:38 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:39:39 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	malloc_argv(char **commands, t_cmd **head)
 	while (cur)
 	{
 		cur->argv = (char **)malloc(sizeof(char *) * (cur->argc + 1));
+		if (!cur->argv)
+			return (ft_error());
 		i = -1;
 		while (++i <= cur->argc)
 			cur->argv[i] = NULL;

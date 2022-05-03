@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 01:16:21 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:42:20 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ void	set_new_env(char *key, char *new_value)
 	len = ft_twoptr_len(g_state.envp);
 	temp = (char **)malloc(sizeof(char *) * (len + 2));
 	if (!temp)
-	{
-		ft_error();
-		return ;
-	}
+		return (ft_error());
 	i = -1;
 	while (g_state.envp[++i])
 		temp[i] = g_state.envp[i];

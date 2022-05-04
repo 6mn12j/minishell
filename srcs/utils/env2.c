@@ -1,60 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_util1.c                                  :+:      :+:    :+:   */
+/*   env2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 03:34:35 by minjupar         ###   ########.fr       */
+/*   Created: 2022/05/01 01:50:32 by minjupar          #+#    #+#             */
+/*   Updated: 2022/05/01 03:34:18 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_twoptr_len(char **twoptr)
+int	get_env_index(char *key)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
-	i = 0;
-	while (twoptr[i])
-		i++;
+	i = -1;
+	temp = ft_strjoin(key, "=");
+	while (g_state.envp[++i])
+	{
+		if (!ft_strncmp(temp, g_state.envp[i], ft_strlen(temp)))
+		{
+			free(temp);
+			temp = NULL;
+			return (i);
+		}
+	}
+	free(temp);
+	temp = NULL;
 	return (i);
 }
 
-void	ft_strjoin_char(char **dst, char ch)
-{
-	char	str[2];
-	char	*temp;
-
-	temp = *dst;
-	str[0] = ch;
-	str[1] = '\0';
-	*dst = ft_strjoin(*dst, str);
-	free(temp);
-	temp = NULL;
-}
-
-int	count_pipe(char **commands)
+int	check_env_key(char *key)
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
-	while (commands[i])
+	if (!ft_isalpha(key[i]) && key[i] != '_')
+		return (FALSE);
+	else
+		i++;
+	while (key[i])
 	{
-		if (commands[i][0] == PIPE_TYPE)
-			count++;
+		if (!ft_isalpha(key[i]))
+			return (FALSE);
 		i++;
 	}
-	return (count);
-}
-
-void	make_file(char *filename)
-{
-	int	fd;
-
-	fd = open(filename, O_CREAT, 0644);
-	close(fd);
+	return (TRUE);
 }

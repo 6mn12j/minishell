@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/28 04:42:13 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:40:36 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void	copy_env(char **envp)
 	int	i;
 
 	i = -1;
-	ft_twoptr_len(envp);
-	g_state.envp = (char **)malloc(sizeof(char *) * ft_twoptr_len(envp) + 1);
+
+	g_state.envp = (char **)malloc(sizeof(char *) * (ft_twoptr_len(envp) + 1));
+	if (!g_state.envp)
+		return (ft_error());
 	while (envp[++i])
 		g_state.envp[i] = ft_strdup(envp[i]);
+	g_state.envp[i] = NULL;
 	return ;
 }
 
@@ -32,17 +35,21 @@ char	*get_env_key(char *command, int start)
 
 	len = 0;
 	i = start;
-	if (command[i] == '"')
+	while (command[i] == '"' || command[i] == '$')
+	{
 		i++;
+		start++;
+	}
 	while (command[++i])
 	{
 		if (command[i] == '\'' || command[i] == '"'\
 		|| command[i] == ' ' || command[i] == '$' \
-		|| command[i] == '|' || command[i] == '.')
+		|| command[i] == '|' || command[i] == '.' \
+		|| command[i] == '=')
 			break ;
 		len++;
 	}
-	key = ft_substr(command, start + 1, len);
+	key = ft_substr(command, start, len + 1);
 	return (key);
 }
 

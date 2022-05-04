@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:30:56 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 15:37:07 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:29:33 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,16 @@ static int	is_space(char *c)
 	return (0);
 }
 
-int	t_atoi(const char *str)
+static int	get_sign(char sign)
+{
+
+	if (sign == '+')
+		return (1);
+	else
+		return (-1);
+}
+
+int	ft_atoi(const char *str)
 {
 	int			i;
 	int			sign;
@@ -42,11 +51,7 @@ int	t_atoi(const char *str)
 	while (is_space(&temp[i]))
 		i++;
 	if (temp[i] == '-' || temp[i] == '+')
-	{
-		if (temp[i] == '-')
-			sign = sign * -1;
-		i++;
-	}
+		sign *= get_sign(temp[i++]);
 	while (is_digit(temp[i]))
 	{
 		result = (result * 10) + (temp[i] - '0');

@@ -6,7 +6,11 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/04 15:54:45 by jinyoo           ###   ########.fr       */
+=======
+/*   Updated: 2022/05/03 21:52:06 by minjupar         ###   ########.fr       */
+>>>>>>> 88adb52227fa62c35c24673db1ca1256aaeea340
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +83,19 @@ typedef struct s_cmd {
 /*global*/
 t_state	g_state;
 
+/*builtins*/
+void	ft_cd(t_cmd *command);
+void	ft_pwd(t_cmd *command);
+void	ft_env(t_cmd *command);
+void	ft_echo(t_cmd *command);
+void	ft_exit(t_cmd *command);
+void	ft_unset(t_cmd *command);
+void	ft_export(t_cmd *command);
+int		is_built_in(char *cmd);
+int		exec_built_in(t_cmd *command);
+void	set_new_env(char *key, char *new_value);
+
+
 /*parser*/
 char	**ft_split_cmds(char *str);
 char	**parse_cmds(char **commands);
@@ -93,17 +110,21 @@ void	parser(char **input, t_cmd **head);
 int		error_cmds(t_cmd *node);
 
 void	print_test(t_cmd **head);// TODO: 내기 전에 삭제
+void	print_commands(char **commands);// TODO: 내기 전에 삭제
 
 /*env*/
 void	copy_env(char **envp);
 void	join_env(char **temp, char *key);
 char	*get_env(char *key);
 char	*get_env_key(char *command, int start);
+int		get_env_index(char *key);
 int		parse_env(char **temp, char *command, int start);
+void	update_env(char *key, char *new_value);
 
 void	init_signal(void);
 void	handle_signal(int signo);
 void	handle_parent_sigint(int signo);
+int		check_env_key(char *str);
 int		ft_twoptr_len(char **twoptr);
 int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);
@@ -114,10 +135,6 @@ int		rdr_l(t_redir *redir);
 int		rdr_r(t_redir *redir);
 int		rdr_rr(t_redir *redir);
 int		redirection_handler(t_cmd *command);
-
-// built_in
-int		is_built_in(char *cmd);
-int		exec_built_in(t_cmd *command);
 
 // execute
 char	*get_valid_cmd(t_cmd *command, char **env_paths);

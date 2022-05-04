@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 15:58:03 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:48:54 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 void	handle_signal(int signo)
 {
 	if (signo == SIGUSR1)
-	{
-		write(1, "\n", 1);
-		init_signal();
-	}
-	else if (signo == SIGUSR2)
 	{
 		write(1, "\n", 1);
 		init_signal();
@@ -52,5 +47,4 @@ void	init_signal(void)
 	signal(SIGINT, handle_signal);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGUSR1, handle_signal);
-	signal(SIGUSR2, handle_signal);
 }

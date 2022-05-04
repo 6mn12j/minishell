@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/30 18:29:11 by jinyoo           ###   ########.fr       */
+=======
+/*   Updated: 2022/05/03 23:39:39 by minjupar         ###   ########.fr       */
+>>>>>>> 88adb52227fa62c35c24673db1ca1256aaeea340
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +34,8 @@ void	malloc_argv(char **commands, t_cmd **head)
 	while (cur)
 	{
 		cur->argv = (char **)malloc(sizeof(char *) * (cur->argc + 1));
+		if (!cur->argv)
+			return (ft_error());
 		i = -1;
 		while (++i <= cur->argc)
 			cur->argv[i] = NULL;
@@ -52,7 +58,6 @@ void	parser(char **input, t_cmd **head)
 	*head = NULL;
 	commands = parse_cmds(ft_split_cmds(*input));
 	set_cmd(commands, head);
-	// print_test(head); // TODO : 내기 전에 삭제
 	ft_free_two_ptr(commands);
 	return ;
 }

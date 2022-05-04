@@ -48,15 +48,13 @@ void	parse_command(char **temp, char *command)
 
 	i = -1;
 	quote = 0;
+
 	while (command[++i])
 	{
-		if (quote != '\'' && command[i] == '$')
+		if (quote != '\'' && command[i] == '$' && command[i + 1] != '\0')
 			i = parse_env(temp, command, i);
 		else if (!quote && command[i] == '~')
-		{
 			join_env(temp, "HOME");
-			continue ;
-		}
 		else if (!quote && (command[i] == '\'' || command[i] == '"'))
 			change_quote(command[i], &quote);
 		else if (quote && command[i] == quote)

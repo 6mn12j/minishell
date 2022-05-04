@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_is_path.c                                      :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 03:19:21 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 20:18:41 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
+/*   Updated: 2022/05/02 17:58:24 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	set_is_path(t_cmd *cmd)
+void	ft_pwd(t_cmd *command)
 {
-	int		i;
-	t_cmd	*cur;
+	char	*cur_pwd;
 
-	i = -1;
-	cur = cmd;
-	if (!cur->cmd)
-		return ;
-	while (cur)
-	{
-		if (!cur->cmd)
-			return ;
-		if (ft_strchr(cur->cmd, '/'))
-			cur->is_path = 1;
-		cur = cur->next;
-	}
+	(void)command;
+	cur_pwd = getcwd(0, _PC_PATH_MAX);
+	printf("%s\n", cur_pwd);
+	free(cur_pwd);
+	cur_pwd = NULL;
+	g_state.exit_status = 0;
+	return ;
 }

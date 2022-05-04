@@ -6,7 +6,11 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/30 17:35:45 by jinyoo           ###   ########.fr       */
+=======
+/*   Updated: 2022/05/03 23:43:17 by minjupar         ###   ########.fr       */
+>>>>>>> 88adb52227fa62c35c24673db1ca1256aaeea340
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +43,14 @@ int	error_cmds(t_cmd *node)
 
 	while (node)
 	{
-		if (node->cmd == NULL)
+		if (node->cmd == NULL && node->input)
 		{
 			printf("No such file or directory\n");
+			return (TRUE);
+		}
+		else if (node->cmd == NULL && node->is_pipe && node->input == NULL && node->output == NULL && node->heredoc == NULL)
+		{
+			printf("syntax error near unexpected token `|'\n");
 			return (TRUE);
 		}
 		else if (check_newline_error(node))
@@ -64,6 +73,6 @@ int	error_cmds(t_cmd *node)
 
 void	ft_error(void)
 {
-	printf("error\n");
-	exit(SUCCESS);
+	write(STDERR_FILENO, "malloc error\n", 13);
+	exit(-1);
 }

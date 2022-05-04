@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:57 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/29 03:44:14 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/30 17:45:49 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_cmd	*create_cmd_node(t_cmd *prev)
 	node->output = NULL;
 	node->heredoc = NULL;
 	node->here_filename = NULL;
+	node->prog_path = getcwd(NULL, 0);
 	node->next = NULL;
 	node->prev = prev;
 	return (node);

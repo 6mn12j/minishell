@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/30 17:34:11 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/05 18:29:30 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	child_handler(t_cmd *command, int flag)
 			return (ERROR);
 	}
 	if (flag)
-		exec_built_in(command);
+		exec_built_in(command, flag);
 	else
 	{
 		if (execve(command->cmd, command->argv, g_state.envp) == ERROR)
@@ -92,16 +92,24 @@ static int	exec_cmd(t_cmd *command, int flag)
 		pipe_open = 1;
 		pipe(command->pipe);
 	}
-	pid = fork();
-	if (pid == -1)
-		return (ERROR);
-	else if (!pid)
+	if (flag && !pipe_open)
 	{
-		if (child_handler(command, flag) == ERROR)
+		if (exec_built_in_hanlder(command) == ERROR)
 			return (ERROR);
 	}
 	else
-		parent_handler(command, pid, pipe_open);
+	{
+		pid = fork();
+		if (pid == -1)
+			return (ERROR);
+		else if (!pid)
+		{
+			if (child_handler(command, flag) == ERROR)
+				return (ERROR);
+		}
+		else
+			parent_handler(command, pid, pipe_open);
+	}
 	return (SUCCESS);
 }
 

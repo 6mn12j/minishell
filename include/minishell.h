@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/05/04 15:54:45 by jinyoo           ###   ########.fr       */
-=======
-/*   Updated: 2022/05/03 21:52:06 by minjupar         ###   ########.fr       */
->>>>>>> 88adb52227fa62c35c24673db1ca1256aaeea340
+/*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
+/*   Updated: 2022/05/05 17:59:01 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +88,8 @@ void	ft_exit(t_cmd *command);
 void	ft_unset(t_cmd *command);
 void	ft_export(t_cmd *command);
 int		is_built_in(char *cmd);
-int		exec_built_in(t_cmd *command);
+int		exec_built_in(t_cmd *command, int flag);
+int		exec_built_in_hanlder(t_cmd *command);
 void	set_new_env(char *key, char *new_value);
 
 

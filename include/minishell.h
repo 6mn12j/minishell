@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/05 17:59:01 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/06 15:41:35 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv);
 void	make_file(char *filename);
 void	ft_free_two_ptr(char **ptr);
 void	parser(char **input, t_cmd **head);
-int		error_cmds(t_cmd *node);
 
 void	print_test(t_cmd **head);// TODO: 내기 전에 삭제
 void	print_commands(char **commands);// TODO: 내기 전에 삭제
@@ -125,7 +124,11 @@ int		check_env_key(char *str);
 int		ft_twoptr_len(char **twoptr);
 int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);
+
+//error.c
+int		error_cmds(t_cmd *node);
 void	ft_error(void);
+int		invalid_cmd_error(char *cmd);
 
 // redirection
 int		rdr_l(t_redir *redir);

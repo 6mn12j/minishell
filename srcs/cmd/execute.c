@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/05 18:29:30 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/06 15:41:25 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,10 @@ int	execute_cmds(t_cmd *command)
 {
 	char	*path;
 	int		flag;
+	char	*cmd_cpy;
 
 	path = get_env("PATH");
+	cmd_cpy = command->cmd;
 	while (command)
 	{
 		flag = 0;
@@ -127,7 +129,7 @@ int	execute_cmds(t_cmd *command)
 		else if (command->cmd)
 			command->cmd = get_valid_cmd(command, ft_split(path, ':'));
 		if (!command->cmd)
-			return (ERROR);
+			return (invalid_cmd_error(cmd_cpy));
 		exec_cmd(command, flag);
 		if (!command->is_path && !flag)
 			free(command->cmd);

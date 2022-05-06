@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/05 18:32:18 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/06 15:42:29 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	rdr_l_error(char *file_name)
 {
-	printf("bash: %s: No such file or directory\n", file_name);
+	printf("soobash: %s: No such file or directory\n", file_name);
 	return (ERROR);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:57 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 23:42:00 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:09:20 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_cmd	*create_cmd_node(t_cmd *prev)
 
 	node = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!node)
-		return (NULL);
+		ft_error();
 	node->is_pipe = 0;
 	node->is_path = 0;
 	node->cmd = NULL;

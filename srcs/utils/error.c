@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 23:43:17 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/06 15:42:19 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,10 @@ void	ft_error(void)
 {
 	write(STDERR_FILENO, "malloc error\n", 13);
 	exit(-1);
+}
+
+int	invalid_cmd_error(char *cmd)
+{
+	printf("soobash: %s: command not found\n", cmd);
+	return (ERROR);
 }

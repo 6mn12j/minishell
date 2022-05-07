@@ -84,7 +84,7 @@ char	**ft_split_cmds(char *str)
 	word_cnt = get_word_count(str);
 	command_array = (char **)malloc(sizeof(char *) * (word_cnt + 1));
 	if (!command_array)
-		return (NULL);
+		ft_error();
 	i = -1;
 	start = get_start(0, str);
 	while (++i < word_cnt)
@@ -92,7 +92,7 @@ char	**ft_split_cmds(char *str)
 		word_len = get_word_len(start, str);
 		command_array[i] = (char *)malloc(sizeof(char) * (word_len +1));
 		if (!command_array[i])
-			return (NULL);
+			ft_error();
 		ft_strlcpy(command_array[i], str + start, word_len + 1);
 		start = get_start(start + word_len, str);
 	}

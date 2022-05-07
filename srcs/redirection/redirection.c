@@ -6,11 +6,17 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/30 15:10:56 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/06 15:42:29 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	rdr_l_error(char *file_name)
+{
+	printf("soobash: %s: No such file or directory\n", file_name);
+	return (ERROR);
+}
 
 int	rdr_l(t_redir *redir)
 {
@@ -22,16 +28,19 @@ int	rdr_l(t_redir *redir)
 	{
 		fd = open(rdr->file_name, O_RDONLY);
 		if (fd == ERROR)
-			return (ERROR);
+			return (rdr_l_error(rdr->file_name));
 		close(fd);
 		rdr = rdr->next;
 	}
 	fd = open(rdr->file_name, O_RDONLY);
 	if (fd == ERROR)
-		return (ERROR);
-	if (dup2(fd, READ) == ERROR)
-		return (ERROR);
-	close(fd);
+		return (rdr_l_error(rdr->file_name));
+	else
+	{
+		if (dup2(fd, READ) == ERROR)
+			return (ERROR);
+		close(fd);
+	}
 	return (SUCCESS);
 }
 

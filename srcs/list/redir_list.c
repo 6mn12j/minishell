@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:28 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 23:41:39 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:09:30 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_redir	*create_redir_node(int type, char *file_name)
 
 	node = (t_redir *)malloc(sizeof(t_redir));
 	if (!node)
-		return (NULL);
+		ft_error();
 	node->type = type;
 	node->file_name = file_name;
 	node->next = NULL;

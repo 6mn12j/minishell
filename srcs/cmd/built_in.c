@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:32:07 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/04/30 21:50:11 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:02:49 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,36 @@ int	is_built_in(char *cmd)
 	return (0);
 }
 
-int	exec_built_in(t_cmd *command)
+int	exec_built_in_hanlder(t_cmd *command)
 {
-	// 빌트인 명령 실행
-	//print_test(&command);
+	int	w_fd;
+	int	r_fd;
+
+	if (command->input || command->output)
+	{
+		w_fd = dup(WRITE);
+		r_fd = dup(READ);
+		if (w_fd == ERROR || r_fd == ERROR)
+			return (ERROR);
+		if (redirection_handler(command) == ERROR)
+			return (ERROR);
+	}
+	exec_built_in(command, 0);
+	if (command->input)
+	{
+		if (dup2(r_fd, READ) == ERROR)
+			return (ERROR);
+	}
+	if (command->output)
+	{
+		if (dup2(w_fd, WRITE) == ERROR)
+			return (ERROR);
+	}
+	return (SUCCESS);
+}
+
+int	exec_built_in(t_cmd *command, int flag)
+{
 	if (!ft_strncmp(command->cmd, "echo", ft_strlen(command->cmd) + 1))
 		ft_echo(command);
 	else if (!ft_strncmp(command->cmd, "cd", ft_strlen(command->cmd) + 1))
@@ -39,6 +65,7 @@ int	exec_built_in(t_cmd *command)
 		ft_unset(command);
 	else if (!ft_strncmp(command->cmd, "export", ft_strlen(command->cmd) + 1))
 		ft_export(command);
-	exit(1); // 무조건 있어야 함
+	if (flag)
+		exit(1);
 	return (SUCCESS);
 }

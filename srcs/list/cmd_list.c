@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:16:57 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/05 18:09:20 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/07 17:48:31 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void	delete_cmd_list(t_cmd **cmd)
 		if (temp->here_filename)
 			unlink(temp->here_filename);
 		free(temp->here_filename);
+		temp->here_filename = NULL;
 		free(temp->heredoc);
+		temp->heredoc = NULL;
 		del_node = temp;
 		temp = temp->next;
 		ft_free_two_ptr(del_node->argv);

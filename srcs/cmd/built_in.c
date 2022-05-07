@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:32:07 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/05 18:02:49 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/07 17:38:29 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int	is_built_in(char *cmd)
 {
 	if (!ft_strncmp("echo", cmd, 5) || !ft_strncmp("pwd", cmd, 4) || \
 	!ft_strncmp("export", cmd, 6) || !ft_strncmp("unset", cmd, 6) || \
-	!ft_strncmp("env", cmd, 4) || !ft_strncmp("exit", cmd, 5) || !ft_strncmp("cd", cmd, 3))
-		return (1);
-	return (0);
+	!ft_strncmp("env", cmd, 4) || !ft_strncmp("exit", cmd, 5) || \
+	!ft_strncmp("cd", cmd, 3))
+		return (TRUE);
+	return (FALSE);
 }
 
 int	exec_built_in_hanlder(t_cmd *command)
@@ -35,7 +36,7 @@ int	exec_built_in_hanlder(t_cmd *command)
 		if (redirection_handler(command) == ERROR)
 			return (ERROR);
 	}
-	exec_built_in(command, 0);
+	exec_built_in(command, FALSE);
 	if (command->input)
 	{
 		if (dup2(r_fd, READ) == ERROR)
@@ -66,6 +67,6 @@ int	exec_built_in(t_cmd *command, int flag)
 	else if (!ft_strncmp(command->cmd, "export", ft_strlen(command->cmd) + 1))
 		ft_export(command);
 	if (flag)
-		exit(1);
+		exit(0);
 	return (SUCCESS);
 }

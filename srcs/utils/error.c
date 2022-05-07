@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/06 15:42:19 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/07 21:33:23 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int	error_cmds(t_cmd *node)
 	{
 		if (node->cmd == NULL && node->input)
 		{
-			printf("No such file or directory\n");
+			printf("%s\n", strerror(2));
 			return (TRUE);
 		}
 		else if (node->cmd == NULL && node->is_pipe && node->input == NULL && node->output == NULL && node->heredoc == NULL)
 		{
-			printf("syntax error near unexpected token `|'\n");
+			printf("soobash: syntax error near unexpected token `|'\n");
 			return (TRUE);
 		}
 		else if (check_newline_error(node))
@@ -56,8 +56,7 @@ int	error_cmds(t_cmd *node)
 		{
 			if (node->argv[i][0] == 7)
 			{
-				printf("soobash: ");
-				printf("syntax error near unexpected token `newline'\n");
+				printf("soobash: syntax error near unexpected token `newline'\n");
 				return (TRUE);
 			}
 			i++;
@@ -70,11 +69,14 @@ int	error_cmds(t_cmd *node)
 void	ft_error(void)
 {
 	write(STDERR_FILENO, "malloc error\n", 13);
-	exit(-1);
+	exit(1);
 }
 
-int	invalid_cmd_error(char *cmd)
+int	invalid_cmd_error(char *cmd, char *path)
 {
 	printf("soobash: %s: command not found\n", cmd);
+	g_state.exit_status = 127;
+	free(path);
+	path = NULL;
 	return (ERROR);
 }

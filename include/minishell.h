@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/06 15:41:35 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/07 21:15:59 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <errno.h>
+# include <string.h>
 # include <signal.h>
 # include <termios.h>
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
-# include <sys/stat.h>
-
-# include <fcntl.h>
 # include <sys/stat.h>
 
 # include "../libft/libft.h"
@@ -128,7 +127,7 @@ void	ft_strjoin_char(char **dst, char ch);
 //error.c
 int		error_cmds(t_cmd *node);
 void	ft_error(void);
-int		invalid_cmd_error(char *cmd);
+int		invalid_cmd_error(char *cmd, char *path);
 
 // redirection
 int		rdr_l(t_redir *redir);
@@ -151,4 +150,7 @@ t_redir	*create_redir_node(int type, char *file_name);
 void	delete_redir_list(t_redir *redir);
 void	add_redir_node(t_redir *new_node, t_redir *head);
 int		handle_redir(t_cmd *node, int type, char *file_name, int *i);
+
+//pipe.c
+int		use_pipe(t_cmd *command, int *pipe_open);
 #endif

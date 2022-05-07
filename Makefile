@@ -17,6 +17,7 @@ READLINE_INC	= -I /Users/$(USER)/.brew/opt/readline/include
 SRCS = srcs/main.c \
 		srcs/cmd/execute.c \
 		srcs/cmd/built_in.c \
+		srcs/cmd/pipe.c \
 		srcs/builtins/ft_cd.c \
 		srcs/builtins/ft_pwd.c \
 		srcs/builtins/ft_env.c \
@@ -55,14 +56,12 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	@make -C ./libft
 
-
 %.o: %.c
 	$(CC) $(CFLAGS) $(READLINE_INC) -c $< -o $@
 
 clean:
 	@make clean -C libft/
 	@rm -rf $(OBJS)
-
 
 fclean: clean
 	@make fclean -C libft/

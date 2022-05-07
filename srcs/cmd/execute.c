@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/06 15:41:25 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/07 22:22:03 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ char	*get_valid_cmd(t_cmd *command, char **env_paths)
 	char		*cmd_path;
 	struct stat	buf;
 
-	if (command->is_path)
-	{
-		if (stat(command->cmd, &buf) == 0)
-			return (command->cmd);
-	}
+	if (stat(command->cmd, &buf) == 0)
+		return (command->cmd);
 	else
 	{
 		while (*env_paths)
@@ -30,10 +27,13 @@ char	*get_valid_cmd(t_cmd *command, char **env_paths)
 			tmp = ft_strjoin(*env_paths, "/");
 			cmd_path = ft_strjoin(tmp, command->cmd);
 			free(tmp);
+			tmp = NULL;
 			if (stat(cmd_path, &buf) == 0)
 				return (cmd_path);
 			env_paths++;
 		}
+		free(cmd_path);
+		cmd_path = NULL;
 	}
 	return (NULL);
 }
@@ -67,9 +67,10 @@ static int	child_handler(t_cmd *command, int flag)
 
 void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
 {
-
+	int	status;
+	
 	signal(SIGINT, handle_parent_sigint);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
 	if (pipe_open)
 	{
 		close(command->pipe[WRITE]);
@@ -79,6 +80,7 @@ void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
 	if (command->prev && command->prev->is_pipe)
 		close(command->prev->pipe[READ]);
 	init_signal();
+	g_state.exit_status = *(int *)&status >> 8 & 0x000000ff;
 }
 
 static int	exec_cmd(t_cmd *command, int flag)
@@ -86,12 +88,8 @@ static int	exec_cmd(t_cmd *command, int flag)
 	pid_t	pid;
 	int		pipe_open;
 
-	pipe_open = 0;
-	if (command->is_pipe || (command->prev && command->prev->is_pipe))
-	{
-		pipe_open = 1;
-		pipe(command->pipe);
-	}
+	if (use_pipe(command, &pipe_open) == ERROR)
+		return (ERROR);
 	if (flag && !pipe_open)
 	{
 		if (exec_built_in_hanlder(command) == ERROR)
@@ -116,24 +114,27 @@ static int	exec_cmd(t_cmd *command, int flag)
 int	execute_cmds(t_cmd *command)
 {
 	char	*path;
-	int		flag;
 	char	*cmd_cpy;
 
 	path = get_env("PATH");
-	cmd_cpy = command->cmd;
 	while (command)
 	{
-		flag = 0;
-		if (is_built_in(command->cmd))
-			flag = 1;
-		else if (command->cmd)
+		cmd_cpy = command->cmd;
+		if (!is_built_in(command->cmd))
+		{
 			command->cmd = get_valid_cmd(command, ft_split(path, ':'));
-		if (!command->cmd)
-			return (invalid_cmd_error(cmd_cpy));
-		exec_cmd(command, flag);
-		if (!command->is_path && !flag)
+			if (!command->cmd)
+				return (invalid_cmd_error(cmd_cpy, path));
+		}
+		exec_cmd(command, is_built_in(command->cmd));
+		if (!command->is_path && !is_built_in(command->cmd))
+		{
 			free(command->cmd);
+			command->cmd = NULL;
+		}
 		command = command->next;
 	}
+	free(path);
+	path = NULL;
 	return (SUCCESS);
 }

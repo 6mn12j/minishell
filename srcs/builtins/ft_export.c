@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 23:42:20 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 01:44:47 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static void	printf_envp(void)
 		key = get_env_key(g_state.envp[i], 0);
 		value = get_env(key);
 		printf("declare -x ");
-		printf("%s=", key);
-		printf("\"%s\"\n", value);
+		printf("%s", key);
+		if (ft_strchr(g_state.envp[i], '='))
+			printf("=\"%s\"", value);
+		printf("\n");
 		free(key);
 		free(value);
 	}
@@ -39,6 +41,10 @@ char	*get_new_value(char *key, t_cmd *command)
 
 	start = ft_strlen(key);
 	len = ft_strlen(command->argv[1]);
+	if (start + 1 == len)
+		return (ft_strdup(""));
+	else if (start + 1 > len)
+		return (NULL);
 	return (ft_substr(command->argv[1], start + 1, len));
 }
 
@@ -52,7 +58,10 @@ void	update_env(char *key, char *new_value)
 	index = get_env_index(key);
 	free(g_state.envp[index]);
 	g_state.envp[index] = NULL;
-	new_env_value = ft_strjoin(key, new_temp);
+	if (new_temp != NULL)
+		new_env_value = ft_strjoin(key, new_temp);
+	else
+		new_env_value = ft_strdup(key);
 	g_state.envp[index] = new_env_value;
 	free(new_temp);
 	return ;
@@ -73,7 +82,10 @@ void	set_new_env(char *key, char *new_value)
 	i = -1;
 	while (g_state.envp[++i])
 		temp[i] = g_state.envp[i];
-	temp[i++] = ft_strjoin(key, new_temp);
+	if (new_temp != NULL)
+		temp[i++] = ft_strjoin(key, new_temp);
+	else
+		temp[i++] = ft_strdup(key);
 	temp[i] = NULL;
 	free(g_state.envp);
 	free(new_temp);
@@ -84,28 +96,25 @@ void	set_new_env(char *key, char *new_value)
 void	ft_export(t_cmd *command)
 {
 	char	*key;
-	char	*value;
 	char	*new_value;
 
 	if (command->argc == 1)
 		return (printf_envp());
 	key = get_env_key(command->argv[1], 0);
-	value = get_env(key);
 	new_value = get_new_value(key, command);
-	if (!check_env_key(key))
+	if (!is_valid_env_key(key))
 	{
-		printf("bash: export: `%s%s': not a valid identifier\n", key, new_value); //write 2번으로
+		printf("bash: export: `%s%s': \
+		not a valid identifier\n", key, new_value); //write 2번으로
 		return ;
 	}
-	if (ft_strlen(value) > 0)
+	if (get_env_index(key) >= 0)
 		update_env(key, new_value);
 	else
 		set_new_env(key, new_value);
 	g_state.exit_status = 0;
 	free(key);
 	key = NULL;
-	free(value);
-	value = NULL;
 	free(new_value);
 	new_value = NULL;
 	return ;

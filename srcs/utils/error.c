@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/07 21:33:23 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/07 22:32:33 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ int	error_cmds(t_cmd *node)
 	while (node)
 	{
 		if (node->cmd == NULL && node->input)
-		{
-			printf("%s\n", strerror(2));
 			return (TRUE);
-		}
 		else if (node->cmd == NULL && node->is_pipe && node->input == NULL && node->output == NULL && node->heredoc == NULL)
 		{
 			printf("soobash: syntax error near unexpected token `|'\n");

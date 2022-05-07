@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 01:44:47 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 02:12:42 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,6 @@ static void	printf_envp(void)
 		free(value);
 	}
 	return ;
-}
-
-char	*get_new_value(char *key, t_cmd *command)
-{
-	int	start;
-	int	len;
-
-	start = ft_strlen(key);
-	len = ft_strlen(command->argv[1]);
-	if (start + 1 == len)
-		return (ft_strdup(""));
-	else if (start + 1 > len)
-		return (NULL);
-	return (ft_substr(command->argv[1], start + 1, len));
 }
 
 void	update_env(char *key, char *new_value)
@@ -93,29 +79,38 @@ void	set_new_env(char *key, char *new_value)
 	return ;
 }
 
-void	ft_export(t_cmd *command)
+void	handle_export(char *argv)
 {
 	char	*key;
 	char	*new_value;
 
-	if (command->argc == 1)
-		return (printf_envp());
-	key = get_env_key(command->argv[1], 0);
-	new_value = get_new_value(key, command);
+	key = get_env_key(argv, 0);
+	new_value = get_new_value(key, argv);
 	if (!is_valid_env_key(key))
 	{
 		printf("bash: export: `%s%s': \
-		not a valid identifier\n", key, new_value); //write 2번으로
+		not a valid identifier\n", key, new_value); //write 2번으로, null일때 처리, 함수로 나누기
+		g_state.exit_status = 1;
 		return ;
 	}
 	if (get_env_index(key) >= 0)
 		update_env(key, new_value);
 	else
 		set_new_env(key, new_value);
-	g_state.exit_status = 0;
 	free(key);
 	key = NULL;
 	free(new_value);
 	new_value = NULL;
-	return ;
+}
+
+void	ft_export(t_cmd *command)
+{
+	int	i;
+
+	g_state.exit_status = 0;
+	if (command->argc == 1)
+		return (printf_envp());
+	i = 0;
+	while (command->argv[++i])
+		handle_export(command->argv[i]);
 }

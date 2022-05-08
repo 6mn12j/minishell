@@ -12,6 +12,23 @@
 
 #include "minishell.h"
 
+void	handle_symbol_type(char **temp, int cnt, char symbol)
+{
+	if (cnt == 1 && symbol == '|')
+		ft_strjoin_char(temp, PIPE_TYPE);
+	else if (cnt == 1 && symbol == '<')
+		ft_strjoin_char(temp, REDIR_L);
+	else if (cnt == 1 && symbol == '>')
+		ft_strjoin_char(temp, REDIR_R);
+	else if (cnt == 2 && symbol == '<')
+		ft_strjoin_char(temp, HEREDOC);
+	else if (cnt == 2 && symbol == '>')
+		ft_strjoin_char(temp, REDIR_RR);
+	else
+		ft_strjoin_char(temp, ERROR_TYPE);
+	return ;
+}
+
 int	is_separate(char **temp, char *cmd, int *i)
 {
 	char	symbol;
@@ -29,19 +46,7 @@ int	is_separate(char **temp, char *cmd, int *i)
 		(*i)++;
 	}
 	(*i)--;
-	//printf("cmd: %c i:%d\n",cmd[*i],*i);
-	if (cnt == 1 && symbol == '|')
-		ft_strjoin_char(temp, PIPE_TYPE);
-	else if (cnt == 1 && symbol == '<')
-		ft_strjoin_char(temp, REDIR_L);
-	else if (cnt == 1 && symbol == '>')
-		ft_strjoin_char(temp, REDIR_R);
-	else if (cnt == 2 && symbol == '<')
-		ft_strjoin_char(temp, HEREDOC);
-	else if (cnt == 2 && symbol == '>')
-		ft_strjoin_char(temp, REDIR_RR);
-	else
-		ft_strjoin_char(temp, ERROR_TYPE);
+	handle_symbol_type(temp, cnt, symbol);
 	return (1);
 }
 

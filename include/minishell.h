@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/08 23:05:05 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 03:36:28 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ t_state	g_state;
 
 /*builtins*/
 void	ft_cd(t_cmd *command);
-void	ft_pwd();
-void	ft_env();
+void	ft_pwd(void);
+void	ft_env(void);
 void	ft_echo(t_cmd *command);
 void	ft_exit(t_cmd *command);
 void	ft_unset(t_cmd *command);
@@ -117,7 +117,6 @@ void	update_env(char *key, char *new_value);
 
 void	init_signal(void);
 void	handle_signal(int signo);
-void	handle_parent_sigint(int signo);
 int		is_valid_env_key(char *str);
 int		ft_twoptr_len(char **twoptr);
 int		count_pipe(char **commands);

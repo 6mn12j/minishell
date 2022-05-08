@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/08 21:53:44 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/09 03:34:40 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*get_valid_cmd(t_cmd *command, char **env_paths)
 
 static int	child_handler(t_cmd *command, int flag)
 {
+	signal(SIGQUIT, SIG_DFL);
 	if (command->input || command->output)
 	{
 		if (redirection_handler(command) == ERROR)
@@ -68,9 +69,13 @@ static int	child_handler(t_cmd *command, int flag)
 void	parent_handler(t_cmd *command, pid_t pid, int pipe_open)
 {
 	int	status;
-	
-	signal(SIGINT, handle_parent_sigint);
+
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
+	if (status == SIGINT)
+		printf("\n");
+	else if (status == SIGQUIT)
+		printf("Quit: %d\n", status);
 	if (pipe_open)
 	{
 		close(command->pipe[WRITE]);

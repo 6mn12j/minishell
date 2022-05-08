@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 01:50:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 03:34:18 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 01:44:47 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,23 @@
 int	get_env_index(char *key)
 {
 	int		i;
-	char	*temp;
+	char	**temp;
 
 	i = -1;
-	temp = ft_strjoin(key, "=");
 	while (g_state.envp[++i])
 	{
-		if (!ft_strncmp(temp, g_state.envp[i], ft_strlen(temp)))
+		temp = ft_split(g_state.envp[i], '=');
+		if (!ft_strncmp(temp[0], key, ft_strlen(key) + 1))
 		{
-			free(temp);
-			temp = NULL;
+			ft_free_two_ptr(temp);
 			return (i);
 		}
+		ft_free_two_ptr(temp);
 	}
-	free(temp);
-	temp = NULL;
-	return (i);
+	return (-1);
 }
 
-int	check_env_key(char *key)
+int	is_valid_env_key(char *key)
 {
 	int	i;
 

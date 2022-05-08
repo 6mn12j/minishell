@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
 /*   Updated: 2022/05/08 17:24:11 by jinyoo           ###   ########.fr       */
@@ -89,7 +89,7 @@ int		is_built_in(char *cmd);
 int		exec_built_in(t_cmd *command, int flag);
 int		exec_built_in_hanlder(t_cmd *command);
 void	set_new_env(char *key, char *new_value);
-
+char	*get_new_value(char *key, char *argv);
 
 /*parser*/
 char	**ft_split_cmds(char *str);
@@ -118,7 +118,7 @@ void	update_env(char *key, char *new_value);
 void	init_signal(void);
 void	handle_signal(int signo);
 void	handle_parent_sigint(int signo);
-int		check_env_key(char *str);
+int		is_valid_env_key(char *str);
 int		ft_twoptr_len(char **twoptr);
 int		count_pipe(char **commands);
 void	ft_strjoin_char(char **dst, char ch);

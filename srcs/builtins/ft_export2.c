@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_export2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 17:19:20 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 01:57:45 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(void)
+char	*get_new_value(char *key, char *argv)
 {
-	int	i;
+	int	start;
+	int	len;
 
-	i = -1;
-	while (g_state.envp[++i])
-	{
-		if (ft_strchr(g_state.envp[i], '='))
-			printf("%s\n", g_state.envp[i]);
-	}
-	g_state.exit_status = 0;
-	return ;
+	start = ft_strlen(key);
+	len = ft_strlen(argv);
+	if (start + 1 == len)
+		return (ft_strdup(""));
+	else if (start + 1 > len)
+		return (NULL);
+	return (ft_substr(argv, start + 1, len));
 }

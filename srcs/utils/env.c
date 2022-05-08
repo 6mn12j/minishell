@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 23:40:36 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 01:25:47 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	copy_env(char **envp)
 	int	i;
 
 	i = -1;
-
 	g_state.envp = (char **)malloc(sizeof(char *) * (ft_twoptr_len(envp) + 1));
 	if (!g_state.envp)
 		return (ft_error());

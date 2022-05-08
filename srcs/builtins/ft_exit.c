@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 17:39:09 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 18:00:51 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,26 @@ int	check_exit(char *str)
 
 void	ft_exit(t_cmd *command)
 {
-	if (command->is_pipe)
-		return ;
-	if (!command->argv[1])
+	if (!command->is_pipe && (!command->prev || !command->prev->is_pipe))
 	{
-		printf("exit\n");
-		exit(127);
+		ft_putendl_fd("exit", STDERR_FILENO);
+		if (!command->argv[1])
+			exit(127);
 	}
-	else if (!check_exit(command->argv[1]))
+	if (!check_exit(command->argv[1]))
 	{
-		printf("exit\n");
-		printf("soobash: exit: %s", command->argv[1]);
-		printf(": numeric argument required\n");
+		ft_putstr_fd("soobash: exit: ", STDERR_FILENO);
+		ft_putstr_fd(command->argv[1], STDERR_FILENO);
+		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
 		exit(255);
 	}
 	else if (command->argc > 2)
 	{
-		printf("soobash: exit: too many arguments\n");
-		g_state.exit_status = 1;
+		ft_putendl_fd("soobash: exit: too many arguments", STDERR_FILENO);
+		if (command->is_pipe || (command->prev && command->prev->is_pipe))
+			exit(1);
+		else
+			g_state.exit_status = 1;
 		return ;
 	}
 }

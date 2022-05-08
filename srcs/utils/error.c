@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/07 22:32:33 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 18:11:06 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_newline_error(t_cmd *node)
 			(node->output && node->output->file_name == NULL) || \
 			(node->input && node->input->file_name == NULL))
 	{
-		printf("soobash: syntax error near unexpected token `newline'\n");
+		ft_putendl_fd("soobash: syntax error near unexpected token `newline'", STDERR_FILENO);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -43,7 +43,7 @@ int	error_cmds(t_cmd *node)
 			return (TRUE);
 		else if (node->cmd == NULL && node->is_pipe && node->input == NULL && node->output == NULL && node->heredoc == NULL)
 		{
-			printf("soobash: syntax error near unexpected token `|'\n");
+			ft_putendl_fd("soobash: syntax error near unexpected token `|'", STDERR_FILENO);
 			return (TRUE);
 		}
 		else if (check_newline_error(node))
@@ -53,7 +53,7 @@ int	error_cmds(t_cmd *node)
 		{
 			if (node->argv[i][0] == 7)
 			{
-				printf("soobash: syntax error near unexpected token `newline'\n");
+				ft_putendl_fd("soobash: syntax error near unexpected token `newline'", STDERR_FILENO);
 				return (TRUE);
 			}
 			i++;
@@ -65,13 +65,16 @@ int	error_cmds(t_cmd *node)
 
 void	ft_error(void)
 {
-	write(STDERR_FILENO, "malloc error\n", 13);
+	ft_putendl_fd("MALLOC ERROR", STDERR_FILENO);
 	exit(1);
 }
 
 int	invalid_cmd_error(char *cmd, char *path)
 {
-	printf("soobash: %s: command not found\n", cmd);
+	ft_putstr_fd("soobash: ", STDERR_FILENO);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putendl_fd("command not found", STDERR_FILENO);
 	g_state.exit_status = 127;
 	free(path);
 	path = NULL;

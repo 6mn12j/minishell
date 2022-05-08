@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/08 16:47:39 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 18:06:47 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static int	rdr_l_error(char *file_name)
 {
-	printf("soobash: %s: %s\n", file_name, strerror(2));
+	ft_putstr_fd("soobash: ", 2);
+	ft_putstr_fd(file_name, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(strerror(2), 2);
 	g_state.exit_status = 1;
 	return (ERROR);
 }

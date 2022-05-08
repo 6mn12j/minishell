@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:32:07 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/07 17:38:29 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 17:21:08 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	exec_built_in(t_cmd *command, int flag)
 	else if (!ft_strncmp(command->cmd, "cd", ft_strlen(command->cmd) + 1))
 		ft_cd(command);
 	else if (!ft_strncmp(command->cmd, "env", ft_strlen(command->cmd) + 1))
-		ft_env(command);
+		ft_env();
 	else if (!ft_strncmp(command->cmd, "pwd", ft_strlen(command->cmd) + 1))
-		ft_pwd(command);
+		ft_pwd();
 	else if (!ft_strncmp(command->cmd, "exit", ft_strlen(command->cmd) + 1))
 		ft_exit(command);
 	else if (!ft_strncmp(command->cmd, "unset", ft_strlen(command->cmd) + 1))

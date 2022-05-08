@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 20:08:41 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 18:04:42 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_input(char *input)
 	}
 	if (!check_quote(input))
 	{
-		printf("Invalid quote\n");
+		ft_putendl_fd("Invalid quote", STDERR_FILENO);
 		return (0);
 	}
 	return (1);

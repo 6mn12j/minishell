@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 15:52:14 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 15:54:38 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	ft_exit(t_cmd *command)
 		return ;
 	if (command->argc > 2)
 	{
+		if (!check_exit(command->argv[1]))
+		{
+			printf("soobash: exit: %s", command->argv[1]);
+			printf(": numeric argument required\n");
+			return ;
+		}
 		printf("soobash: exit: too many arguments\n");
 		return ;
 	}

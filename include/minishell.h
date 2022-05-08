@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/07 22:26:36 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 17:24:11 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ t_state	g_state;
 
 /*builtins*/
 void	ft_cd(t_cmd *command);
-void	ft_pwd(t_cmd *command);
-void	ft_env(t_cmd *command);
+void	ft_pwd();
+void	ft_env();
 void	ft_echo(t_cmd *command);
 void	ft_exit(t_cmd *command);
 void	ft_unset(t_cmd *command);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 23:42:20 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 17:01:50 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ft_export(t_cmd *command)
 	if (!check_env_key(key))
 	{
 		printf("bash: export: `%s%s': not a valid identifier\n", key, new_value); //write 2번으로
+		g_state.exit_status = 1;
 		return ;
 	}
 	if (ft_strlen(value) > 0)

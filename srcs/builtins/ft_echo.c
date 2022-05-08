@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:01:09 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 02:00:53 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 05:38:49 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	check_n_option(t_cmd *command, int j, char *option)
 {
 	int	i;
 
+	if (command->argv[j] == NULL)
+		return (0);
 	if (command->argv[j][0] != '-')
 		return (0);
 	if (!ft_strncmp("-n", command->argv[j], 3))
@@ -27,11 +29,13 @@ int	check_n_option(t_cmd *command, int j, char *option)
 	while (command->argv[j][i])
 	{
 		if (command->argv[j][i] != 'n')
-			return (1);
+			return (0);
 		i++;
 	}
-	*option = 'n';
-	return (1);
+	*option = command->argv[j][i - 1];
+	if (*option == 'n')
+		return (1);
+	return (0);
 }
 
 void	ft_echo(t_cmd *command)
@@ -43,10 +47,14 @@ void	ft_echo(t_cmd *command)
 	j = 0;
 	is_string = 0;
 	option = 0;
+
 	while (command->argv[++j])
 	{
-		while (!is_string && check_n_option(command, j, &option))
+		while (!is_string && \
+		check_n_option(command, j, &option))
 			j++;
+		if (command->argv[j] == NULL)
+			break ;
 		printf("%s", command->argv[j]);
 		is_string = 1;
 		if (command->argv[j + 1] != NULL)

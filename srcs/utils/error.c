@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 18:11:06 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 23:44:00 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	error_cmds(t_cmd *node)
 
 	while (node)
 	{
-		if (node->cmd == NULL && node->input)
+		if (node->argc == 2 && node->cmd == NULL && node->input)
 			return (TRUE);
 		else if (node->cmd == NULL && node->is_pipe && node->input == NULL && node->output == NULL && node->heredoc == NULL)
 		{

@@ -23,9 +23,13 @@ int	is_separate(char **temp, char *cmd, int *i)
 	else
 		return (0);
 	ft_strjoin_char(temp, SEPARATOR);
-	while (cmd[(*i)++] == symbol)
+	while (cmd[(*i)] == symbol)
+	{
 		cnt++;
+		(*i)++;
+	}
 	(*i)--;
+	//printf("cmd: %c i:%d\n",cmd[*i],*i);
 	if (cnt == 1 && symbol == '|')
 		ft_strjoin_char(temp, PIPE_TYPE);
 	else if (cnt == 1 && symbol == '<')
@@ -48,7 +52,6 @@ void	parse_command(char **temp, char *command)
 
 	i = -1;
 	quote = 0;
-
 	while (command[++i])
 	{
 		if (quote != '\'' && command[i] == '$' && command[i + 1] != '\0')

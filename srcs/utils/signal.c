@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/03 22:48:54 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 22:09:31 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	handle_signal(int signo)
 		rl_redisplay();
 		g_state.exit_status = 1;
 	}
-
 }
 
 void	handle_parent_sigint(int signo)

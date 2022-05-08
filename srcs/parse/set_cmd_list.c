@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 20:18:07 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 23:45:12 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ static void	set_not_output_file(int *i_argv, t_cmd *cur)
 	return ;
 }
 
+// void	set_only_redir(int *i_argv, t_cmd *node)
+// {
+// 	char	*temp;
+
+// 	temp = ft_strdup("");
+// 	//node->input = create_redir_node(REDIR_L, ERROR_TYPE);
+// 	ft_strjoin_char(&temp, ERROR_TYPE);
+// 	node->argv[(*i_argv)++] = temp;
+// 	return ;
+// }
+
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 {
 	while (commands[++i] && cur)
@@ -50,7 +61,10 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 		{
 			if (check_redir(cur, commands, &i))
 			{
-				if ((commands[i - 1][0] == REDIR_R || commands[i - 1][0] == REDIR_RR ) && \
+				if (i == 0)
+					return ;
+				if ((commands[i - 1][0] == REDIR_R || \
+				commands[i - 1][0] == REDIR_RR) &&
 				cur->output->file_name && cur->cmd == NULL)
 					set_not_output_file(&i_argv, cur);
 			}

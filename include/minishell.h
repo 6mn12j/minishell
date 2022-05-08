@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/08 17:39:16 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 23:05:05 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	**parse_cmds(char **commands);
 void	set_is_path(t_cmd *cmd);
 void	change_quote(char c, char *flag);
 int		handle_heredoc(t_cmd *cur, char *heredoc, int *i);
-int		check_redir(t_cmd *cur, char **commands, int *i);
+int		_redir(t_cmd *cur, char **commands, int *i);
 void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv);
 void	make_file(char *filename);
 void	ft_free_two_ptr(char **ptr);

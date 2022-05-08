@@ -40,7 +40,11 @@ int	get_word_count(char *str)
 		change_quote(str[i], &flag);
 		if (flag == 0 && str[i + 1] == '\0')
 			word_count++;
-		else if (flag == 0 && str[i] != ' ' && str[i + 1] == ' ')
+		else if (flag == 0 && str[i] != ' ' && str[i + 1] == '<' && str[i + 2] != '<')
+			word_count++;
+		else if (flag == 0 && str[i] == '<' && str[i + 1] != '<' && str[i - 1] != '<')
+			word_count++;
+		else if (flag == 0 && str[i] != ' ' && str[i + 1] == ' ' )
 		{
 			word_count++;
 			i++;

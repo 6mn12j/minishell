@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 01:25:33 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 17:39:19 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(t_cmd *command)
+void	ft_env(void)
 {
 	int	i;
 
-	(void)command;
 	i = -1;
 	while (g_state.envp[++i])
 	{

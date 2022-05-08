@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 15:54:38 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 18:00:51 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,26 @@ int	check_exit(char *str)
 
 void	ft_exit(t_cmd *command)
 {
-	if (command->is_pipe)
-		return ;
-	if (command->argc > 2)
+	if (!command->is_pipe && (!command->prev || !command->prev->is_pipe))
 	{
-		if (!check_exit(command->argv[1]))
-		{
-			printf("soobash: exit: %s", command->argv[1]);
-			printf(": numeric argument required\n");
-			return ;
-		}
-		printf("soobash: exit: too many arguments\n");
+		ft_putendl_fd("exit", STDERR_FILENO);
+		if (!command->argv[1])
+			exit(127);
+	}
+	if (!check_exit(command->argv[1]))
+	{
+		ft_putstr_fd("soobash: exit: ", STDERR_FILENO);
+		ft_putstr_fd(command->argv[1], STDERR_FILENO);
+		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
+		exit(255);
+	}
+	else if (command->argc > 2)
+	{
+		ft_putendl_fd("soobash: exit: too many arguments", STDERR_FILENO);
+		if (command->is_pipe || (command->prev && command->prev->is_pipe))
+			exit(1);
+		else
+			g_state.exit_status = 1;
 		return ;
 	}
-	if (command->argc == 2)
-	{
-		if (!check_exit(command->argv[1]))
-		{
-			printf("soobash: exit: %s", command->argv[1]);
-			printf(": numeric argument required\n");
-			return ;
-		}
-		g_state.exit_status = ft_atoi(command->argv[1]);
-	}
-	printf("exit\n");
-	exit(g_state.exit_status);
 }

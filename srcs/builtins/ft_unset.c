@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 02:13:08 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/08 17:39:11 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_unset_error_printf(char *error_props)
 {
 	g_state.exit_status = 1;
 	printf("bash: unset: `%s': not a valid identifier\n", error_props);
+	g_state.exit_status = 1;
 	return ;
 }
 

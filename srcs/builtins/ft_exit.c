@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 18:00:51 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 21:43:00 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,6 @@ void	ft_exit(t_cmd *command)
 			g_state.exit_status = 1;
 		return ;
 	}
+	else
+		exit(ft_atoi(command->argv[1]));
 }

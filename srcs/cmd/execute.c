@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/07 22:22:03 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/08 21:53:44 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int	execute_cmds(t_cmd *command)
 	path = get_env("PATH");
 	while (command)
 	{
+		if (!command->cmd)
+			break ;
 		cmd_cpy = command->cmd;
 		if (!is_built_in(command->cmd))
 		{

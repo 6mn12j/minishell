@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 01:57:45 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:24:56 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,26 @@ char	*get_new_value(char *key, char *argv)
 	else if (start + 1 > len)
 		return (NULL);
 	return (ft_substr(argv, start + 1, len));
+}
+
+void	printf_envp(void)
+{
+	int		i;
+	char	*key;
+	char	*value;
+
+	i = -1;
+	while (g_state.envp[++i])
+	{
+		key = get_env_key(g_state.envp[i], 0);
+		value = get_env(key);
+		printf("declare -x ");
+		printf("%s", key);
+		if (ft_strchr(g_state.envp[i], '='))
+			printf("=\"%s\"", value);
+		printf("\n");
+		free(key);
+		free(value);
+	}
+	return ;
 }

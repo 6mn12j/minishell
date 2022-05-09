@@ -6,24 +6,32 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 21:43:00 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/09 22:33:51 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_exit(char *str)
+static int	check_exit(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(str[i]) && str[i] != '-')
 			return (FALSE);
 		i++;
 	}
 	return (TRUE);
+}
+
+static void	ft_exit_handler(int argv)
+{
+	if (argv < 0)
+		exit(256 + argv);
+	else
+		exit(argv);
 }
 
 void	ft_exit(t_cmd *command)
@@ -51,5 +59,5 @@ void	ft_exit(t_cmd *command)
 		return ;
 	}
 	else
-		exit(ft_atoi(command->argv[1]));
+		ft_exit_handler(ft_atoi(command->argv[1]));
 }

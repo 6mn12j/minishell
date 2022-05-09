@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 02:32:04 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/30 15:52:34 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:27:21 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	read_heredoc(t_cmd *cur, char *heredoc)
 	line = readline("> ");
 	while (line && ft_strncmp(line, heredoc, ft_strlen(line)))
 	{
+	
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);

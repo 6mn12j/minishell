@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 17:39:11 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/09 17:29:06 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	ft_unset_error_printf(char *error_props)
 {
-	g_state.exit_status = 1;
-	printf("bash: unset: `%s': not a valid identifier\n", error_props);
+	ft_putstr_fd("soobash: unset: '", STDERR_FILENO);
+	ft_putstr_fd(error_props, STDERR_FILENO);
+	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 	g_state.exit_status = 1;
 	return ;
 }

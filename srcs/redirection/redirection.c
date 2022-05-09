@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/09 14:33:24 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/09 18:07:24 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	rdr_l_error(char *file_name)
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(strerror(2), 2);
 	g_state.exit_status = 1;
-	return (ERROR);
+	exit(1);
 }
 
 int	rdr_l(t_redir *redir)
 {
-	int	fd;
+	int		fd;
 	t_redir *rdr;
 
 	rdr = redir;
@@ -50,8 +50,8 @@ int	rdr_l(t_redir *redir)
 
 int	rdr_rr(t_redir *redir)
 {
-	int			fd;
-	t_redir		*rdr;
+	int		fd;
+	t_redir	*rdr;
 
 	rdr = redir;
 	while (rdr->next)

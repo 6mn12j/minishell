@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/09 16:43:30 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/09 17:47:03 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,9 @@ int	execute_cmds(t_cmd *command)
 			command->cmd = NULL;
 		}
 		command = command->next;
+		if (command && !command->cmd)
+			break;
 	}
-	if (command)
 	free(path);
 	path = NULL;
 	return (SUCCESS);

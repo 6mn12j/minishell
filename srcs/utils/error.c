@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 23:44:00 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 17:37:19 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	check_newline_error(t_cmd *node)
 			(node->input && node->input->file_name == NULL))
 	{
 		ft_putendl_fd("soobash: syntax error near unexpected token `newline'", STDERR_FILENO);
+		g_state.exit_status = 258;
 		return (TRUE);
 	}
 	return (FALSE);
@@ -40,10 +41,18 @@ int	error_cmds(t_cmd *node)
 	while (node)
 	{
 		if (node->argc == 2 && node->cmd == NULL && node->input)
+		{
+			ft_putstr_fd("soobash: ", STDERR_FILENO);
+			ft_putstr_fd(node->input->file_name, STDERR_FILENO);
+			ft_putstr_fd(": ", STDERR_FILENO);
+			ft_putendl_fd(strerror(2), STDERR_FILENO);
+			g_state.exit_status = 1;
 			return (TRUE);
+		}
 		else if (node->cmd == NULL && node->is_pipe && node->input == NULL && node->output == NULL && node->heredoc == NULL)
 		{
 			ft_putendl_fd("soobash: syntax error near unexpected token `|'", STDERR_FILENO);
+			g_state.exit_status = 258;
 			return (TRUE);
 		}
 		else if (check_newline_error(node))
@@ -54,6 +63,7 @@ int	error_cmds(t_cmd *node)
 			if (node->argv[i][0] == 7)
 			{
 				ft_putendl_fd("soobash: syntax error near unexpected token `newline'", STDERR_FILENO);
+				g_state.exit_status = 258;
 				return (TRUE);
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 04:41:30 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 00:24:56 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,26 @@ int	check_quote(char *input)
 int	check_input(char *input)
 {
 	int	i;
+	int	space_cnt;
 
 	i = -1;
+	space_cnt = 0;
 	if (!input)
 		return (0);
+	while (input[++i])
+	{
+		if (input[i] == ' ')
+			space_cnt++;
+	}
+	if (!ft_strncmp(input, "\n", ft_strlen(input) + 1) || \
+		space_cnt == (int)ft_strlen(input))
+	{
+		add_history(input);
+		return (0);
+	}
 	if (!check_quote(input))
 	{
-		printf("Invalid quote\n");
+		ft_putendl_fd("Invalid quote", STDERR_FILENO);
 		return (0);
 	}
 	return (1);
@@ -55,35 +68,34 @@ int	check_input(char *input)
 
 char	*read_input(char **input)
 {
-	char	*temp;
-
-	temp = get_env("PWD");
-	*input = readline(ft_strjoin(temp, "/bash$:"));
-	free(temp);
-	temp = 0;
+	*input = readline("soobash$ ");
 	return (*input);
 }
 
 void	handle_prompt(void)
 {
+	int		is_error;
 	char	*input;
-	char	**command;
+	t_cmd	*head;
 
 	while (read_input(&input))
 	{
 		if (!check_input(input))
 		{
 			free(input);
+			input = NULL;
 			continue ;
 		}
+		parser(&input, &head);
+		is_error = error_cmds(head);
+		if (is_error == FALSE)
+			execute_cmds(head);
+		delete_cmd_list(&head);
 		add_history(input);
-		command = ft_split_command(input);
 		free(input);
-		input = 0;
-		//실행 넘겨주기
-		//free command;
+		input = NULL;
 	}
-	//free env
+	ft_free_two_ptr(g_state.envp);
 }
 
 int	main(int argc, char *argv[], char **envp)

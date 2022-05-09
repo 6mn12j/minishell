@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 21:46:49 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 07:41:22 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/22 22:05:23 by minjupar          #+#    #+#             */
+/*   Updated: 2022/04/27 03:13:22 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_free_two_ptr(char **ptr)
 {
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
-	lst = 0;
+	int		i;
+
+	i = -1;
+	while (ptr[++i])
+	{
+		free(ptr[i]);
+		ptr[i] = NULL;
+	}
+	free(ptr);
+	ptr = NULL;
+	return ;
 }

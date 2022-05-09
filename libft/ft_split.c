@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 00:25:16 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 15:42:07 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/22 21:59:34 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ static char	**split_malloc(char **temp, char const *src, char c, size_t wc)
 			start = i;
 			while (src[i] && src[i] != c)
 				i++;
-			temp[count++] = ft_substr(src, start, i - start);
+			temp[count] = ft_substr(src, start, i - start);
 			if (!temp[count])
 				return (split_free(temp, count));
+			count++;
 		}
 		else
 			i++;

@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   set_is_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 21:46:49 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 07:41:22 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/25 03:19:21 by minjupar          #+#    #+#             */
+/*   Updated: 2022/04/30 20:18:41 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	set_is_path(t_cmd *cmd)
 {
-	if (!lst || !del)
+	int		i;
+	t_cmd	*cur;
+
+	i = -1;
+	cur = cmd;
+	if (!cur->cmd)
 		return ;
-	del(lst->content);
-	free(lst);
-	lst = 0;
+	while (cur)
+	{
+		if (!cur->cmd)
+			return ;
+		if (ft_strchr(cur->cmd, '/'))
+			cur->is_path = 1;
+		cur = cur->next;
+	}
 }

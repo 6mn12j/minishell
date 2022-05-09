@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 21:46:49 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 07:41:22 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
+/*   Updated: 2022/05/08 17:39:19 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_env(void)
 {
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
-	lst = 0;
+	int	i;
+
+	i = -1;
+	while (g_state.envp[++i])
+	{
+		if (ft_strchr(g_state.envp[i], '='))
+			printf("%s\n", g_state.envp[i]);
+	}
+	g_state.exit_status = 0;
+	return ;
 }

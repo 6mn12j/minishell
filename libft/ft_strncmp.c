@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 18:08:43 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/18 15:34:56 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/04/28 20:39:50 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 
 	i = 0;
 	if (n == 0)
-		return (0);
+		return (-1);
 	while (i < n && (s1[i] && s2[i]))
 	{
 		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])

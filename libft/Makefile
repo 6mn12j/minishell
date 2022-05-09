@@ -71,15 +71,15 @@ bonus:
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(NAME): $(OBJECTS)
-	ar rc $@ $^
+	@ar rc $@ $^
 
 .PHONY: clean
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	@rm -f $(OBJS) $(BONUS_OBJS)
 
 .PHONY: fclean
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 .PHONY: re
 re: fclean all

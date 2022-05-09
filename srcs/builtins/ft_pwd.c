@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/09 21:46:49 by minjupar          #+#    #+#             */
-/*   Updated: 2022/04/23 07:41:22 by minjupar         ###   ########.fr       */
+/*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
+/*   Updated: 2022/05/08 17:20:52 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_pwd()
 {
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	free(lst);
-	lst = 0;
+	char	*cur_pwd;
+
+	cur_pwd = getcwd(0, _PC_PATH_MAX);
+	printf("%s\n", cur_pwd);
+	free(cur_pwd);
+	cur_pwd = NULL;
+	g_state.exit_status = 0;
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/09 03:36:28 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:25:09 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void	ft_export(t_cmd *command);
 int		is_built_in(char *cmd);
 int		exec_built_in(t_cmd *command, int flag);
 int		exec_built_in_hanlder(t_cmd *command);
+void	printf_envp(void);
 void	set_new_env(char *key, char *new_value);
 char	*get_new_value(char *key, char *argv);
-
 /*parser*/
 char	**ft_split_cmds(char *str);
 char	**parse_cmds(char **commands);

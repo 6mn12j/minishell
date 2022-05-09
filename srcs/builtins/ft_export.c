@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 17:39:13 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/09 16:24:49 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	printf_envp(void)
-{
-	int		i;
-	char	*key;
-	char	*value;
-
-	i = -1;
-	while (g_state.envp[++i])
-	{
-		key = get_env_key(g_state.envp[i], 0);
-		value = get_env(key);
-		printf("declare -x ");
-		printf("%s", key);
-		if (ft_strchr(g_state.envp[i], '='))
-			printf("=\"%s\"", value);
-		printf("\n");
-		free(key);
-		free(value);
-	}
-	return ;
-}
 
 void	update_env(char *key, char *new_value)
 {
@@ -79,6 +57,15 @@ void	set_new_env(char *key, char *new_value)
 	return ;
 }
 
+void	print_not_valid_key(char *argv)
+{
+	ft_putstr_fd("bash: export: `", STDERR_FILENO);
+	ft_putstr_fd(argv, STDERR_FILENO);
+	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+	g_state.exit_status = 1;
+	return ;
+}
+
 void	handle_export(char *argv)
 {
 	char	*key;
@@ -87,12 +74,7 @@ void	handle_export(char *argv)
 	key = get_env_key(argv, 0);
 	new_value = get_new_value(key, argv);
 	if (!is_valid_env_key(key))
-	{
-		printf("bash: export: `%s%s': \
-		not a valid identifier\n", key, new_value); //write 2번으로, null일때 처리, 함수로 나누기
-		g_state.exit_status = 1;
-		return ;
-	}
+		return (print_not_valid_key(argv));
 	if (get_env_index(key) >= 0)
 		update_env(key, new_value);
 	else

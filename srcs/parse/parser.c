@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/09 00:20:51 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:35:28 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	parser(char **input, t_cmd **head)
 	*head = NULL;
 	commands = parse_cmds(ft_split_cmds(*input));
 	set_cmd(commands, head);
+	print_test(head);
 	ft_free_two_ptr(commands);
 	return ;
 }

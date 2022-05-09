@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/09 03:36:28 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:33:40 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int		invalid_cmd_error(char *cmd, char *path);
 int		rdr_l(t_redir *redir);
 int		rdr_r(t_redir *redir);
 int		rdr_rr(t_redir *redir);
+int		rdr_l_error(char *file_name);
 int		redirection_handler(t_cmd *command);
 
 // execute

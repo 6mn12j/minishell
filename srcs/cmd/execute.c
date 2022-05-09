@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/09 03:34:40 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/09 16:43:30 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ int	execute_cmds(t_cmd *command)
 	path = get_env("PATH");
 	while (command)
 	{
-		if (!command->cmd)
-			break ;
 		cmd_cpy = command->cmd;
 		if (!is_built_in(command->cmd))
 		{
@@ -141,6 +139,7 @@ int	execute_cmds(t_cmd *command)
 		}
 		command = command->next;
 	}
+	if (command)
 	free(path);
 	path = NULL;
 	return (SUCCESS);

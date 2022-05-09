@@ -6,13 +6,13 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/08 18:06:47 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/09 14:33:24 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	rdr_l_error(char *file_name)
+int	rdr_l_error(char *file_name)
 {
 	ft_putstr_fd("soobash: ", 2);
 	ft_putstr_fd(file_name, 2);

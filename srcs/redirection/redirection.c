@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:52:29 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/09 21:54:43 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/09 18:07:24 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	rdr_l_error(char *file_name)
 int	rdr_l(t_redir *redir)
 {
 	int		fd;
-	t_redir	*rdr;
+	t_redir *rdr;
 
 	rdr = redir;
 	while (rdr->next)

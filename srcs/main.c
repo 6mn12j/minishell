@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 22:16:04 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/11 01:54:26 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ int	check_input(char *input)
 		if (input[i] == ' ')
 			space_cnt++;
 	}
-	if (!ft_strncmp(input, "\n", ft_strlen(input) + 1) || \
-		space_cnt == (int)ft_strlen(input))
+	if (space_cnt == (int)ft_strlen(input))
 	{
 		add_history(input);
 		return (0);

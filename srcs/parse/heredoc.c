@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 02:32:04 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 14:51:50 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 03:54:09 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void	make_heredoc_file(t_cmd *cur, char *heredoc)
 	cur->heredoc = heredoc;
 	if (!cur->here_filename)
 	{
-		free(cur->here_filename);
-		cur->here_filename = NULL;
 		fileindex = ft_itoa(++index);
 		cur->here_filename = ft_strjoin(".temp", fileindex);
 		free(fileindex);
@@ -52,11 +50,6 @@ int	read_heredoc(t_cmd *cur, char *heredoc)
 		free(line);
 		line = NULL;
 		line = readline("> ");
-		if (line == NULL)
-		{
-			cur->here_filename = NULL;
-			return (1);
-		}
 	}
 	free(line);
 	line = NULL;

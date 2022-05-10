@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/11 01:02:26 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 02:35:37 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ char	*get_env_key(char *command, int start)
 	i = start;
 	while (command[i])
 	{
-		if (command[i] == '\'' || command[i] == '"'\
-		|| command[i] == ' ' || command[i] == '$' \
-		|| command[i] == '|' || command[i] == '.' \
-		|| command[i] == '=')
+		if (!ft_isalnum(command[i]))
 			break ;
 		i++;
 		len++;
@@ -98,7 +95,7 @@ int	parse_env(char **temp, char *command, int start)
 	char	*parse_temp;
 
 	key = get_env_key(command, start);
-	if (ft_strlen(key) == 0)
+	if (ft_strlen(key) == 0 && command[start + 1] != '"')
 		value = ft_strdup("$");
 	else
 		value = get_env(key);

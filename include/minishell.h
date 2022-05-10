@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/10 22:42:16 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/11 01:33:20 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_export(t_cmd *command);
 int		is_built_in(char *cmd);
 int		exec_built_in(t_cmd *command, int flag);
 int		exec_built_in_hanlder(t_cmd *command);
-void	printf_envp(void);
+void	print_envp(void);
 void	set_new_env(char *key, char *new_value);
 char	*get_new_value(char *key, char *argv);
 /*parser*/

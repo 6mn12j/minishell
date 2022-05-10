@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 21:45:35 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 01:33:20 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_export(t_cmd *command)
 
 	g_state.exit_status = 0;
 	if (command->argc == 1)
-		return (printf_envp());
+		return (print_envp());
 	i = 0;
 	while (command->argv[++i])
 		handle_export(command->argv[i]);

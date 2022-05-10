@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 21:47:20 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 01:02:26 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	join_env(char **temp, char *key)
 	free(value);
 	value = NULL;
 	free(parse_temp);
-	key = NULL;
 	parse_temp = NULL;
 	return ;
 }

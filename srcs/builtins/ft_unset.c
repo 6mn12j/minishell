@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 20:55:50 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/11 01:19:13 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_unset_error_printf(char *error_props)
+static void	ft_unset_error_print(char *error_props)
 {
 	ft_putstr_fd("soobash: unset: '", STDERR_FILENO);
 	ft_putstr_fd(error_props, STDERR_FILENO);
@@ -37,9 +37,10 @@ static void	unset_env(int index)
 		if (i != index)
 			temp[++j] = g_state.envp[i];
 	}
-	temp[j] = NULL;
+	temp[j + 1] = NULL;
 	free(g_state.envp[index]);
 	free(g_state.envp);
+	g_state.envp[index] = NULL;
 	g_state.envp = temp;
 }
 
@@ -48,7 +49,7 @@ static void	handle_unset(char *argv)
 	int		index;
 
 	if (!is_valid_env_key(argv))
-		return (ft_unset_error_printf(argv));
+		return (ft_unset_error_print(argv));
 	index = get_env_index(argv);
 	if (index >= 0)
 		unset_env(index);

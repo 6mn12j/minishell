@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/09 17:29:56 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 20:54:03 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	set_new_env(char *key, char *new_value)
 	return ;
 }
 
-void	print_not_valid_key(char *argv)
+static void	print_not_valid_key(char *argv)
 {
 	ft_putstr_fd("soobash: export: `", STDERR_FILENO);
 	ft_putstr_fd(argv, STDERR_FILENO);
@@ -66,7 +66,7 @@ void	print_not_valid_key(char *argv)
 	return ;
 }
 
-void	handle_export(char *argv)
+static void	handle_export(char *argv)
 {
 	char	*key;
 	char	*new_value;

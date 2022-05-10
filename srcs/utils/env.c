@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/09 19:20:43 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:52:11 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	parse_env(char **temp, char *command, int start)
 
 	key = get_env_key(command, start);
 	value = get_env(key);
-	//printf("key:%s value:%s\n",key,value);
 	parse_temp = *temp;
 	*temp = ft_strjoin(*temp, value);
 	start += ft_strlen(key);

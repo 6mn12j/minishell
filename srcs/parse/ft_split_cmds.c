@@ -26,7 +26,7 @@ void	change_quote(char c, char *flag)
 	return ;
 }
 
-int	get_word_count(char *str)
+static int	get_word_count(char *str)
 {
 	int		i;
 	char	flag;
@@ -49,7 +49,7 @@ int	get_word_count(char *str)
 	return (word_count);
 }
 
-int	get_word_len(int start, char*str)
+static int	get_word_len(int start, char*str)
 {
 	char	flag;
 	int		len;
@@ -66,7 +66,7 @@ int	get_word_len(int start, char*str)
 	return (len);
 }
 
-int	get_start(int start, char *str)
+static int	get_start(int start, char *str)
 {
 	while (str[start] && (str[start] == ' '))
 		start ++;

@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 20:54:03 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 21:05:04 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	update_env(char *key, char *new_value)
 		new_env_value = ft_strdup(key);
 	g_state.envp[index] = new_env_value;
 	free(new_temp);
+	new_temp = NULL;
 	return ;
 }
 
@@ -52,8 +53,9 @@ void	set_new_env(char *key, char *new_value)
 		temp[i++] = ft_strdup(key);
 	temp[i] = NULL;
 	free(g_state.envp);
-	free(new_temp);
 	g_state.envp = temp;
+	free(new_temp);
+	new_temp = NULL;
 	return ;
 }
 

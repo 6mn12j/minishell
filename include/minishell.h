@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/10 14:54:56 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:51:12 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <signal.h>
+# include <dirent.h>
 # include <termios.h>
 # include <fcntl.h>
 # include <readline/readline.h>
@@ -132,7 +133,6 @@ int		rdr_l_error(char *file_name);
 int		redirection_handler(t_cmd *command);
 
 // execute
-char	*get_valid_cmd(t_cmd *command, char **env_paths);
 int		execute_cmds(t_cmd *command);
 
 /*cmd list*/

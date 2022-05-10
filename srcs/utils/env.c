@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 21:36:28 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 21:42:52 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ char	*get_env(char *key)
 		if (!ft_strncmp(g_state.envp[i], temp, ft_strlen(temp)))
 		{
 			free(temp);
+			temp = NULL;
 			return (ft_substr(g_state.envp[i], ft_strlen(key) + 1, \
 				ft_strlen(g_state.envp[i]) - ft_strlen(key) + 1));
 		}
 	}
 	free(temp);
+	temp = NULL;
 	return (ft_strdup(""));
 }
 
@@ -81,6 +83,7 @@ void	join_env(char **temp, char *key)
 	parse_temp = *temp;
 	*temp = ft_strjoin(*temp, value);
 	free(value);
+	value = NULL;
 	free(parse_temp);
 	key = NULL;
 	parse_temp = NULL;
@@ -105,6 +108,7 @@ int	parse_env(char **temp, char *command, int start)
 	free(value);
 	free(parse_temp);
 	key = NULL;
+	value = NULL;
 	parse_temp = NULL;
 	return (start);
 }

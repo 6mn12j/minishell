@@ -6,13 +6,13 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/09 21:56:58 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 20:51:17 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_valid_cmd(t_cmd *command, char **env_paths)
+static char	*get_valid_cmd(t_cmd *command, char **env_paths)
 {
 	char		*tmp;
 	char		*cmd_path;

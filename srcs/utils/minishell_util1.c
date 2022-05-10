@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_util1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/01 03:34:35 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 22:41:58 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_env_path(char **path)
+{
+	int	i;
+
+	i = 0;
+	while (path[i])
+	{
+		free(path[i]);
+		path[i] = NULL;
+		i++;
+	}
+	free(path);
+	path = NULL;
+}
 
 int	ft_twoptr_len(char **twoptr)
 {

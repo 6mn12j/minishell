@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/10 20:51:17 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 22:42:33 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ static char	*get_valid_cmd(t_cmd *command, char **env_paths)
 	struct stat	buf;
 
 	if (stat(command->cmd, &buf) == 0)
+	{
+		if ((buf.st_mode & S_IFMT) == S_IFDIR)
+			return (NULL);
 		return (command->cmd);
+	}
 	else
 	{
 		while (*env_paths)
@@ -108,7 +112,7 @@ static int	exec_cmd(t_cmd *command, int flag)
 		else if (!pid)
 		{
 			if (child_handler(command, flag) == ERROR)
-				return (ERROR);
+				exit(1);
 		}
 		else
 			parent_handler(command, pid, pipe_open);
@@ -119,15 +123,17 @@ static int	exec_cmd(t_cmd *command, int flag)
 int	execute_cmds(t_cmd *command)
 {
 	char	*path;
+	char	**path_split;
 	char	*cmd_cpy;
 
 	path = get_env("PATH");
+	path_split = ft_split(path, ':');
 	while (command)
 	{
 		cmd_cpy = command->cmd;
 		if (!is_built_in(command->cmd))
 		{
-			command->cmd = get_valid_cmd(command, ft_split(path, ':'));
+			command->cmd = get_valid_cmd(command, path_split);
 			if (!command->cmd)
 				return (invalid_cmd_error(cmd_cpy, path));
 		}
@@ -139,6 +145,7 @@ int	execute_cmds(t_cmd *command)
 		if (command && !command->cmd)
 			break ;
 	}
+	free_env_path(path_split);
 	free(path);
 	path = NULL;
 	return (SUCCESS);

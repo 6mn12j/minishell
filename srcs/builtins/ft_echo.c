@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:01:09 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 14:52:31 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:56:19 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_n_option(t_cmd *command, int j, char *option)
+static int	check_n_option(t_cmd *command, int j, char *option)
 {
 	int	i;
 

@@ -6,13 +6,13 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:32:44 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/09 17:29:06 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 20:55:50 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_unset_error_printf(char *error_props)
+static void	ft_unset_error_printf(char *error_props)
 {
 	ft_putstr_fd("soobash: unset: '", STDERR_FILENO);
 	ft_putstr_fd(error_props, STDERR_FILENO);
@@ -21,7 +21,7 @@ void	ft_unset_error_printf(char *error_props)
 	return ;
 }
 
-void	unset_env(int index)
+static void	unset_env(int index)
 {
 	char	**temp;
 	int		i;
@@ -43,7 +43,7 @@ void	unset_env(int index)
 	g_state.envp = temp;
 }
 
-void	handle_unset(char *argv)
+static void	handle_unset(char *argv)
 {
 	int		index;
 

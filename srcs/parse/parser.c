@@ -6,13 +6,13 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/09 22:29:58 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 20:59:49 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	malloc_argv(char **commands, t_cmd **head)
+static void	malloc_argv(char **commands, t_cmd **head)
 {
 	int		i;
 	t_cmd	*cur;

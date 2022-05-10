@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	handle_symbol_type(char **temp, int cnt, char symbol)
+static void	handle_symbol_type(char **temp, int cnt, char symbol)
 {
 	if (cnt == 1 && symbol == '|')
 		ft_strjoin_char(temp, PIPE_TYPE);
@@ -29,7 +29,7 @@ void	handle_symbol_type(char **temp, int cnt, char symbol)
 	return ;
 }
 
-int	is_separate(char **temp, char *cmd, int *i)
+static int	is_separate(char **temp, char *cmd, int *i)
 {
 	char	symbol;
 	int		cnt;
@@ -50,7 +50,7 @@ int	is_separate(char **temp, char *cmd, int *i)
 	return (1);
 }
 
-void	parse_command(char **temp, char *command)
+static void	parse_command(char **temp, char *command)
 {
 	int		i;
 	char	quote;

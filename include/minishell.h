@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/10 20:51:12 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 22:42:16 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,4 +149,6 @@ int		handle_redir(t_cmd *node, int type, char *file_name, int *i);
 
 //pipe.c
 int		use_pipe(t_cmd *command, int *pipe_open);
+
+void	free_env_path(char **path);
 #endif

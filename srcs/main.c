@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/11 01:54:26 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 04:39:30 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	check_input(char *input)
 		if (input[i] == ' ')
 			space_cnt++;
 	}
+	if (ft_strlen(input) == 0)
+		return (0);
 	if (space_cnt == (int)ft_strlen(input))
 	{
 		add_history(input);

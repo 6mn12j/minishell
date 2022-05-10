@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 14:52:11 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 21:36:28 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,18 @@ char	*get_env_key(char *command, int start)
 	char	*key;
 
 	len = 0;
-	i = start;
-	while (command[i] == '"' || command[i] == '$')
-	{
-		i++;
-		start++;
-	}
-	while (command[++i])
+	i = ++start;
+	while (command[i])
 	{
 		if (command[i] == '\'' || command[i] == '"'\
 		|| command[i] == ' ' || command[i] == '$' \
 		|| command[i] == '|' || command[i] == '.' \
 		|| command[i] == '=')
 			break ;
+		i++;
 		len++;
 	}
-	key = ft_substr(command, start, len + 1);
+	key = ft_substr(command, start, len);
 	return (key);
 }
 
@@ -98,7 +94,10 @@ int	parse_env(char **temp, char *command, int start)
 	char	*parse_temp;
 
 	key = get_env_key(command, start);
-	value = get_env(key);
+	if (ft_strlen(key) == 0)
+		value = ft_strdup("$");
+	else
+		value = get_env(key);
 	parse_temp = *temp;
 	*temp = ft_strjoin(*temp, value);
 	start += ft_strlen(key);

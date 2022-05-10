@@ -6,13 +6,13 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 21:01:23 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 21:01:52 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_redir(t_cmd *cur, char **commands, int *i)
+static int	check_redir(t_cmd *cur, char **commands, int *i)
 {
 	if (commands[*i][0] == HEREDOC)
 		return (handle_heredoc(cur, ft_strdup(commands[*i + 1]), i));

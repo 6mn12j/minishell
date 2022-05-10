@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/11 02:35:37 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 04:52:40 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*get_env_key(char *command, int start)
 	if (command[start] == '$')
 		start++;
 	i = start;
+	if (command[i] == '?')
+		return (ft_strdup("?"));
 	while (command[i])
 	{
 		if (!ft_isalnum(command[i]))

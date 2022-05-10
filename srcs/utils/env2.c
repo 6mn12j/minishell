@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 01:50:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 01:44:47 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 05:23:22 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	is_valid_env_key(char *key)
 		i++;
 	while (key[i])
 	{
-		if (!ft_isalpha(key[i]))
+		if (!ft_isalnum(key[i]) && key[i] != '_')
 			return (FALSE);
 		i++;
 	}

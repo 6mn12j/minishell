@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 21:42:52 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 21:47:20 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ char	*get_env_key(char *command, int start)
 	char	*key;
 
 	len = 0;
-	i = ++start;
+	if (command[start] == '$')
+		start++;
+	i = start;
 	while (command[i])
 	{
 		if (command[i] == '\'' || command[i] == '"'\

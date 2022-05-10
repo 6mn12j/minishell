@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/09 17:37:19 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 14:50:52 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,20 @@ static int	check_newline_error(t_cmd *node)
 			(node->output && node->output->file_name == NULL) || \
 			(node->input && node->input->file_name == NULL))
 	{
-		ft_putendl_fd("soobash: syntax error near unexpected token `newline'", STDERR_FILENO);
+		ft_putendl_fd("soobash: syntax error near unexpected token `newline'", \
+		STDERR_FILENO);
 		g_state.exit_status = 258;
 		return (TRUE);
 	}
 	return (FALSE);
+}
+
+int	print_error(char *token, int exit_status)
+{
+	ft_putstr_fd("soobash: syntax error near unexpected token ", STDERR_FILENO);
+	ft_putendl_fd(token, STDERR_FILENO);
+	g_state.exit_status = exit_status;
+	return (TRUE);
 }
 
 int	error_cmds(t_cmd *node)
@@ -49,25 +58,15 @@ int	error_cmds(t_cmd *node)
 			g_state.exit_status = 1;
 			return (TRUE);
 		}
-		else if (node->cmd == NULL && node->is_pipe && node->input == NULL && node->output == NULL && node->heredoc == NULL)
-		{
-			ft_putendl_fd("soobash: syntax error near unexpected token `|'", STDERR_FILENO);
-			g_state.exit_status = 258;
-			return (TRUE);
-		}
+		else if (node->cmd == NULL && node->is_pipe && node->input == NULL \
+		&& node->output == NULL && node->heredoc == NULL)
+			return (print_error("`|'", 258));
 		else if (check_newline_error(node))
 			return (TRUE);
-		i = 0;
-		while (node->argv[i])
-		{
-			if (node->argv[i][0] == 7)
-			{
-				ft_putendl_fd("soobash: syntax error near unexpected token `newline'", STDERR_FILENO);
-				g_state.exit_status = 258;
-				return (TRUE);
-			}
-			i++;
-		}
+		i = -1;
+		while (node->argv[++i])
+			if (node->argv[i][0] == ERROR_TYPE)
+				return (print_error("`newline'", 258));
 		node = node->next;
 	}
 	return (FALSE);

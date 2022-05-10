@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 14:30:56 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/02 18:29:33 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:34:15 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	is_space(char *c)
 
 static int	get_sign(char sign)
 {
-
 	if (sign == '+')
 		return (1);
 	else

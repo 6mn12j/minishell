@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/09 16:45:11 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/10 14:54:56 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,6 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv);
 void	make_file(char *filename);
 void	ft_free_two_ptr(char **ptr);
 void	parser(char **input, t_cmd **head);
-
-void	print_test(t_cmd **head);// TODO: 내기 전에 삭제
-void	print_commands(char **commands);// TODO: 내기 전에 삭제
 
 /*env*/
 void	copy_env(char **envp);

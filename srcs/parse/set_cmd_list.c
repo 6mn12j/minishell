@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 01:00:32 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/08 23:45:12 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:36:18 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,19 @@ void	set_cmd_list(char **commands, t_cmd	*cur, int i, int i_argv)
 			cur = cur->next;
 			i_argv = 0;
 		}
+		else if (check_redir(cur, commands, &i))
+		{
+			if (i == 0)
+				return ;
+			if ((commands[i - 1][0] == REDIR_R || \
+			commands[i - 1][0] == REDIR_RR) &&
+			cur->output->file_name && cur->cmd == NULL)
+				set_not_output_file(&i_argv, cur);
+		}
 		else
 		{
-			if (check_redir(cur, commands, &i))
-			{
-				if (i == 0)
-					return ;
-				if ((commands[i - 1][0] == REDIR_R || \
-				commands[i - 1][0] == REDIR_RR) &&
-				cur->output->file_name && cur->cmd == NULL)
-					set_not_output_file(&i_argv, cur);
-			}
-			else
-			{
-				cur->argv[i_argv++] = ft_strdup(commands[i]);
-				cur->cmd = cur->argv[0];
-			}
+			cur->argv[i_argv++] = ft_strdup(commands[i]);
+			cur->cmd = cur->argv[0];
 		}
 	}
 }

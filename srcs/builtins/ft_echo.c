@@ -6,7 +6,7 @@
 /*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 16:01:09 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/09 05:38:49 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:52:31 by minjupar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ft_echo(t_cmd *command)
 	j = 0;
 	is_string = 0;
 	option = 0;
-
 	while (command->argv[++j])
 	{
 		while (!is_string && \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/11 01:44:01 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:01:07 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_signal(int signo)
 		rl_redisplay();
 		printf("  \n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		rl_replace_line("", 1);
 		rl_redisplay();
 		g_state.exit_status = 1;
 	}

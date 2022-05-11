@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 14:50:52 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:42:10 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,12 @@ void	ft_error(void)
 	exit(1);
 }
 
-int	invalid_cmd_error(char *cmd, char *path)
+int	invalid_cmd_error(char *cmd)
 {
 	ft_putstr_fd("soobash: ", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd("command not found", STDERR_FILENO);
 	g_state.exit_status = 127;
-	free(path);
-	path = NULL;
 	return (ERROR);
 }

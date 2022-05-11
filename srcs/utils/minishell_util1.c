@@ -6,7 +6,7 @@
 /*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 02:13:40 by minjupar          #+#    #+#             */
-/*   Updated: 2022/05/10 22:41:58 by jinyoo           ###   ########.fr       */
+/*   Updated: 2022/05/11 16:27:05 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,17 @@ void	free_env_path(char **path)
 	int	i;
 
 	i = 0;
-	while (path[i])
+	if (path)
 	{
-		free(path[i]);
-		path[i] = NULL;
-		i++;
+		while (path[i])
+		{
+			free(path[i]);
+			path[i] = NULL;
+			i++;
+		}
+		free(path);
+		path = NULL;
 	}
-	free(path);
-	path = NULL;
 }
 
 int	ft_twoptr_len(char **twoptr)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 15:58:57 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/11 01:33:20 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:42:59 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	ft_strjoin_char(char **dst, char ch);
 //error.c
 int		error_cmds(t_cmd *node);
 void	ft_error(void);
-int		invalid_cmd_error(char *cmd, char *path);
+int		invalid_cmd_error(char *cmd);
 
 // redirection
 int		rdr_l(t_redir *redir);
@@ -134,6 +134,7 @@ int		redirection_handler(t_cmd *command);
 
 // execute
 int		execute_cmds(t_cmd *command);
+char	*get_valid_cmd(t_cmd *command, char **env_paths);
 
 /*cmd list*/
 int		here_filename(t_cmd *head);
@@ -151,4 +152,7 @@ int		handle_redir(t_cmd *node, int type, char *file_name, int *i);
 int		use_pipe(t_cmd *command, int *pipe_open);
 
 void	free_env_path(char **path);
+char	*get_cmd_path(t_cmd *command, char **env_paths, struct stat *buf);
+void	get_valid_cmd_handler(t_cmd *command, char *cmd_cpy, char **path_split);
+void	free_cmd(t_cmd *command);
 #endif

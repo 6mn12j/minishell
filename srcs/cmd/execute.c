@@ -3,44 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjupar <minjupar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jinyoo <jinyoo@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 14:55:40 by jinyoo            #+#    #+#             */
-/*   Updated: 2022/05/11 03:51:11 by minjupar         ###   ########.fr       */
+/*   Updated: 2022/05/11 17:45:36 by jinyoo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*get_valid_cmd(t_cmd *command, char **env_paths)
-{
-	char		*tmp;
-	char		*cmd_path;
-	struct stat	buf;
-
-	if (stat(command->cmd, &buf) == 0)
-	{
-		if ((buf.st_mode & S_IFMT) == S_IFDIR)
-			return (NULL);
-		return (command->cmd);
-	}
-	else
-	{
-		while (*env_paths)
-		{
-			tmp = ft_strjoin(*env_paths, "/");
-			cmd_path = ft_strjoin(tmp, command->cmd);
-			free(tmp);
-			tmp = NULL;
-			if (stat(cmd_path, &buf) == 0)
-				return (cmd_path);
-			env_paths++;
-		}
-		free(cmd_path);
-		cmd_path = NULL;
-	}
-	return (NULL);
-}
 
 static int	child_handler(t_cmd *command, int flag)
 {
@@ -132,15 +102,12 @@ int	execute_cmds(t_cmd *command)
 	{
 		cmd_cpy = command->cmd;
 		if (!is_built_in(command->cmd))
+			get_valid_cmd_handler(command, cmd_cpy, path_split);
+		if (command->cmd)
 		{
-			command->cmd = get_valid_cmd(command, path_split);
-			if (!command->cmd)
-				return (invalid_cmd_error(cmd_cpy, path));
+			exec_cmd(command, is_built_in(command->cmd));
+			free_cmd(command);
 		}
-		exec_cmd(command, is_built_in(command->cmd));
-		if (!command->is_path && !is_built_in(command->cmd))
-			free(command->cmd);
-		command->cmd = NULL;
 		command = command->next;
 		if (command && !command->cmd)
 			break ;
